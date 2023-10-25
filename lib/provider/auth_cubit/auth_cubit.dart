@@ -1,7 +1,7 @@
-/*import 'package:ad_automation/data/model/country_model.dart';
-import 'package:ad_automation/provider/auth_cubit/auth_state.dart';
-import 'package:ad_automation/repositories/auth_repositories/login_repositories.dart';
-import 'package:ad_automation/repositories/auth_repositories/sign_up_repositories.dart';
+// import 'package:taosel_user_app/data/model/country_model.dart';
+import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
+import 'package:taosel_user_app/repositories/auth_repositories/login_repositories.dart';
+import 'package:taosel_user_app/repositories/auth_repositories/sign_up_repositories.dart';
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,7 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
   final SignUpRepositories signUpRepositories;
   final ForgetPassRepositories forgetPassRepositories;
 
-  List<CountryModel> listCountry = [];
+  // List<CountryModel> listCountry = [];
 
   //get image lince
   var picker = ImagePicker();
@@ -93,18 +93,18 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   //get Country
-  CountryListModel ? countryListModel;
-  getCountry() async {
-    emit(CountryLoading());
-    try {
-       countryListModel =
-          await signUpRepositories.getCountry();
-      listCountry.addAll(countryListModel!.data);
-      emit(CountryLoaded());
-    } catch (e) {
-      emit(AuthError(error: e.toString()));
-    }
-  }
+  // CountryListModel ? countryListModel;
+  // getCountry() async {
+  //   emit(CountryLoading());
+  //   try {
+  //      countryListModel =
+  //         await signUpRepositories.getCountry();
+  //     listCountry.addAll(countryListModel!.data);
+  //     emit(CountryLoaded());
+  //   } catch (e) {
+  //     emit(AuthError(error: e.toString()));
+  //   }
+  // }
 
   //otp
   checkOtp(String otp) async {
@@ -201,4 +201,3 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 }
-*/
