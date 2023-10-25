@@ -3,16 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
+import 'package:taosel_user_app/myobserver.dart';
+import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
 import 'package:taosel_user_app/view/pages/splash_screen/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/style/style.dart';
 import 'data/local/hiva_helper.dart';
 import 'injection_container.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  ///------------injection Container & HIVHELPER----------
-  await init();
-  await HiveHelper.init();
+
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
@@ -22,7 +23,13 @@ void main() async{
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-
+  ///------------injection Container & HIVHELPER----------
+  await init();
+  await HiveHelper.init();
+  // BlocOverrides.runZoned(
+  //       () => runApp(const MyApp()),
+  //   blocObserver: MyObserver(),
+  // );
   runApp(const MyApp());
 }
 
@@ -42,14 +49,17 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
                 create: (BuildContext context) => getIt<LanguageCubit>()),
-            // BlocProvider<LanguageCubit>(
-            //     create: (context) => getIt<LanguageCubit>()),
+            BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
+            // BlocProvider(
+            //     create: (BuildContext context) => FacebookLoginCubit()),
+
           ],
           child: BlocBuilder<LanguageCubit, Locale>(
               builder:(_,locale){
                 return MaterialApp(
                   title: 'Taosel',
-                  theme: ThemeData(),
+                  debugShowCheckedModeBanner: false,
+                  theme: lightTheme(),
                   localizationsDelegates: AppLocalizations.localizationsDelegates,
                   supportedLocales: AppLocalizations.supportedLocales,
                   localeResolutionCallback: (deviceLocale, supportedLocale) {

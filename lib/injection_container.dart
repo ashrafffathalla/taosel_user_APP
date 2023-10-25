@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/repositories/auth_repositories/forget_pass_repositories.dart';
+import 'package:taosel_user_app/repositories/auth_repositories/login_repositories.dart';
+import 'package:taosel_user_app/repositories/auth_repositories/sign_up_repositories.dart';
 import 'core/constant/apis.dart';
 import 'core/localization/language_cubit.dart';
 import 'data/local/hiva_helper.dart';
@@ -10,10 +14,11 @@ Future<void> init() async {
   getIt.registerFactory(() => LanguageCubit(getIt()));
   // getIt.registerFactory(
   //     () => CheckCarCubit(uploadCarSideImageRepository: getIt()));
-  // getIt.registerFactory(() => AuthCubit(
-  //     loginRepositories: getIt(),
-  //     signUpRepositories: getIt(),
-  //     forgetPassRepositories: getIt()));
+  getIt.registerFactory(() => AuthCubit(
+      loginRepositories: getIt(),
+      signUpRepositories: getIt(),
+      forgetPassRepositories: getIt())
+  );
   // getIt.registerFactory(() => RentCarCubit(
   //       searchRepositories: getIt(),
   //       getCarsRepositories: getIt(),
@@ -42,12 +47,12 @@ Future<void> init() async {
   // getIt.registerFactory(() => ContractCubit(contractRepository: getIt()));
   //
   // // Repository
-  // getIt.registerLazySingleton(
-  //     () => LoginRepositories(dioHelper: getIt(), hiveHelper: getIt()));
-  // getIt.registerLazySingleton(
-  //     () => SignUpRepositories(dioHelper: getIt(), hiveHelper: getIt()));
-  // getIt.registerLazySingleton(
-  //     () => ForgetPassRepositories(dioHelper: getIt(), hiveHelper: getIt()));
+  getIt.registerLazySingleton(
+      () => LoginRepositories(dioHelper: getIt(), hiveHelper: getIt()));
+  getIt.registerLazySingleton(
+      () => SignUpRepositories(dioHelper: getIt(), hiveHelper: getIt()));
+  getIt.registerLazySingleton(
+      () => ForgetPassRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   // getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
   // getIt.registerLazySingleton(() => DeleteAccountRepositories());
   // getIt.registerLazySingleton(() => UpdateName(dioHelper: getIt()));

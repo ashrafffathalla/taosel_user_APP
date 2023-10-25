@@ -1,9 +1,12 @@
 import 'package:animation_wrappers/animations/faded_slide_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taosel_user_app/view/widgets/customMainBtn.dart';
 import '../../../core/localization/language_cubit.dart';
 import '../../../data/local/hiva_helper.dart';
 import '../../../provider/auth_cubit/auth_cubit.dart';
@@ -34,140 +37,51 @@ class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final local = AppLocalizations.of(context);
-
-    return DefaultTabController(
-      initialIndex: index,
-      length: 2,
-      animationDuration: const Duration(milliseconds: 1000),
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: FadedSlideAnimation(
-          beginOffset: const Offset(0.8, 0.2),
-          endOffset: const Offset(0, 0),
-          slideDuration: const Duration(milliseconds: 3000),
-          slideCurve: Curves.easeInOut,
-          child: Container(
-            height: 45.sp,
-            width: 45.sp,
-            child: FloatingActionButton(
-              onPressed: () {
-                BlocProvider.of<LanguageCubit>(context).selectEngLanguage();
-                // BlocProvider.of<RentCarCubit>(context).regionModel.clear();
-                //BlocProvider.of<RentCarCubit>(context).getRegion();
-                // BlocProvider.of<AuthCubit>(context).listCountry.clear();
-                //BlocProvider.of<AuthCubit>(context).getCountry();
-              },
-              backgroundColor: Colors.white,
-              splashColor: Colors.purple.withOpacity(0.2),
-              disabledElevation: 0,
-              tooltip: 'ع / EN',
-              child: Icon(
-                Icons.language,
-                color: Theme.of(context).colorScheme.primary,
-                size: 35,
-              ),
+    final local = AppLocalizations.of(context)!;
+    final Size size = MediaQuery.of(context).size;
+    return  Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal:size.width*0.05,vertical: size.height*0.07 ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: size.height*0.02,),
+            Text(local.signIn.toString(),style: TextStyle(
+              fontSize: 16.sp,
+            ),),
+            SizedBox(height: 0.03.sh,),
+            Text(CheckLocal.isDirectionRTL(context)?"مرحبا بعودتك مرة اخري ":"Welcome Back Again",style: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w700
+            ),),
+            SizedBox(height: 0.03.sh,),
+            const Login(),
+            SizedBox(height: 0.03.sh,),
+            CustomMainBtn(ontap: (){},
+            iconButton: Padding(
+              padding:  EdgeInsets.only(right:size.width*0.03 ),
+              child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
             ),
-          ),
-        ),
-        body: SizedBox(
-          child: Stack(
-           children: [
-            const BackGround(),
-            SingleChildScrollView(
-              padding:  EdgeInsets.only(bottom: 20.sp),
-              //physics: NeverScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: index ==0?SizeConfig.defaultSize! * 16:SizeConfig.defaultSize!*16,
-                  ),
-                  Card(
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.sp)),
-                    margin:  EdgeInsets.symmetric(horizontal: 30.sp),
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      padding:  EdgeInsets.all(15.sp),
-                      constraints: BoxConstraints(
-                          maxHeight: index == 0
-                              ? SizeConfig.defaultSize! * 50
-                              : SizeConfig.defaultSize! * 70),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 3,
-                                  offset: Offset(1, 3),
-                                ),
-                              ],
-                            ),
-                            height: SizeConfig.defaultSize! * 4.5,
-                            child: TabBar(
-                              onTap: (value) {
-                                setState(() {
-                                  index = value;
-                                });
-                              },
-                              labelColor:
-                                  Theme.of(context).colorScheme.onSurface,
-                              indicatorColor: Colors.white,
-                              unselectedLabelColor:
-                                  Theme.of(context).colorScheme.onSurface,
-                              indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                              tabs: [
-                                Text(
-                                  local!.signIn,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.sp,
-                                    fontFamily: 'Elm',
-                                  ),
-                                ),
-                                Text(
-                                  local.signUp,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.sp,
-                                    fontFamily: 'Elm',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: index==0?30.0.sp:7.sp,
-                          ),
-                          const Expanded(
-                            flex: 1,
-                            child: TabBarView(
-                              physics: NeverScrollableScrollPhysics(),
-                              children: [
-                                Login(),
-                                SignUp(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
+            ),
+            SizedBox(height: 0.02.sh,),
+            CustomMainBtn(ontap: (){},
+              iconButton: Padding(
+                padding:  EdgeInsets.only(right:size.width*0.03 ),
+                child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
               ),
-            )
-          ]),
+              textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
+            ),
+            SizedBox(height: 0.025.sh,),
+            Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
+            style: TextStyle(
+              color:const Color(0xffF96817),
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600
+            ),
+            ),
+          ],
         ),
       ),
     );

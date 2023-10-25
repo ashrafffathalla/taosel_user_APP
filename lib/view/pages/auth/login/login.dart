@@ -85,7 +85,7 @@ class _LoginState extends State<Login> {
                         style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: Theme.of(context).colorScheme.primary),
+                             color:const Color(0xffF96817).withOpacity(0.6),),
                       ),
                     ),
                   ),
@@ -100,7 +100,6 @@ class _LoginState extends State<Login> {
                     showDialog(
                         context: context,
                         builder: (context) {
-
                           return AlertDialog(
                             title: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +109,7 @@ class _LoginState extends State<Login> {
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             GestureDetector(
-                                              child: Icon(
+                                              child:const Icon(
                                                 Icons.close,
                                                 color: Colors.black87,
                                               ),
@@ -151,8 +150,15 @@ class _LoginState extends State<Login> {
                     );
                   }
                   return SizedBox(
-                    width: SizeConfig.defaultSize! * 30,
+                    width: SizeConfig.defaultSize! * 35,
                     child: ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    // side: BorderSide(color: Colors.red)
+                                )
+                            )),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<AuthCubit>(context).login(
@@ -161,46 +167,13 @@ class _LoginState extends State<Login> {
                           }
                         },
                         child: Text(local.signIn,style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w600
+                            fontSize: 18.sp,
+                          color: Colors.white
                         ),)),
                   );
                 },
               ),
-              SizedBox(
-                height: 5,
-              ),
-              InkWell(
-                onTap: () {
-                  // navigateAndFinish(context, Home());
-                },
-                child: Card(
-                  elevation: 0.0,
-                  color: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.primary),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.1)),
-                    child: Center(
-                      child: Text(
-                        CheckLocal.isDirectionRTL(context)
-                            ? 'الدخول كزائر'
-                            : 'Continue As Guest',
-                        style: TextStyle(
-                            color: Colors.black,fontSize: 16.sp, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              SizedBox(height: 0.03.sh,),
             ],
           ),
         ),

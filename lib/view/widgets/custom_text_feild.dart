@@ -77,24 +77,23 @@ class _CustomTextFeildState extends State<CustomTextFeild> {
       decoration: InputDecoration(
         hintTextDirection: TextDirection.rtl,
         counterText: "",
-        contentPadding:  EdgeInsets.all(10.0.sp),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50.sp),
-            borderSide: BorderSide(
-                color: Color(0xffFFD451),
-                width: 1.0)),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50.sp),
-            borderSide: BorderSide(
-                color:  Color(0xffFFD451),
-                width: 1.0)),
+        contentPadding:  EdgeInsets.all(5.0.sp),
+        // focusedBorder: OutlineInputBorder(
+        //     borderRadius: BorderRadius.circular(0.sp),
+        //     borderSide:const BorderSide(
+        //         color: Color(0xffFFD451),
+        //         width: 1.0)
+        // ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
         errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
+            // borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.error.withOpacity(0.3),
                 width: 1.0)),
         focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50.sp),
+            // borderRadius: BorderRadius.circular(50.sp),
             borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.error.withOpacity(0.3),
                 width: 1.0)),

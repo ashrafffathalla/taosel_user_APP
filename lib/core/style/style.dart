@@ -6,7 +6,7 @@ ThemeData lightTheme() {
     backgroundColor: const Color(0xFFF6F5F8),
     scaffoldBackgroundColor: const Color(0xFFF0EFEF),
     colorScheme: const ColorScheme(
-      primary: Color(0xfffbc112),
+      primary: Color(0xff152F4B),
       primaryContainer: Colors.white,
       secondary: Color(0xFF6f5da8),
       secondaryContainer: Color(0xFF6f5da8),
@@ -25,15 +25,15 @@ ThemeData lightTheme() {
       elevation: 0.0,
       // toolbarHeight: 35,
       backgroundColor: const Color(0xFFF0EFEF),
-      titleTextStyle: GoogleFonts.elMessiri(
+      titleTextStyle: GoogleFonts.cairo(
         color: const Color(0xff1B1C1C),
         fontWeight: FontWeight.bold,
         fontSize: 20.0,
         letterSpacing: 0.15,
       ),
-      iconTheme: const IconThemeData(color: Color((0xfffbc112))),
+      iconTheme: const IconThemeData(color: Color((0xff152F4B))),
     ),
-    toggleableActiveColor: const Color(0xfffbc112).withOpacity(0.8),
+    toggleableActiveColor: const Color(0xff152F4B).withOpacity(0.8),
     // radioTheme: RadioThemeData(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 0.0,
@@ -50,56 +50,42 @@ ThemeData lightTheme() {
         borderRadius: BorderRadius.circular(16),
       ),
       dialBackgroundColor: const Color(0xFF6f5da8).withOpacity(0.9),
-      dialHandColor: const Color(0xfffbc112),
+      dialHandColor: const Color(0xff152F4B),
       dialTextColor: Colors.white,
-      hourMinuteColor: const Color(0xfffbc112).withOpacity(0.05),
+      hourMinuteColor: const Color(0xff152F4B).withOpacity(0.05),
       hourMinuteShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      hourMinuteTextColor: const Color(0xfffbc112),
+      hourMinuteTextColor: const Color(0xff152F4B),
     ),
     dialogTheme: const DialogTheme(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(16)),),),
 
     textTheme: TextTheme(
-      button: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
+      labelLarge: GoogleFonts.cairo(
+
       ),
-      overline: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
+      labelSmall:const TextStyle(
+        fontFamily: 'Cairo'
       ),
-      bodyText1: GoogleFonts.elMessiri(
-          color: const Color(0xff1b1c1c), fontWeight: FontWeight.bold),
-      bodyText2: GoogleFonts.elMessiri(
-        color: Colors.grey[700],
-      ),
-      headline1: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
-      ),
-      headline2: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
-      ),
-      headline3: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
-      ),
-      headline4: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
-      ),
-      headline5: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
-      ),
-      headline6: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
+      bodyLarge:const TextStyle(
+          fontFamily: 'Cairo',
         fontWeight: FontWeight.bold,
       ),
-      subtitle1: GoogleFonts.elMessiri(
-        color: const Color(0xff1b1c1c),
+      bodyMedium:const TextStyle(
+          fontFamily: 'Cairo'
+      ),
+      displayLarge: const TextStyle(
+          fontFamily: 'Cairo'
+      ),
+      displayMedium:const TextStyle(
+          fontFamily: 'Cairo'
       ),
     ),
     iconTheme: const IconThemeData(color: Color(0xFF071D34)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: const Color(0xfffbc112),
+      backgroundColor: const Color(0xff152F4B),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -107,10 +93,10 @@ ThemeData lightTheme() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        textStyle: GoogleFonts.elMessiri(
-            color: const Color(0xff1b1c1c), fontWeight: FontWeight.bold),
+        textStyle: GoogleFonts.cairo(
+            fontWeight: FontWeight.bold),
         padding: const EdgeInsets.all(10.0),
-        primary: const Color(0xfffbc112).withOpacity(0.8),
+        primary: const Color(0xff152F4B).withOpacity(0.8),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -118,10 +104,10 @@ ThemeData lightTheme() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        textStyle: GoogleFonts.elMessiri(
-            color: const Color(0xff1b1c1c), fontWeight: FontWeight.bold),
+        textStyle: GoogleFonts.cairo(
+            fontWeight: FontWeight.bold),
         padding: const EdgeInsets.all(0.0),
-        primary: const Color(0xfffbc112).withOpacity(0.8),
+        primary: const Color(0xff152F4B).withOpacity(0.8),
       ),
     ),
   );
