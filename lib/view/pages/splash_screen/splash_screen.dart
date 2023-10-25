@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
 import '../../../core/localization/check_local.dart';
 import '../../../core/size_config/size_config.dart';
 import '../../../data/local/hiva_helper.dart';
@@ -38,6 +39,12 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     //           context,
     //           MaterialPageRoute(builder: (context) => startWidget),
     //         ));
+    Future.delayed(
+        const Duration(seconds: 5),
+        () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) =>const AuthView()),
+            ));
   }
   @override
   void dispose() {
