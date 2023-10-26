@@ -6,6 +6,7 @@ import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
 import 'package:taosel_user_app/view/widgets/customMainBtn.dart';
 import '../../../core/localization/language_cubit.dart';
 import '../../../data/local/hiva_helper.dart';
@@ -74,12 +75,17 @@ class _AuthViewState extends State<AuthView> {
               textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
             ),
             SizedBox(height: 0.025.sh,),
-            Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
-            style: TextStyle(
-              color:const Color(0xffF96817),
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600
-            ),
+            InkWell(
+              onTap: (){
+                navigateTo(context,const SignUp());
+              },
+              child: Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
+              style: TextStyle(
+                color:const Color(0xffF96817),
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600
+              ),
+              ),
             ),
           ],
         ),

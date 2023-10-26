@@ -121,7 +121,7 @@ class _LoginState extends State<Login> {
                                         ),
                                 Center(
                                     child: SvgPicture.asset(
-                                        'assets/images/infoIcon.svg')),
+                                        'assets/images/infoIcon.svg',)),
                               ],
                             ),
                             content: Text(state.error,textAlign: TextAlign.center,),
