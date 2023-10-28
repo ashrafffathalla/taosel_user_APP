@@ -2,6 +2,7 @@ import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
+import 'package:taosel_user_app/view/pages/home/layout.dart';
 import 'package:taosel_user_app/view/widgets/custom_text_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -161,9 +162,11 @@ class _LoginState extends State<Login> {
                             )),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            BlocProvider.of<AuthCubit>(context).login(
-                                email: phoneController.text,
-                                password: passwordController.text);
+                            // BlocProvider.of<AuthCubit>(context).login(
+                            //     email: phoneController.text,
+                            //     password: passwordController.text);
+                            ///-----مسح مع API
+                            navigateTo(context, LayoutScreen());
                           }
                         },
                         child: Text(local.signIn,style: TextStyle(

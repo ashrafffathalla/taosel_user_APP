@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
     );
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
 
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     //           MaterialPageRoute(builder: (context) => startWidget),
     //         ));
     Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds:2),
         () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) =>const AuthView()),

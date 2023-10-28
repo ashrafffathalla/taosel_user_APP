@@ -1,6 +1,6 @@
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/view/pages/auth/reset_password/reset_password.dart';
-// import 'package:taosel_user_app/view/pages/home/home.dart';
+// import 'package:taosel_user_app/view/pages/home/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
