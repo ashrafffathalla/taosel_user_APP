@@ -44,50 +44,52 @@ class _AuthViewState extends State<AuthView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal:size.width*0.05,vertical: size.height*0.07 ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: size.height*0.02,),
-            Text(local.signIn.toString(),style: TextStyle(
-              fontSize: 16.sp,
-            ),),
-            SizedBox(height: 0.03.sh,),
-            Text(CheckLocal.isDirectionRTL(context)?"مرحبا بعودتك مرة اخري ":"Welcome Back Again",style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w700
-            ),),
-            SizedBox(height: 0.03.sh,),
-            const Login(),
-            SizedBox(height: 0.03.sh,),
-            CustomMainBtn(ontap: (){},
-            iconButton: Padding(
-              padding:  EdgeInsets.only(right:size.width*0.03 ),
-              child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
-            ),
-              textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
-            ),
-            SizedBox(height: 0.02.sh,),
-            CustomMainBtn(ontap: (){},
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: size.height*0.02,),
+              Text(local.signIn.toString(),style: TextStyle(
+                fontSize: 16.sp,
+              ),),
+              SizedBox(height: 0.03.sh,),
+              Text(CheckLocal.isDirectionRTL(context)?"مرحبا بعودتك مرة اخري ":"Welcome Back Again",style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700
+              ),),
+              SizedBox(height: 0.03.sh,),
+              const Login(),
+              SizedBox(height: 0.03.sh,),
+              CustomMainBtn(ontap: (){},
               iconButton: Padding(
                 padding:  EdgeInsets.only(right:size.width*0.03 ),
-                child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
+                child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
               ),
-              textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
-            ),
-            SizedBox(height: 0.025.sh,),
-            InkWell(
-              onTap: (){
-                navigateTo(context,const SignUp());
-              },
-              child: Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
-              style: TextStyle(
-                color:const Color(0xffF96817),
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600
+                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
               ),
+              SizedBox(height: 0.02.sh,),
+              CustomMainBtn(ontap: (){},
+                iconButton: Padding(
+                  padding:  EdgeInsets.only(right:size.width*0.03 ),
+                  child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
+                ),
+                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
               ),
-            ),
-          ],
+              SizedBox(height: 0.025.sh,),
+              InkWell(
+                onTap: (){
+                  navigateTo(context,const SignUp());
+                },
+                child: Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
+                style: TextStyle(
+                  color:const Color(0xffF96817),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600
+                ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

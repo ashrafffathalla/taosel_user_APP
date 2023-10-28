@@ -151,3 +151,5 @@ flutter:
     - family: Cairo
       fonts:
         - asset: fonts/Cairo-Regular.ttf
+        - asset: fonts/Cairo-Bold.ttf
+        - asset: fonts/Cairo-SemiBold.ttf

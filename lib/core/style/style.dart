@@ -8,8 +8,8 @@ ThemeData lightTheme() {
     colorScheme: const ColorScheme(
       primary: Color(0xff152F4B),
       primaryContainer: Colors.white,
-      secondary: Color(0xFF6f5da8),
-      secondaryContainer: Color(0xFF6f5da8),
+      secondary: Color(0xff152F4B),
+      secondaryContainer: Color(0xff152F4B),
       surface: Color(0xffFFFFFF),
       background: Color(0xffFFFFFF),
       error: Color(0xffB00020),
@@ -49,7 +49,7 @@ ThemeData lightTheme() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      dialBackgroundColor: const Color(0xFF6f5da8).withOpacity(0.9),
+      dialBackgroundColor: const Color(0xff152F4B).withOpacity(0.9),
       dialHandColor: const Color(0xff152F4B),
       dialTextColor: Colors.white,
       hourMinuteColor: const Color(0xff152F4B).withOpacity(0.05),

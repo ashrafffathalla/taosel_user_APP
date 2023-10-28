@@ -47,6 +47,7 @@ class _OTPState extends State<OTP> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
@@ -92,15 +93,15 @@ class _OTPState extends State<OTP> {
           }
           if (state is AuthLoaded) {
             if (widget.namePage == "signUp") {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const AuthView()),
-                  (route) => false);
+              // Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute<void>(
+              //         builder: (BuildContext context) => const ResetPassword()),
+              //     (route) => false);
               showDialog(
                   context: context,
                   builder: (context) {
-                    Future.delayed(Duration(seconds: 3), () {
+                    Future.delayed(const Duration(seconds: 3), () {
                       Navigator.pop(context);
                     });
                     return AlertDialog(
@@ -158,10 +159,14 @@ class _OTPState extends State<OTP> {
               children: [
                 Column(
                   children: [
-                    const BackGround(),
+
                     SizedBox(
-                      height: SizeConfig.defaultSize! * 5,
+                      height: size.height*0.08,
                     ),
+                    Text(local!.resetPassword.toString(),style: TextStyle(
+                      fontSize: 16.sp,
+                    ),),
+                    SizedBox(height: 0.02.sh,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -212,43 +217,9 @@ class _OTPState extends State<OTP> {
                       height: SizeConfig.defaultSize! * 2,
                     ),
                     widget.namePage == "signUp"
-                        ? Padding(
+                        ?const Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 30.0),
-                            // child: Row(
-                            //   children: [
-                            //     Expanded(
-                            //       child: CustomTextFeild(
-                            //         inputFormatters: [
-                            //           new LengthLimitingTextInputFormatter(8),
-                            //         ],
-                            //         controller: phoneController,
-                            //         type: TextInputType.phone,
-                            //         preText: " | 05 ",
-                            //         label: local.pleaseEnterPhoneNumber,
-                            //         pIcon: LineAwesomeIcons.mobile_phone,
-                            //         validat: (value) =>
-                            //             FormValidator.phoneValidate(
-                            //                 context, value),
-                            //       ),
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 20,
-                            //     ),
-                            //     state is ChangePhoneLoading
-                            //         ? const Center(
-                            //             child: CircularProgressIndicator(),
-                            //           )
-                            //         : GestureDetector(
-                            //             onTap: () {
-                            //               BlocProvider.of<AuthCubit>(context)
-                            //                   .changePhone(
-                            //                       phoneController.text);
-                            //             },
-                            //             child: Text(local.change),
-                            //           )
-                            //   ],
-                            // ),
+                                 EdgeInsets.symmetric(horizontal: 30.0),
                           )
                         : const SizedBox.shrink(),
                     SizedBox(
@@ -275,12 +246,12 @@ class _OTPState extends State<OTP> {
                               selectedFillColor: Theme.of(context)
                                   .colorScheme
                                   .secondary
-                                  .withOpacity(0.6),
+                                  .withOpacity(0.3),
                               shape: PinCodeFieldShape.box,
                               fieldOuterPadding: const EdgeInsets.all(0.0),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(3),
                               fieldHeight: 50.sp,
-                              fieldWidth: 40.sp,
+                              fieldWidth: 50.sp,
                               activeColor:
                                   Theme.of(context).colorScheme.primary,
                               activeFillColor: Colors.white,
@@ -294,30 +265,30 @@ class _OTPState extends State<OTP> {
                               setState(() {
                                 currentText = value;
                                 if (currentText.length == 4) {
-                                  if (HiveHelper().getData("sendAgainToken") !=
-                                      null) {
-                                    BlocProvider.of<AuthCubit>(context)
-                                        .againCheckOtp(otpControler.text);
-                                    emailCreated = false;
-                                    setState(() {
-                                      print(emailCreated.toString());
-                                    });
-                                  } else {
-                                    HiveHelper().getData("tokenRegister") !=
-                                            null
-                                        ? BlocProvider.of<AuthCubit>(context)
-                                            .checkOtp(otpControler.text)
-                                        : BlocProvider.of<AuthCubit>(context)
-                                            .checkOtpPass(otpControler.text);
-                                    emailCreated = false;
-                                    setState(() {
-                                      print(emailCreated.toString());
-                                    });
-                                  }
-
-                                  print(HiveHelper()
-                                      .getData('sendAgainToken')
-                                      .toString());
+                                  // if (HiveHelper().getData("sendAgainToken") !=
+                                  //     null) {
+                                  //   BlocProvider.of<AuthCubit>(context)
+                                  //       .againCheckOtp(otpControler.text);
+                                  //   emailCreated = false;
+                                  //   setState(() {
+                                  //     print(emailCreated.toString());
+                                  //   });
+                                  // } else {
+                                  //   HiveHelper().getData("tokenRegister") !=
+                                  //           null
+                                  //       ? BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtp(otpControler.text)
+                                  //       : BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtpPass(otpControler.text);
+                                  //   emailCreated = false;
+                                  //   setState(() {
+                                  //     print(emailCreated.toString());
+                                  //   });
+                                  // }
+                                  //
+                                  // print(HiveHelper()
+                                  //     .getData('sendAgainToken')
+                                  //     .toString());
                                 }
                               });
                             },
@@ -372,33 +343,44 @@ class _OTPState extends State<OTP> {
                         : SizedBox(
                             width: SizeConfig.defaultSize! * 15,
                             child: ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          // side: BorderSide(color: Colors.red)
+                                        )
+                                    )),
                                 onPressed: () {
                                   if (currentText.length == 4) {
-                                    emailCreated == false;
-                                    if (HiveHelper()
-                                            .getData("sendAgainToken") !=
-                                        null) {
-                                      BlocProvider.of<AuthCubit>(context)
-                                          .againCheckOtp(otpControler.text);
-                                      setState(() {
-                                        print(emailCreated.toString());
-                                        print('=====+');
-                                      });
-                                    } else {
-                                      HiveHelper().getData("tokenRegister") !=
-                                              null
-                                          ? BlocProvider.of<AuthCubit>(context)
-                                              .checkOtp(otpControler.text)
-                                          : BlocProvider.of<AuthCubit>(context)
-                                              .checkOtpPass(otpControler.text);
-                                      print(HiveHelper()
-                                          .getData('sendAgainToken')
-                                          .toString());
-                                      print('=====');
-                                    }
+                                    ///-----مسح API
+                                    navigateTo(context, ResetPassword());
+                                    // emailCreated == false;
+                                    // if (HiveHelper()
+                                    //         .getData("sendAgainToken") !=
+                                    //     null) {
+                                    //   BlocProvider.of<AuthCubit>(context)
+                                    //       .againCheckOtp(otpControler.text);
+                                    //   setState(() {
+                                    //     print(emailCreated.toString());
+                                    //     print('=====+');
+                                    //   });
+                                    // } else {
+                                    //   HiveHelper().getData("tokenRegister") !=
+                                    //           null
+                                    //       ? BlocProvider.of<AuthCubit>(context)
+                                    //           .checkOtp(otpControler.text)
+                                    //       : BlocProvider.of<AuthCubit>(context)
+                                    //           .checkOtpPass(otpControler.text);
+                                    //   print(HiveHelper()
+                                    //       .getData('sendAgainToken')
+                                    //       .toString());
+                                    //   print('=====');
+                                    // }
                                   }
                                 },
-                                child: Text(local.confirm))),
+                                child: Text(local.confirm,style:const TextStyle(
+                                  color: Colors.white
+                                ),))),
                     // ElevatedButton.icon(
                     //     onPressed: () {
                     //       BlocProvider.of<LanguageCubit>(context)

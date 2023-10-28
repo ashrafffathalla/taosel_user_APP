@@ -41,7 +41,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
-
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -76,10 +76,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      const BackGround(),
-                      SizedBox(
-                        height: SizeConfig.defaultSize! * 5,
-                      ),
+                      SizedBox(height: size.height*0.08,),
+                      Text(local!.newPassowrd.toString(),style: TextStyle(
+                        fontSize: 16.sp,
+                      ),),
+                      SizedBox(height: 0.04.sh,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -93,11 +94,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                             ),
                           ),
                           SizedBox(
-                            width: SizeConfig.defaultSize! * 1,
+                            width: SizeConfig.defaultSize! * 2,
                           ),
                           RichText(
                             text: TextSpan(
-                              text: local!.resetPassword,
+                              text: local.resetPassword,
                               style: CheckLocal.isDirectionRTL(context)
                                   ? Theme.of(context)
                                       .textTheme
@@ -128,7 +129,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ],
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize! * 1.5,
+                        height: SizeConfig.defaultSize! * 3.5,
                       ),
                       Padding(
                         padding:  EdgeInsets.symmetric(
@@ -156,19 +157,29 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ),
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize! * 2,
+                        height: SizeConfig.defaultSize! * 3.5,
                       ),
                       SizedBox(
                           width: SizeConfig.defaultSize! * 15,
                           child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        // side: BorderSide(color: Colors.red)
+                                      )
+                                  )),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  BlocProvider.of<AuthCubit>(context)
-                                      .changepass(
-                                          pass: passwordController.text);
+                                  // BlocProvider.of<AuthCubit>(context)
+                                  //     .changepass(
+                                  //         pass: passwordController.text);
                                 }
                               },
-                              child: Text(local.resetButton))),
+                              child: Text(local.resetButton,style:const TextStyle(
+                                color: Colors.white,
+
+                              ),))),
                     ],
                   ),
                 ),

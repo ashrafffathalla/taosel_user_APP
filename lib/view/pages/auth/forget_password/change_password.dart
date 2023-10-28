@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
@@ -23,6 +24,7 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
@@ -47,113 +49,122 @@ class ChangePassword extends StatelessWidget {
         },
         builder: (context, state) {
           return SingleChildScrollView(
-            child: Stack(
+            child:Column(
               children: [
-                Column(
+                SizedBox(height: size.height*0.08,),
+                Text(local!.resetPassword.toString(),style: TextStyle(
+                  fontSize: 16.sp,
+                ),),
+                SizedBox(height: 0.03.sh,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const BackGround(),
-                    SizedBox(
-                      height: SizeConfig.defaultSize! * 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Transform(
-                          transform: CheckLocal.isDirectionRTL(context)
-                              ? Matrix4.rotationX(math.pi / 90)
-                              : Matrix4.rotationX(math.pi / 120),
-                          child: Icon(
-                            Icons.sms,
-                            size: SizeConfig.defaultSize! * 6,
-                          ),
-                        ),
-                        SizedBox(
-                          width: SizeConfig.defaultSize! * 1,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: local!.changePassword,
-                            style: CheckLocal.isDirectionRTL(context)
-                                ? Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(
-                                      fontSize: 16,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    )
-                                : Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        height: SizeConfig.defaultSize! * 0.22),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: local.changePasswordDesc,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: SizeConfig.defaultSize! * 1,
-                    ),
-                    Form(
-                      key: _formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: CustomTextFeild(
-                          inputFormatters: [
-                            new LengthLimitingTextInputFormatter(9),
-                          ],
-                          controller: phoneController,
-                          type: TextInputType.phone,
-                          label: local.pleaseEnterPhoneNumber,
-                          pIcon: Icons.phone_android_outlined,
-                          preText: CheckLocal.isDirectionRTL(context)?' | 966 +':' + 966 | ',
-                          validat: (value) =>
-                              FormValidator.phoneValidate(context, value),
-                        ),
+                    Transform(
+                      transform: CheckLocal.isDirectionRTL(context)
+                          ? Matrix4.rotationX(math.pi / 90)
+                          : Matrix4.rotationX(math.pi / 120),
+                      child: Icon(
+                        Icons.sms,
+                        size: SizeConfig.defaultSize! * 6,
                       ),
                     ),
                     SizedBox(
-                      height: SizeConfig.defaultSize! * 2,
+                      width: SizeConfig.defaultSize! * 1,
                     ),
-                    state is AuthLoading
-                        ? const Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          )
-                        : SizedBox(
-                            width: SizeConfig.defaultSize! * 15,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    BlocProvider.of<AuthCubit>(context)
-                                        .forget(phone: phoneController.text);
-                                  }
-                                },
-                                child: Text(local.send))),
-                    // ElevatedButton.icon(
-                    //     onPressed: () {
-                    //       BlocProvider.of<LanguageCubit>(context)
-                    //           .selectEngLanguage();
-                    //     },
-                    //     icon: const Icon(Icons.language),
-                    //     label: const Text("Change Languagh"))
+                    RichText(
+                      text: TextSpan(
+                        text: local.changePassword,
+                        style: CheckLocal.isDirectionRTL(context)
+                            ? Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        )
+                            : Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            height: SizeConfig.defaultSize! * 0.22),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: local.changePasswordDesc,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal)),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-
-                CustomBackButton(ontap: () {
-                  HiveHelper().removeData("token").then((value) {
-                    Navigator.pop(context);
-                  });
-                }),
+                SizedBox(
+                  height: SizeConfig.defaultSize! * 1,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: size.width*0.09,vertical: size.height*0.05),
+                    child: CustomTextFeild(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(11),
+                      ],
+                      controller: phoneController,
+                      type: TextInputType.phone,
+                      label: local.pleaseEnterPhoneNumber,
+                      pIcon: Icons.phone_android_outlined,
+                      // preText: CheckLocal.isDirectionRTL(context)?' | 966 +':' + 966 | ',
+                      validat: (value) =>
+                          FormValidator.phoneValidate(context, value),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: SizeConfig.defaultSize! * 2,
+                ),
+                state is AuthLoading
+                    ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+                    : SizedBox(
+                    width: SizeConfig.defaultSize! * 15,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  // side: BorderSide(color: Colors.red)
+                                )
+                            )),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            ///-----دي حذف بعد API
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const OTP(
+                                      namePage: "changePassword",
+                                    )));
+                            ///----------
+                            // BlocProvider.of<AuthCubit>(context)
+                            //     .forget(phone: phoneController.text);
+                          }
+                        },
+                        child: Text(local.send,style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp
+                        ),))),
+                // ElevatedButton.icon(
+                //     onPressed: () {
+                //       BlocProvider.of<LanguageCubit>(context)
+                //           .selectEngLanguage();
+                //     },
+                //     icon: const Icon(Icons.language),
+                //     label: const Text("Change Languagh"))
               ],
             ),
           );
@@ -162,3 +173,8 @@ class ChangePassword extends StatelessWidget {
     );
   }
 }
+// CustomBackButton(ontap: () {
+// HiveHelper().removeData("token").then((value) {
+// Navigator.pop(context);
+// });
+// }),

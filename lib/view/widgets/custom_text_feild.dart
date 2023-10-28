@@ -73,11 +73,11 @@ class _CustomTextFeildState extends State<CustomTextFeild> {
       maxLength: widget.maxlenth,
       obscureText: widget.type == TextInputType.visiblePassword ? !isShow : isShow,
       keyboardType: widget.type,
-      style: TextStyle(fontSize: 18.sp),
+      style: TextStyle(fontSize: 20.sp),
       decoration: InputDecoration(
         hintTextDirection: TextDirection.rtl,
         counterText: "",
-        contentPadding:  EdgeInsets.all(5.0.sp),
+        contentPadding:  EdgeInsets.all(8.0.sp),
         // focusedBorder: OutlineInputBorder(
         //     borderRadius: BorderRadius.circular(0.sp),
         //     borderSide:const BorderSide(
@@ -102,15 +102,15 @@ class _CustomTextFeildState extends State<CustomTextFeild> {
         label: Text(
             widget.label,
           style: TextStyle(
-            fontSize: widget.waletScreen==true?13.sp:16.sp,
+            fontSize: widget.waletScreen==true?13.sp:14.sp,
             fontWeight: FontWeight.w400
 
           ),
         ),
 
         // prefixText: widget.preText.toString(),
-        prefixText: CheckLocal.isDirectionRTL(context)?'':widget.type == TextInputType.phone?widget.preText.toString():'',
-        suffixText: CheckLocal.isDirectionRTL(context)?widget.type == TextInputType.phone?widget.preText.toString():'':null,
+       // prefixText: CheckLocal.isDirectionRTL(context)?'':widget.type == TextInputType.phone?widget.preText.toString():'',
+       //  suffixText: CheckLocal.isDirectionRTL(context)?widget.type == TextInputType.phone?widget.preText.toString():'':null,
         suffixStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,),
         prefixStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,),
 
