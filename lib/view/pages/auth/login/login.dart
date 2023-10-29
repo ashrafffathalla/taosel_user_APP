@@ -56,9 +56,7 @@ class _LoginState extends State<Login> {
                 pIcon: LineAwesomeIcons.mobile_phone,
                 validat: (value) => FormValidator.phoneValidate(context, value),
               ),
-              SizedBox(
-                height: SizeConfig.defaultSize! * 2,
-              ),
+              SizedBox(height: SizeConfig.defaultSize! * 2,),
               CustomTextFeild(
                 controller: passwordController,
                 type: TextInputType.visiblePassword,
