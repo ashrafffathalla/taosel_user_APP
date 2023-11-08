@@ -18,29 +18,6 @@ class AuthCubit extends Cubit<AuthState> {
   final SignUpRepositories signUpRepositories;
   final ForgetPassRepositories forgetPassRepositories;
 
-  // List<CountryModel> listCountry = [];
-
-  //get image lince
-  var picker = ImagePicker();
-  XFile? imageProfile;
-  String imagePathFace = "";
-  getImage(String type) async {
-    emit(ImageProfileLodingState());
-    try {
-      if (type == "camera") {
-        imageProfile = await picker.pickImage(source: ImageSource.camera);
-        imagePathFace = imageProfile!.path;
-        emit(ImageProfileScussesState());
-      } else if (type == "gallery") {
-        imageProfile = await picker.pickImage(source: ImageSource.gallery);
-        imagePathFace = imageProfile!.path;
-        emit(ImageProfileScussesState());
-      }
-    } catch (e) {
-      print(e.toString()+'4444444');
-      emit(ImageProfileErrorState(error: e.toString()));
-    }
-  }
 
 //user login
   login({required String email, required String password}) async {
@@ -60,8 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String phone,
     required String password,
-    required String licenseID,
-    required int country ,
+    required String password_confirmation,
   }) async {
     emit(AuthLoading());
     try {
@@ -70,19 +46,11 @@ class AuthCubit extends Cubit<AuthState> {
           name: name,
           phone: phone,
           password: password,
-          country: 1,
-          licenseID: licenseID,
-          image: imagePathFace.toString());
-       //print(email.toString()+'ssss');
-      // print(name.toString());
-      // print(phone.toString());
-     //  print(country.toString()+'sssss');
-      // print(licenseID.toString());
-      // print(imagePathFace.toString()+' 55555 ');
+          password_confirmation: password_confirmation,);
       emit(AuthLoaded());
     } catch (e) {
-      emit(AuthError(error: e.toString()));
-      print(e.toString());
+      emit(RegisterStateError(error: e.toString()));
+      // print(e.toString());
       // print(email.toString());
       // print(name.toString());
       // print(phone.toString());
@@ -91,20 +59,6 @@ class AuthCubit extends Cubit<AuthState> {
       // print(imagePathFace.toString()+' 55555 ');
     }
   }
-
-  //get Country
-  // CountryListModel ? countryListModel;
-  // getCountry() async {
-  //   emit(CountryLoading());
-  //   try {
-  //      countryListModel =
-  //         await signUpRepositories.getCountry();
-  //     listCountry.addAll(countryListModel!.data);
-  //     emit(CountryLoaded());
-  //   } catch (e) {
-  //     emit(AuthError(error: e.toString()));
-  //   }
-  // }
 
   //otp
   checkOtp(String otp) async {

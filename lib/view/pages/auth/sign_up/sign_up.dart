@@ -2,11 +2,6 @@ import 'dart:io';
 import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
-import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
-import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
-import 'package:taosel_user_app/view/pages/auth/otp/otp.dart';
-
-// import 'package:taosel_user_app/view/pages/menu/about_us/privacy_policy/privacy_policy.dart';
 import 'package:taosel_user_app/view/widgets/custom_text_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,35 +56,8 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AuthError) {
-            state.error.contains("path = ''")
-                ? showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title:
-                            //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
-                            Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Center(
-                                child: SvgPicture.asset(
-                                    'assets/images/infoIcon.svg')),
-                          ],
-                        ),
-                        content: Text(
-                          CheckLocal.isDirectionRTL(context)
-                              ? 'يجب ارفاق صورة رخصة القيادة'
-                              : "driver's license must be attached",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      );
-                    })
-                : showDialog(
+          if (state is RegisterStateError) {
+            showDialog(
                     context: context,
                     builder: (_) {
                       return AlertDialog(
@@ -101,7 +69,7 @@ class _SignUpState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 GestureDetector(
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.close,
                                     color: Colors.black87,
                                   ),
@@ -111,9 +79,8 @@ class _SignUpState extends State<SignUp> {
                                 ),
                               ],
                             ),
-                            Center(
-                                child: SvgPicture.asset(
-                                    'assets/images/infoIcon.svg')),
+                            const Center(
+                                child: Icon(Icons.warning_amber)),
                           ],
                         ),
                         content: Text(
@@ -370,11 +337,8 @@ class _SignUpState extends State<SignUp> {
                                       email: emailController.text,
                                       phone: phoneController.text,
                                       password: passwordController.text,
-                                      licenseID: licenseIdController.text,
-                                      country: 1,
-                                      // country: countryModel!.id
+                                      password_confirmation: passwordController.text,
                                     );
-
                                     // BlocProvider.of<LanguageCubit>(context)
                                     //     .selectEngLanguage();
                                   }

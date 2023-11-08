@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
+import 'package:taosel_user_app/data/model/signup_model.dart';
 import 'package:taosel_user_app/data/remote/dio_helper.dart';
 
 import '../../core/constant/apis.dart';
@@ -54,40 +55,35 @@ class SignUpRepositories {
 //   }
 
 //Sign Up
+  SignUpModel? signUpModel;
   Future<Response> signUp(
       {required String email,
       required String name,
       required String phone,
       required String password,
-      required String image,
-      required String licenseID,
-      required int country,
+      required String password_confirmation,
       }) async {
     try {
       FormData formData = FormData.fromMap({
-        "full_name": name,
+        "name": name,
         "email": email,
-        "phone": phone,
         "password": password,
-        "country": country,
-        "license_id": licenseID,
-        "license_image": await MultipartFile.fromFile(image, filename: image),
+        "password_confirmation": password_confirmation,
+        "phone": phone,
       });
       final Response response = await dioHelper.postData(
         needAuth: false,
         url: AutomationApi.registerUrl,
         data: formData,
       );
-      print(response.data);
-      var data = jsonDecode(response.data) as Map<String, dynamic>;
-      token = data['data']["token"];
-       await HiveHelper().putData('tokenRegister', token);
-      print(HiveHelper().getData('tokenRegister').toString()+'65656565656');
-
+        var data = jsonDecode(response.data) as Map<String, dynamic>;
+       if(token != null) {
+         token = data['data']["token"];
+         await HiveHelper().putData('tokenRegister', token);
+       }
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
-      print(error.toString());
       throw textSelect(error['data'].toString());
     } catch (error) {
       throw '..Oops $error';

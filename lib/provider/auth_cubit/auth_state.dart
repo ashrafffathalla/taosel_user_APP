@@ -13,13 +13,18 @@ class AuthLoading extends AuthState {}
 class AuthLoaded extends AuthState {}
 class AuthSendCodeLoaded extends AuthState {}
 
+class RegisterStateError extends AuthState {
+  final String error;
+  const RegisterStateError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
 class AuthError extends AuthState {
   final String error;
   const AuthError({required this.error});
   @override
   List<Object> get props => [error];
 }
-
 class CountryLoading extends AuthState {}
 
 class CountryLoaded extends AuthState {}
