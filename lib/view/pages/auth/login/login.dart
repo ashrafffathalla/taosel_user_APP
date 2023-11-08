@@ -139,13 +139,13 @@ class _LoginState extends State<Login> {
                       //  HiveHelper().getData('number') == 1
                       //      ? Navigator.of(context).pop(true)
                       //      :
-                      // Navigator.pushAndRemoveUntil(
-                      //         context,
-                      //         MaterialPageRoute<void>(
-                      //             builder: (BuildContext context) =>
-                      //                 const Home()
-                      //         ),
-                      //         (route) => false);
+                      Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const LayoutScreen()
+                              ),
+                              (route) => false);
                     }
                   }
                 },
@@ -171,7 +171,7 @@ class _LoginState extends State<Login> {
                                 password: passwordController.text);
 
                             ///-----مسح مع API
-                            navigateTo(context, LayoutScreen());
+                            // navigateTo(context, LayoutScreen());
                           }
                         },
                         child: Text(
