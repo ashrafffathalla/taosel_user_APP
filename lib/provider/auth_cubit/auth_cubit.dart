@@ -20,10 +20,10 @@ class AuthCubit extends Cubit<AuthState> {
 
 
 //user login
-  login({required String email, required String password}) async {
+  login({required String phone, required String password}) async {
     emit(AuthLoading());
     try {
-      await loginRepositories.login(email: email, password: password);
+      await loginRepositories.login(phone: phone, password: password);
       emit(AuthLoaded());
     } catch (e) {
       print("log ++++ $e");

@@ -51,8 +51,8 @@ class _LoginState extends State<Login> {
             children: [
               CustomTextFeild(
                 controller: phoneController,
-                type: TextInputType.emailAddress,
-                label: local!.phoneNumber,
+                type: TextInputType.phone,
+                label: local!.enterMobileNumber,
                 pIcon: LineAwesomeIcons.mobile_phone,
                 validat: (value) => FormValidator.phoneValidate(context, value),
               ),
@@ -160,9 +160,9 @@ class _LoginState extends State<Login> {
                             )),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // BlocProvider.of<AuthCubit>(context).login(
-                            //     email: phoneController.text,
-                            //     password: passwordController.text);
+                            BlocProvider.of<AuthCubit>(context).login(
+                                phone: phoneController.text,
+                                password: passwordController.text);
                             ///-----مسح مع API
                             navigateTo(context, LayoutScreen());
                           }
