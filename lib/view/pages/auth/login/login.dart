@@ -56,7 +56,9 @@ class _LoginState extends State<Login> {
                 pIcon: LineAwesomeIcons.mobile_phone,
                 validat: (value) => FormValidator.phoneValidate(context, value),
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 2,),
+              SizedBox(
+                height: SizeConfig.defaultSize! * 2,
+              ),
               CustomTextFeild(
                 controller: passwordController,
                 type: TextInputType.visiblePassword,
@@ -82,9 +84,10 @@ class _LoginState extends State<Login> {
                         local.forgetPassword,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                             color:const Color(0xffF96817).withOpacity(0.6),),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xffF96817).withOpacity(0.6),
+                        ),
                       ),
                     ),
                   ),
@@ -105,25 +108,29 @@ class _LoginState extends State<Login> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              child:const Icon(
-                                                Icons.close,
-                                                color: Colors.black87,
-                                              ),
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
-                                        ),
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      child: const Icon(
+                                        Icons.close,
+                                        color: Colors.black87,
+                                      ),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
                                 Center(
                                     child: SvgPicture.asset(
-                                        'assets/images/infoIcon.svg',)),
+                                  'assets/images/infoIcon.svg',
+                                )),
                               ],
                             ),
-                            content: Text(state.error,textAlign: TextAlign.center,),
+                            content: Text(
+                              state.error,
+                              textAlign: TextAlign.center,
+                            ),
                           );
                         });
                   }
@@ -152,29 +159,32 @@ class _LoginState extends State<Login> {
                     width: SizeConfig.defaultSize! * 35,
                     child: ElevatedButton(
                         style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    // side: BorderSide(color: Colors.red)
-                                )
-                            )),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          // side: BorderSide(color: Colors.red)
+                        ))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<AuthCubit>(context).login(
                                 phone: phoneController.text,
                                 password: passwordController.text);
+
                             ///-----مسح مع API
                             navigateTo(context, LayoutScreen());
                           }
                         },
-                        child: Text(local.signIn,style: TextStyle(
-                            fontSize: 18.sp,
-                          color: Colors.white
-                        ),)),
+                        child: Text(
+                          local.signIn,
+                          style:
+                              TextStyle(fontSize: 18.sp, color: Colors.white),
+                        )),
                   );
                 },
               ),
-              SizedBox(height: 0.03.sh,),
+              SizedBox(
+                height: 0.03.sh,
+              ),
             ],
           ),
         ),
