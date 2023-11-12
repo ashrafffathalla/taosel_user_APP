@@ -3,7 +3,6 @@ import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
 import '../../../core/localization/check_local.dart';
 import '../../../core/size_config/size_config.dart';
 import '../../../data/local/hiva_helper.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -40,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     //           MaterialPageRoute(builder: (context) => startWidget),
     //         ));
     Future.delayed(
-        const Duration(seconds:2),
+        const Duration(seconds:3),
         () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) =>const AuthView()),

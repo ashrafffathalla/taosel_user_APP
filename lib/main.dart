@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
 import 'package:taosel_user_app/myobserver.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/view/pages/home/home/home_screen.dart';
+import 'package:taosel_user_app/view/pages/home/layout.dart';
 import 'package:taosel_user_app/view/pages/splash_screen/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/style/style.dart';
@@ -39,7 +41,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -52,7 +53,6 @@ class MyApp extends StatelessWidget {
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
             // BlocProvider(
             //     create: (BuildContext context) => FacebookLoginCubit()),
-
           ],
           child: BlocBuilder<LanguageCubit, Locale>(
               builder:(_,locale){
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
                     return supportedLocale.first;
                   },
                   locale: locale,
-                  home: const SplashScreen(),
+                  home: const LayoutScreen(),
                 );
               }
           ),
