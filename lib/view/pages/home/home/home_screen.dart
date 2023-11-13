@@ -3,6 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:taosel_user_app/core/localization/check_local.dart';
+import 'package:taosel_user_app/data/local/hiva_helper.dart';
+import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
+
+import '../../../../shared/shared_commponents/commponents.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -67,10 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Row(
                           children: [
-                            CircleAvatar(
-                              radius: 18.sp, // Image radius
-                              backgroundImage: const NetworkImage(
-                                'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+                            GestureDetector(
+                              onTap:(){
+                                HiveHelper().removeData('token').then(
+                                  navigateAndFinish(context,AuthView()),
+                                );
+                              },
+                              child: CircleAvatar(
+                                radius: 18.sp, // Image radius
+                                backgroundImage: const NetworkImage(
+                                  'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+                                ),
                               ),
                             )
                           ],

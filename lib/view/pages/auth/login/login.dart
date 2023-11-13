@@ -51,6 +51,9 @@ class _LoginState extends State<Login> {
           child: Column(
             children: [
               CustomTextFeild(
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                ],
                 controller: phoneController,
                 type: TextInputType.phone,
                 label: local!.enterMobileNumber,
@@ -61,9 +64,7 @@ class _LoginState extends State<Login> {
                 height: SizeConfig.defaultSize! * 2,
               ),
               CustomTextFeild(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(11),
-                ],
+
                 controller: passwordController,
                 type: TextInputType.visiblePassword,
                 label: local.password,
