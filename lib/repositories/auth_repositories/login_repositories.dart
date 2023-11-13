@@ -19,13 +19,14 @@ class LoginRepositories {
         needAuth: false,
         url: AutomationApi.loginUrl,
         data: {
-          "phone": phone,
+          "phone": "+2$phone",
           "password": password,
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      // String token = data['data']["token"];
-      // await hiveHelper.putData("token", token);
+      String token = data['data']["token"];
+      await hiveHelper.putData("token", token);
+      print(hiveHelper.getData('token').toString()+"HHHHH");
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;

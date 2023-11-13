@@ -92,22 +92,20 @@ ThemeData lightTheme() {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
-        ),
+        ), backgroundColor: const Color(0xff152F4B).withOpacity(0.8),
         textStyle: GoogleFonts.cairo(
             fontWeight: FontWeight.bold),
         padding: const EdgeInsets.all(10.0),
-        primary: const Color(0xff152F4B).withOpacity(0.8),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        shape: RoundedRectangleBorder(
+        foregroundColor: const Color(0xff152F4B).withOpacity(0.8), shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         textStyle: GoogleFonts.cairo(
             fontWeight: FontWeight.bold),
         padding: const EdgeInsets.all(0.0),
-        primary: const Color(0xff152F4B).withOpacity(0.8),
       ),
     ),
   );

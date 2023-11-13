@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
 import 'package:taosel_user_app/myobserver.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/view/pages/auth/login/login.dart';
+import 'package:taosel_user_app/view/pages/auth/sign_up/sign_up.dart';
 import 'package:taosel_user_app/view/pages/home/home/home_screen.dart';
 import 'package:taosel_user_app/view/pages/home/layout.dart';
 import 'package:taosel_user_app/view/pages/splash_screen/splash_screen.dart';
@@ -12,6 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/style/style.dart';
 import 'data/local/hiva_helper.dart';
 import 'injection_container.dart';
+import 'view/pages/auth/autth_view.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,7 +76,7 @@ class MyApp extends StatelessWidget {
                     return supportedLocale.first;
                   },
                   locale: locale,
-                  home: const LayoutScreen(),
+                  home: const SplashScreen(),
                 );
               }
           ),

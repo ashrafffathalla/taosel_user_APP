@@ -55,7 +55,6 @@ class SignUpRepositories {
 //   }
 
 //Sign Up
-  SignUpModel? signUpModel;
   Future<Response> signUp(
       {required String email,
       required String name,
@@ -69,18 +68,17 @@ class SignUpRepositories {
         "email": email,
         "password": password,
         "password_confirmation": password_confirmation,
-        "phone": phone,
+        "phone": "+2$phone",
       });
+
       final Response response = await dioHelper.postData(
         needAuth: false,
         url: AutomationApi.registerUrl,
         data: formData,
       );
+      print("H11111");
         var data = jsonDecode(response.data) as Map<String, dynamic>;
-       if(token != null) {
-         token = data['data']["token"];
-         await HiveHelper().putData('tokenRegister', token);
-       }
+        print(data.toString());
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
@@ -99,7 +97,7 @@ class SignUpRepositories {
         needAuth: true,
         url: AutomationApi.checkOtpRegisterUrl,
         data: {
-          "otp": otp,
+          "code": otp,
         },
       );
       // var data = jsonDecode(response.data) as Map<String, dynamic>;

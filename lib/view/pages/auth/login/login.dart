@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
@@ -35,12 +36,12 @@ class _LoginState extends State<Login> {
   void initState() {
     passwordController = TextEditingController();
     phoneController = TextEditingController();
-    // BlocProvider.of<AuthCubit>(context).listCountry.clear();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     final local = AppLocalizations.of(context);
     return SingleChildScrollView(
       child: Padding(
@@ -60,6 +61,9 @@ class _LoginState extends State<Login> {
                 height: SizeConfig.defaultSize! * 2,
               ),
               CustomTextFeild(
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                ],
                 controller: passwordController,
                 type: TextInputType.visiblePassword,
                 label: local.password,
@@ -121,10 +125,8 @@ class _LoginState extends State<Login> {
                                     ),
                                   ],
                                 ),
-                                Center(
-                                    child: SvgPicture.asset(
-                                  'assets/images/infoIcon.svg',
-                                )),
+                                 Center(
+                                    child: Icon(Icons.close,color: Colors.red,size: 30.sp,)),
                               ],
                             ),
                             content: Text(
@@ -136,9 +138,6 @@ class _LoginState extends State<Login> {
                   }
                   if (state is AuthLoaded) {
                     if (_formKey.currentState!.validate()) {
-                      //  HiveHelper().getData('number') == 1
-                      //      ? Navigator.of(context).pop(true)
-                      //      :
                       Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute<void>(
@@ -155,23 +154,29 @@ class _LoginState extends State<Login> {
                       child: CircularProgressIndicator.adaptive(),
                     );
                   }
-                  return SizedBox(
+                  return Container(
                     width: SizeConfig.defaultSize! * 35,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                    ),
                     child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          // side: BorderSide(color: Colors.red)
-                        ))),
+                        )
+                            ),   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<AuthCubit>(context).login(
                                 phone: phoneController.text,
                                 password: passwordController.text);
 
-                            ///-----مسح مع API
-                            // navigateTo(context, LayoutScreen());
                           }
                         },
                         child: Text(

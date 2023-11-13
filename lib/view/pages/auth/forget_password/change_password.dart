@@ -39,6 +39,7 @@ class ChangePassword extends StatelessWidget {
           //       });
           // }
           if (state is AuthLoaded) {
+
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -130,28 +131,33 @@ class ChangePassword extends StatelessWidget {
                     ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )
-                    : SizedBox(
-                    width: SizeConfig.defaultSize! * 15,
+                    : Container(
+                    width: SizeConfig.defaultSize! * 30,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                    ),
                     child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                   // side: BorderSide(color: Colors.red)
-                                )
-                            )),
+                                ),
+
+                            ),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+                        ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ///-----دي حذف بعد API
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const OTP(
-                                      namePage: "changePassword",
-                                    )));
                             ///----------
-                            // BlocProvider.of<AuthCubit>(context)
-                            //     .forget(phone: phoneController.text);
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            BlocProvider.of<AuthCubit>(context)
+                                .forget(phone: phoneController.text);
                           }
                         },
                         child: Text(local.send,style: TextStyle(
@@ -173,8 +179,3 @@ class ChangePassword extends StatelessWidget {
     );
   }
 }
-// CustomBackButton(ontap: () {
-// HiveHelper().removeData("token").then((value) {
-// Navigator.pop(context);
-// });
-// }),

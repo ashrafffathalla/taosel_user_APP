@@ -41,14 +41,20 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
+      print("HHHHH1");
       await signUpRepositories.signUp(
           email: email,
           name: name,
           phone: phone,
           password: password,
           password_confirmation: password_confirmation,);
+      print(email.toString());
+      print(name.toString());
+      print(phone.toString());
+      print("HHHHH2");
       emit(AuthLoaded());
     } catch (e) {
+      print(e.toString());
       emit(RegisterStateError(error: e.toString()));
       // print(e.toString());
       // print(email.toString());
@@ -64,14 +70,11 @@ class AuthCubit extends Cubit<AuthState> {
   checkOtp(String otp) async {
     emit(AuthLoading());
     try {
-      // print("test200");
-      // print(HiveHelper().getData('token').toString()+'AShrafOTP');
       await signUpRepositories.otp(otp: otp);
       emit(AuthLoaded());
-      HiveHelper().removeData("tokenRegister");
+      print("Ashraf");
     } catch (e) {
-      // print("Ashraf fathalla");
-      // print("++++ $e");
+      print("Ashraf fathalla");
       emit(AuthError(error: e.toString()));
     }
   }
@@ -122,7 +125,7 @@ class AuthCubit extends Cubit<AuthState> {
   forget({required String phone}) async {
     emit(AuthLoading());
     try {
-      await forgetPassRepositories.forgetPass(phone: phone);
+      await forgetPassRepositories.forgetPass(phone: "+2$phone");
       emit(AuthLoaded());
     } catch (e) {
       print("forget $e");
@@ -142,11 +145,13 @@ class AuthCubit extends Cubit<AuthState> {
   //change Password
   changepass({
     required String pass,
+    required String password_confirmation,
   }) async {
     emit(AuthLoading());
     try {
       await forgetPassRepositories.changePass(
         pass: pass,
+          password_confirmation:password_confirmation
       );
       emit(AuthLoaded());
     } catch (e) {

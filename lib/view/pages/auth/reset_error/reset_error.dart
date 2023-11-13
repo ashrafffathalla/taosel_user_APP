@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
 import 'package:taosel_user_app/view/pages/auth/widget/gray_logo_background.dart';
@@ -28,7 +30,7 @@ class ResetError extends StatelessWidget {
                     SizedBox(
                       height: SizeConfig.defaultSize! * 30,
                     ),
-                    SvgPicture.asset("assets/images/resetError.svg"),
+                     Icon(Icons.close,size: 100.sp,color: Colors.red,),
                     SizedBox(
                       height: SizeConfig.defaultSize! * 4,
                     ),
@@ -46,9 +48,20 @@ class ResetError extends StatelessWidget {
                     SizedBox(
                       height: SizeConfig.defaultSize! * 2,
                     ),
-                    SizedBox(
-                      width: SizeConfig.defaultSize! * 15,
+                    Container(
+                      width: SizeConfig.defaultSize! * 30,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                      ),
                       child: ElevatedButton.icon(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+                          ),
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(
                                 context,
@@ -64,53 +77,6 @@ class ResetError extends StatelessWidget {
                 ),
               ),
             ),
-            // Positioned(
-            //   top: SizeConfig.defaultSize! * 29,
-            //   right: SizeConfig.defaultSize! * 9,
-            //   child: SvgPicture.asset("assets/images/resetError.svg"),
-            // ),
-            // Positioned(
-            //   top: SizeConfig.defaultSize! * 53,
-            //   right: SizeConfig.defaultSize! * 12.4,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text(
-            //         local!.resetError,
-            //         style: const TextStyle(
-            //             color: Colors.black,
-            //             fontSize: 25,
-            //             fontWeight: FontWeight.bold),
-            //       ),
-            //       Text(
-            //         local.resetErrorDesc,
-            //         style: const TextStyle(fontSize: 16),
-            //       ),
-            //       SizedBox(
-            //         height: SizeConfig.defaultSize! * 2,
-            //       ),
-            //       SizedBox(
-            //         width: SizeConfig.defaultSize! * 15,
-            //         child: ElevatedButton.icon(
-            //             onPressed: () {
-            //               Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                       builder: (context) => const AuthView()));
-            //             },
-            //             icon: const Icon(Icons.arrow_back),
-            //             label: Text(local.resetErrorButton)),
-            //       ),
-            //       /*  ElevatedButton.icon(
-            //           onPressed: () {
-            //             BlocProvider.of<LanguageCubit>(context)
-            //                 .selectEngLanguage();
-            //           },
-            //           icon: const Icon(Icons.language),
-            //           label: const Text("Change Languagh"))*/
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

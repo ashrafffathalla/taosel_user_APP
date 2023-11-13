@@ -14,6 +14,8 @@ import '../../../../core/validation/form_validator.dart';
 
 // import '../../../../data/model/country_model.dart';
 import '../../../../provider/auth_cubit/auth_state.dart';
+import '../../../../shared/shared_commponents/commponents.dart';
+import '../autth_view.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -50,6 +52,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
     final local = AppLocalizations.of(context);
     // BlocProvider.of<AuthCubit>(context).getCountry();
@@ -80,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                               ],
                             ),
                             const Center(
-                                child: Icon(Icons.warning_amber)),
+                                child: Icon(Icons.warning_amber,size: 50,color: Colors.red,)),
                           ],
                         ),
                         content: Text(
@@ -94,68 +97,43 @@ class _SignUpState extends State<SignUp> {
                       );
                     });
           }
-          //  if (state is AuthError) {
-          //   showDialog(
-          //       context: context,
-          //       builder: (_) {
-          //         return AlertDialog(
-          //           title:
-          //           //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
-          //           Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             crossAxisAlignment: CrossAxisAlignment.center,
-          //             children: [
-          //               Center(
-          //                   child: SvgPicture.asset(
-          //                       'assets/images/infoIcon.svg')),
-          //             ],
-          //           ),
-          //           content: Text(
-          //             state.error.toString(),
-          //             style: TextStyle(
-          //               fontSize: 14.sp,
-          //               fontWeight: FontWeight.w500,
-          //             ),
-          //           ),
-          //         );
-          //       });
-          // }
+
           if (state is AuthLoaded) {
-            // BlocProvider.of<AuthCubit>(context).imagePathFace = "";
-            // navigateAndFinish(context, AuthView());
-            // // showDialog(
-            // //     context: context,
-            // //     builder: (context) {
-            // //       Future.delayed(Duration(seconds: 3), () {
-            // //         Navigator.pop(context);
-            // //       });
-            // //       return AlertDialog(
-            // //         title:
-            // //             //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
-            // //             Column(
-            // //           mainAxisAlignment: MainAxisAlignment.center,
-            // //           crossAxisAlignment: CrossAxisAlignment.center,
-            // //           children: [
-            // //             Center(
-            // //                 child: Icon(
-            // //               Icons.check_circle,
-            // //               color: Colors.green,
-            // //               size: 50.sp,
-            // //             )),
-            // //           ],
-            // //         ),
-            // //         content: Text(
-            // //           CheckLocal.isDirectionRTL(context)
-            // //               ? 'تم انشاء البريد الالكتروني بنجاح'
-            // //               : 'Email has been created successfully',
-            // //           textAlign: TextAlign.center,
-            // //           style: TextStyle(
-            // //             fontSize: 16.sp,
-            // //             fontWeight: FontWeight.w600,
-            // //           ),
-            // //         ),
-            // //       );
-            // //     });
+            navigateAndFinish(context, const AuthView());
+            showDialog(
+                context: context,
+                builder: (context) {
+                  Future.delayed(Duration(seconds: 3), () {
+                    Navigator.pop(context);
+                  });
+                  return AlertDialog(
+                    title:
+                        //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
+                        Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Center(
+                            child: Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 50.sp,
+                        )),
+                      ],
+                    ),
+                    content: Text(
+                      CheckLocal.isDirectionRTL(context)
+                          ? 'تم انشاء البريد الالكتروني بنجاح'
+                          : 'Email has been created successfully',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  );
+                });
+
             // Navigator.push(
             //   context,
             //   MaterialPageRoute(
@@ -281,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           Theme(
                             data: ThemeData(
-                                primarySwatch: Colors.amber,
+                                primarySwatch: Colors.blue,
                                 unselectedWidgetColor:
                                     Theme.of(context).colorScheme.primary),
                             child: Transform.scale(
@@ -291,7 +269,7 @@ class _SignUpState extends State<SignUp> {
                                   onChanged: (value) {
                                     setState(() {
                                       isAgreeTerms = value!;
-                                      print(isAgreeTerms.toString());
+
                                     });
                                   }),
                             ),

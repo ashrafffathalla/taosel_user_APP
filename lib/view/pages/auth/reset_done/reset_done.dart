@@ -1,3 +1,4 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/view/pages/auth/reset_error/reset_error.dart';
 import 'package:taosel_user_app/view/pages/auth/widget/gray_logo_background.dart';
@@ -21,37 +22,6 @@ class ResetDone extends StatelessWidget {
     final local = AppLocalizations.of(context);
 
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FadedSlideAnimation(
-        beginOffset: const Offset(0.8, 0.2),
-        endOffset: const Offset(0, 0),
-        slideDuration: const Duration(milliseconds: 3000),
-        slideCurve: Curves.easeInOut,
-        child: Container(
-          height: 45.sp,
-          width: 45.sp,
-          child: FloatingActionButton(
-            onPressed: () {
-              // BlocProvider.of<LanguageCubit>(context).selectEngLanguage();
-              // BlocProvider.of<RentCarCubit>(context).regionModel.clear();
-              // BlocProvider.of<RentCarCubit>(context).getRegion();
-              // BlocProvider.of<AuthCubit>(context).listCountry.clear();
-              // BlocProvider.of<AuthCubit>(context).getCountry();
-            },
-            backgroundColor: Colors.white,
-            splashColor: Colors.purple.withOpacity(0.2),
-            //focusColor: Colors.green,
-            disabledElevation: 0,
-            tooltip: 'ع / EN',
-            // autofocus: true,
-            child: Icon(
-              Icons.language,
-              color: Theme.of(context).colorScheme.primary,
-              size: 35,
-            ),
-          ),
-        ),
-      ),
       body: SizedBox(
         height: double.infinity,
         child: Stack(
@@ -64,11 +34,11 @@ class ResetDone extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: SizeConfig.defaultSize! * 30.5,
+                      height: SizeConfig.defaultSize! * 25.5,
                     ),
-                    SvgPicture.asset("assets/images/allDone.svg"),
+                     Icon(FontAwesomeIcons.checkCircle,color: Colors.green,size: 100.sp,),
                     SizedBox(
-                      height: SizeConfig.defaultSize! * 8,
+                      height: SizeConfig.defaultSize! * 5,
                     ),
                     Text(
                       local!.done,
@@ -84,9 +54,20 @@ class ResetDone extends StatelessWidget {
                     SizedBox(
                       height: SizeConfig.defaultSize! * 7,
                     ),
-                    SizedBox(
-                      width: SizeConfig.defaultSize! * 33,
+                    Container(
+                      width: SizeConfig.defaultSize! * 30,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                      ),
                       child: ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+                        ),
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                               context,
@@ -95,66 +76,22 @@ class ResetDone extends StatelessWidget {
                                       const AuthView()),
                               (route) => false);
                         },
-                        icon: Row(
+                        icon:const Row(
                           children: [
-
-                            const Icon(Icons.arrow_circle_right),
+                             Icon(Icons.arrow_circle_right,color: Colors.white,),
                           ],
                         ),
-                        label: Text(local.doneButton),
+                        label: Text(local.doneButton,style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp
+                        ),),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            // Positioned(
-            //     top: SizeConfig.defaultSize! * 29,
-            //     right: SizeConfig.defaultSize! * 12,
-            //     child: SvgPicture.asset("assets/images/allDone.svg")),
-            // Positioned(
-            //   top: SizeConfig.defaultSize! * 53,
-            //   right: SizeConfig.defaultSize! * 9.5,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text(
-            //         local!.done,
-            //         style:const  TextStyle(
-            //             color: Colors.black,
-            //             fontSize: 25,
-            //             fontWeight: FontWeight.bold),
-            //       ),
-            //       Text(
-            //         local.doneDesc,
-            //         style: TextStyle(fontSize: 16),
-            //       ),
-            //       SizedBox(
-            //         height: SizeConfig.defaultSize! * 2,
-            //       ),
-            //       SizedBox(
-            //         width: SizeConfig.defaultSize! * 15,
-            //         child: ElevatedButton.icon(
-            //           onPressed: () {
-            //             Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                     builder: (context) => const ResetError()));
-            //           },
-            //           icon:const  Icon(Icons.arrow_back),
-            //           label: Text(local.doneButton),
-            //         ),
-            //       ),
-            //       ElevatedButton.icon(
-            //           onPressed: () {
-            //             BlocProvider.of<LanguageCubit>(context)
-            //                 .selectEngLanguage();
-            //           },
-            //           icon: const Icon(Icons.language),
-            //           label: const Text("Change Languagh"))
-            //     ],
-            //   ),
-            // ),
+
           ],
         ),
       ),

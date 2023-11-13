@@ -1,14 +1,14 @@
 class AutomationApi {
-  static const baseUrl = "https://taosel.com/api/v1";
+  static const baseUrl = "https://taosel.com/api";
 
   //**************** Authentication *******************//
   static const loginUrl = "$baseUrl/auth/login"; //post
   static const registerUrl = "$baseUrl/auth/register-client"; //post
-  static const checkOtpRegisterUrl = "$baseUrl/check_otp"; //post
+  static const checkOtpRegisterUrl = "$baseUrl/auth/reset/check_code"; //post
   static const changePhoneUrl = "$baseUrl/change_phone"; //post
   static const countriesUrl = "$baseUrl/countries"; //get
-  static const forgetUrl = "$baseUrl/forget_password"; //post
-  static const changePasswordUrl = "$baseUrl/change_password"; //post
+  static const forgetUrl = "$baseUrl/auth/check-phone"; //post
+  static const changePasswordUrl = "$baseUrl/auth/reset/reset_password"; //post
   static const updateAllProfileUrl = "$baseUrl/update_profile"; //post
 
   //**************** Profile *******************//

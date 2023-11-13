@@ -65,7 +65,7 @@ class _OTPState extends State<OTP> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             GestureDetector(
-                              child: Icon(
+                              child: const Icon(
                                 Icons.close,
                                 color: Colors.black87,
                               ),
@@ -75,9 +75,9 @@ class _OTPState extends State<OTP> {
                             ),
                           ],
                         ),
-                        Center(
+                        const Center(
                             child:
-                                SvgPicture.asset('assets/images/infoIcon.svg')),
+                                Icon(LineAwesomeIcons.check_circle,color: Colors.green,)),
                       ],
                     ),
                     content: Center(
@@ -115,7 +115,7 @@ class _OTPState extends State<OTP> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               GestureDetector(
-                                child: Icon(
+                                child:const  Icon(
                                   Icons.close,
                                   color: Colors.black87,
                                 ),
@@ -184,7 +184,7 @@ class _OTPState extends State<OTP> {
                         ),
                         RichText(
                           text: TextSpan(
-                            text: local!.otpCode,
+                            text: local.otpCode,
                             style: CheckLocal.isDirectionRTL(context)
                                 ? Theme.of(context)
                                     .textTheme
@@ -301,38 +301,38 @@ class _OTPState extends State<OTP> {
                     SizedBox(
                       height: 5,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width * 0.09),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            local.sendAgain,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          InkWell(
-                              onTap: () {
-                                BlocProvider.of<AuthCubit>(context)
-                                    .sendAgain(phone: widget.phone.toString());
-                              },
-                              child: Text(
-                                local.sendAgain2,
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w600),
-                              )),
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //       horizontal: MediaQuery.of(context).size.width * 0.09),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     children: [
+                    //       Text(
+                    //         local.sendAgain,
+                    //         style: TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 16.sp,
+                    //             fontWeight: FontWeight.w600),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 4,
+                    //       ),
+                    //       InkWell(
+                    //           onTap: () {
+                    //             BlocProvider.of<AuthCubit>(context)
+                    //                 .sendAgain(phone: widget.phone.toString());
+                    //           },
+                    //           child: Text(
+                    //             local.sendAgain2,
+                    //             style: TextStyle(
+                    //                 color:
+                    //                     Theme.of(context).colorScheme.primary,
+                    //                 fontSize: 15.sp,
+                    //                 fontWeight: FontWeight.w600),
+                    //           )),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
                       height: SizeConfig.defaultSize! * 2.5,
                     ),
@@ -340,8 +340,16 @@ class _OTPState extends State<OTP> {
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : SizedBox(
-                            width: SizeConfig.defaultSize! * 15,
+                        : Container(
+                        width: SizeConfig.defaultSize! * 30,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                        ),
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -349,34 +357,13 @@ class _OTPState extends State<OTP> {
                                           borderRadius: BorderRadius.circular(8.0),
                                           // side: BorderSide(color: Colors.red)
                                         )
-                                    )),
+                                    ),backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
                                 onPressed: () {
                                   if (currentText.length == 4) {
-                                    ///-----مسح API
-                                    navigateTo(context, ResetPassword());
-                                    // emailCreated == false;
-                                    // if (HiveHelper()
-                                    //         .getData("sendAgainToken") !=
-                                    //     null) {
-                                    //   BlocProvider.of<AuthCubit>(context)
-                                    //       .againCheckOtp(otpControler.text);
-                                    //   setState(() {
-                                    //     print(emailCreated.toString());
-                                    //     print('=====+');
-                                    //   });
-                                    // } else {
-                                    //   HiveHelper().getData("tokenRegister") !=
-                                    //           null
-                                    //       ? BlocProvider.of<AuthCubit>(context)
-                                    //           .checkOtp(otpControler.text)
-                                    //       : BlocProvider.of<AuthCubit>(context)
-                                    //           .checkOtpPass(otpControler.text);
-                                    //   print(HiveHelper()
-                                    //       .getData('sendAgainToken')
-                                    //       .toString());
-                                    //   print('=====');
-                                    // }
-                                  }
+                                    BlocProvider.of<AuthCubit>(context)
+                                        .checkOtp(otpControler.text);
+                                    }
+
                                 },
                                 child: Text(local.confirm,style:const TextStyle(
                                   color: Colors.white
@@ -390,11 +377,6 @@ class _OTPState extends State<OTP> {
                     //     label: const Text("Change Languagh"))
                   ],
                 ),
-                CustomBackButton(ontap: () {
-                  HiveHelper().removeData("token").then((value) {
-                    Navigator.pop(context);
-                  });
-                }),
               ],
             ),
           );

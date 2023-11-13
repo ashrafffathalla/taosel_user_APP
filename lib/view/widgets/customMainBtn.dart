@@ -13,16 +13,27 @@ class CustomMainBtn extends StatelessWidget {
   final String? textButton;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: SizeConfig.defaultSize! * 35,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+      ),
       child: ElevatedButton(
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
+
                     // side: BorderSide(color: Colors.red)
-                  )
-              )),
+                  ),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+          ),
           onPressed: ontap,
           child: Row(
             children: [

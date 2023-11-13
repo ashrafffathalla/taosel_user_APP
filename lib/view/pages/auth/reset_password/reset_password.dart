@@ -46,26 +46,20 @@ class _ResetPasswordState extends State<ResetPassword> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
-            HiveHelper().removeData("token").then((value) {
 
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const ResetError()),
-                  (route) => false);
-            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const ResetError()),
+                    (route) => false);
           }
           if (state is AuthLoaded) {
-            HiveHelper().removeData("token").then((value) {
-              HiveHelper().removeData("sendAgainToken");
-              HiveHelper().removeData("tokenRegister");
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const ResetDone(),
-                  ),
-                  (route) => false);
-            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const ResetDone(),
+                ),
+                    (route) => false);
           }
         },
         builder: (context, state) {
@@ -82,17 +76,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),),
                       SizedBox(height: 0.04.sh,),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Transform(
-                            transform: CheckLocal.isDirectionRTL(context)
-                                ? Matrix4.rotationX(math.pi / 90)
-                                : Matrix4.rotationX(math.pi / 120),
-                            child: Icon(
-                              LineAwesomeIcons.researchgate,
-                              size: SizeConfig.defaultSize! * 6,
-                            ),
-                          ),
                           SizedBox(
                             width: SizeConfig.defaultSize! * 2,
                           ),
@@ -159,8 +144,16 @@ class _ResetPasswordState extends State<ResetPassword> {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 3.5,
                       ),
-                      SizedBox(
-                          width: SizeConfig.defaultSize! * 15,
+                      Container(
+                          width: SizeConfig.defaultSize! * 30,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xff065BFF), Color(0xff161EEE)], // Define your gradient colors
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+                          ),
                           child: ElevatedButton(
                               style: ButtonStyle(
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -168,12 +161,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                                         borderRadius: BorderRadius.circular(8.0),
                                         // side: BorderSide(color: Colors.red)
                                       )
-                                  )),
+                                  ),backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  // BlocProvider.of<AuthCubit>(context)
-                                  //     .changepass(
-                                  //         pass: passwordController.text);
+                                  FocusScope.of(context).requestFocus(FocusNode());
+                                  BlocProvider.of<AuthCubit>(context)
+                                      .changepass(
+                                          pass: passwordController.text,
+                                    password_confirmation: passwordController.text
+                                  );
                                 }
                               },
                               child: Text(local.resetButton,style:const TextStyle(

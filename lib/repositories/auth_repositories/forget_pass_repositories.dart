@@ -25,9 +25,8 @@ class ForgetPassRepositories {
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      String token = data['data']["token"];
-      print(token);
-      await hiveHelper.putData("token", token);
+      String message = data['data']["message"];
+      print(message.toString()+"HH");
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
@@ -62,12 +61,14 @@ class ForgetPassRepositories {
 // change Password
   Future<Response> changePass({
     required String pass,
+    required String password_confirmation,
   }) async {
     try {
       final Response response = await dioHelper.postData(
         needAuth: true,
         url: AutomationApi.changePasswordUrl,
-        data: {"password": pass},
+        data: {"password": pass,
+          "password_confirmation":password_confirmation},
       );
 
       return response;
