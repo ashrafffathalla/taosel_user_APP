@@ -25,7 +25,7 @@ String  replaceText({required String str}){
     str = str.replaceAll('٧', '7');
     str = str.replaceAll('٨', '8');
     str = str.replaceAll('٩', '9');
-    print(str.replaceAll('/', '-'));
+
     return str.replaceAll('/', '-');
 
 
