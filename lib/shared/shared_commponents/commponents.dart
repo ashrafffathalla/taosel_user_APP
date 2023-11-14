@@ -31,7 +31,7 @@ String  replaceText({required String str}){
 
 }
 Future<void> startDelay() async {
-  await Future.delayed(Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 2));
 }
 void navigateAndFinish(
     context,widget
