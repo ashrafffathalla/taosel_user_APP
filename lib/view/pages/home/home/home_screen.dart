@@ -7,6 +7,7 @@ import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
 
 import '../../../../shared/shared_commponents/commponents.dart';
+import '../../menu/menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -15,10 +16,10 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  IconData? deIcon;
   bool isHide = false;
   int selectedIndex = 0;
 
@@ -27,9 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final local = AppLocalizations.of(context);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: const Menu(),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: size.height/1,
+          height: size.height / 1,
           child: Column(
             children: [
               SizedBox(
@@ -38,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Flexible(
                 child: SizedBox(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.03),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -50,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Container(
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Padding(
                                   padding:
@@ -72,10 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 HiveHelper().removeData('token').then(
-                                  navigateAndFinish(context,AuthView()),
-                                );
+                                      navigateAndFinish(context, AuthView()),
+                                    );
                               },
                               child: CircleAvatar(
                                 radius: 18.sp, // Image radius
@@ -103,6 +107,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
+                        Builder(
+                          builder: (context) => IconButton(
+                            icon: Padding(
+                              padding: CheckLocal.isDirectionRTL(context)
+                                  ? EdgeInsets.only(right: 1.sp)
+                                  : EdgeInsets.only(left: 1.sp),
+                              child: Icon(
+                                Icons.menu,
+                                size: 37.sp,
+                              ),
+                            ),
+                            onPressed: () {
+                              Scaffold.of(context).openDrawer();
+                            },
+                          ),
+                        ),
                         Expanded(
                           child: SizedBox(
                             width: size.width / 1.2,
@@ -128,7 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor:
                                           Theme.of(context).colorScheme.primary,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
                                     child: const Icon(
@@ -141,10 +162,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                        ),
-                        Icon(
-                          Icons.menu,
-                          size: 40.sp,
                         ),
                       ],
                     ),
@@ -166,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               });
                             },
                             child: Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: selectedIndex == index
@@ -201,55 +219,56 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(CheckLocal.isDirectionRTL(context)
-                            ? "الاقرب لك "
-                            : "The closest to you",
-                        style:TextStyle(
-                          color:const Color(0xff0C1D2E),
-                          fontSize: 16.sp
-                        ),),
-                        Text(CheckLocal.isDirectionRTL(context)
-                            ? "عرض الكل "
-                            : "Show All",
-
-                          style:TextStyle(
-                            decoration:  TextDecoration.underline,
-                              color:const  Color(0xff0C1D2E),
-                              fontSize: 16.sp
-                          ),),
+                        Text(
+                          CheckLocal.isDirectionRTL(context)
+                              ? "الاقرب لك "
+                              : "The closest to you",
+                          style: TextStyle(
+                              color: const Color(0xff0C1D2E), fontSize: 16.sp),
+                        ),
+                        Text(
+                          CheckLocal.isDirectionRTL(context)
+                              ? "عرض الكل "
+                              : "Show All",
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: const Color(0xff0C1D2E),
+                              fontSize: 16.sp),
+                        ),
                       ],
                     ),
+
                     ///---------Grid ITEMS------------
-                   SizedBox(
-            height: size.height*0.4,
-            child: GridView.count(
-              crossAxisCount: 3, //
-              physics:const NeverScrollableScrollPhysics(),
-              children: List.generate(6, (index) {
-              return Container(
-                margin:  EdgeInsets.all(8.0.sp),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/ba.png', // Replace with your image path
-                      width: 47.w,
-                      height: 47.h,
-                    ),
-                    SizedBox(height: 5.h),
-                    Text(
-                      'Item $index',
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color:const Color(0xff0C1D2E)
+                    SizedBox(
+                      height: size.height * 0.4,
+                      child: GridView.count(
+                        crossAxisCount: 3, //
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: List.generate(6, (index) {
+                          return Container(
+                            margin: EdgeInsets.all(8.0.sp),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/ba.png',
+                                  // Replace with your image path
+                                  width: 47.w,
+                                  height: 47.h,
+                                ),
+                                SizedBox(height: 5.h),
+                                Text(
+                                  'Item $index',
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff0C1D2E)),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                       ),
                     ),
-                  ],
-                ),
-              );
-              }),
-            ),
-          ),
                   ],
                 ),
               ),
@@ -259,5 +278,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }

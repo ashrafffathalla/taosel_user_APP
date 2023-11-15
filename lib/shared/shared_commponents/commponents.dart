@@ -25,7 +25,6 @@ String  replaceText({required String str}){
     str = str.replaceAll('٧', '7');
     str = str.replaceAll('٨', '8');
     str = str.replaceAll('٩', '9');
-
     return str.replaceAll('/', '-');
 
 
@@ -45,7 +44,21 @@ void navigateAndFinish(
           return false;
         }
     );
-
+PreferredSizeWidget customAppBar(context)=>AppBar(
+  leading: Container(),
+  elevation: 0,
+  backgroundColor: Colors.transparent,
+  actions:  [
+    Padding(
+      padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
+      child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child:const Icon(Icons.arrow_back_ios_new_rounded)),
+    ),
+  ],
+);
 // ///-------------------------------------
 //  customMainBtn( onTap,dynamic iconButton,String? textButton,context){
 //   Container(

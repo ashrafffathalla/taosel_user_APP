@@ -81,6 +81,7 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   pin_code_fields: ^8.0.1
   animation_wrappers: ^3.0.0
+  readmore: ^2.2.0
   smooth_page_indicator: ^1.0.1
   #The package provides TextInputFormatter for TextField and TextFormField which format the input by a given mask.
   flutter_multi_formatter: ^2.5.1
