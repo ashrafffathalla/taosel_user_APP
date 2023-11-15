@@ -32,12 +32,6 @@ class ProfileCubit extends Cubit<ProfileState> {
         required this.updateAllFields
       })
       : super(ProfileInitial());
-
-  dynamic  country_id;
-  dynamic  nationality;
-  dynamic  birthDate;
-  dynamic  DateExp;
-  dynamic  LicenceExp;
   ProfileListData ? profileListProfileData;
   getProfileData() async {
     emit(ProfileLoading());
@@ -136,7 +130,6 @@ updateAllFieldsAccInfo({
   }
   updateSwitchState()async{
     emit(UpdateStateOne());
-    nationality.toString();
     emit(UpdateState());
   }
 }

@@ -112,7 +112,7 @@ class _AccountInformationState extends State<AccountInformation> {
                     ),
                     InkWell(
                       onTap: () {
-                        // navigateTo(context, PasswordEdit());
+                         navigateTo(context, PasswordEdit());
                       },
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height * 0.08,

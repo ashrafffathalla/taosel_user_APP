@@ -16,7 +16,7 @@ class CustomTextFeildAccInfo extends StatefulWidget {
   final dynamic sIcon;
   final Function()? sOnTap;
   final bool isClickable;
-  final  preText;
+
   final String? hint;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -25,7 +25,7 @@ class CustomTextFeildAccInfo extends StatefulWidget {
   const CustomTextFeildAccInfo(
       {Key? key,
         this.maxlenth,
-        this.preText,
+
         required this.controller,
         this.validat,
         required this.type,
@@ -106,7 +106,6 @@ class _CustomTextFeildAccInfo extends State<CustomTextFeildAccInfo> {
                   width: 1.0)),
           fillColor:  Colors.transparent,
           //prefixText: widget.preText.toString(),
-          prefixText: widget.type == TextInputType.phone?widget.preText.toString():'',
           // suffixText: CheckLocal.isDirectionRTL(context)?widget.type == TextInputType.phone?widget.preText.toString():'':null,
           suffixStyle: TextStyle(fontWeight: FontWeight.bold,),
           prefixStyle: TextStyle(fontWeight: FontWeight.bold,),

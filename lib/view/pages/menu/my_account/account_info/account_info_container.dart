@@ -5,16 +5,12 @@ class AccountInfoContainer extends StatelessWidget {
   bool isPasswordScreen=false;
   final IconData? containerIcon;
   final Widget widget;
-  final Widget hijriWidget;
   final Function? containerEdit;
   final bool isEdit;
-  final bool? isDate;
    AccountInfoContainer({
   this.containerIcon,
     required this.widget,
-    required this.hijriWidget,
     this.containerEdit,
-    this.isDate,
     required this.isEdit,
      required this.isPasswordScreen,
     Key? key,
@@ -56,19 +52,15 @@ class AccountInfoContainer extends StatelessWidget {
         Expanded(
             flex: isPasswordScreen?6:30,
             child: widget),
-        Expanded(
-            flex:3,
-            child: isDate==true ?
-            hijriWidget:Text('')
-        ),
+
         Expanded(
             flex: 1,
             child: GestureDetector(
               onTap: () {
-                return containerEdit!();
+                containerEdit!();
               },
               child: isEdit
-                  ? Text('')
+                  ? const Icon(Icons.edit)
                   : Icon(
                       Icons.visibility,
                       color: Theme.of(context).colorScheme.primary,
