@@ -30,7 +30,9 @@ class LoginRepositories {
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      print(error['message']);
       throw error['message'];
+
     } catch (error) {
       throw '..Oops $error';
     }

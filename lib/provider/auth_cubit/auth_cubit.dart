@@ -23,10 +23,10 @@ class AuthCubit extends Cubit<AuthState> {
   login({required String phone, required String password}) async {
     emit(AuthLoading());
     try {
-      await loginRepositories.login(phone: phone, password: password);
+      await loginRepositories.login(phone: phone, password: password,);
       emit(AuthLoaded());
     } catch (e) {
-      print("log ++++ $e");
+
       emit(AuthError(error: e.toString()));
     }
   }
@@ -48,21 +48,9 @@ class AuthCubit extends Cubit<AuthState> {
           phone: phone,
           password: password,
           password_confirmation: password_confirmation,);
-      print(email.toString());
-      print(name.toString());
-      print(phone.toString());
-      print("HHHHH2");
       emit(AuthLoaded());
     } catch (e) {
-      print(e.toString());
       emit(RegisterStateError(error: e.toString()));
-      // print(e.toString());
-      // print(email.toString());
-      // print(name.toString());
-      // print(phone.toString());
-      // print(country.toString());
-      // print(licenseID.toString());
-      // print(imagePathFace.toString()+' 55555 ');
     }
   }
 
@@ -72,9 +60,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await signUpRepositories.otp(otp: otp);
       emit(AuthLoaded());
-      print("Ashraf");
     } catch (e) {
-      print("Ashraf fathalla");
       emit(AuthError(error: e.toString()));
     }
   }

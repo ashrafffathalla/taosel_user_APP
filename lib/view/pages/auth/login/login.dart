@@ -112,22 +112,22 @@ class _LoginState extends State<Login> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
+                               const  Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    GestureDetector(
-                                      child: const Icon(
-                                        Icons.close,
-                                        color: Colors.black87,
-                                      ),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
+                                    // GestureDetector(
+                                    //   child: const Icon(
+                                    //     Icons.close,
+                                    //     color: Colors.black87,
+                                    //   ),
+                                    //   onTap: () {
+                                    //     Navigator.pop(context);
+                                    //   },
+                                    // ),
                                   ],
                                 ),
                                  Center(
-                                    child: Icon(Icons.close,color: Colors.red,size: 30.sp,)),
+                                    child: Icon(Icons.close,color: Colors.red,size: 35.sp,)),
                               ],
                             ),
                             content: Text(
