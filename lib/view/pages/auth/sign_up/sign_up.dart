@@ -16,6 +16,7 @@ import '../../../../core/validation/form_validator.dart';
 import '../../../../provider/auth_cubit/auth_state.dart';
 import '../../../../shared/shared_commponents/commponents.dart';
 import '../autth_view.dart';
+import '../otp/otp.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -97,13 +98,12 @@ class _SignUpState extends State<SignUp> {
                       );
                     });
           }
-
           if (state is AuthLoaded) {
-            navigateAndFinish(context, const AuthView());
+            /* navigateAndFinish(context, const AuthView());
             showDialog(
                 context: context,
                 builder: (context) {
-                  Future.delayed(Duration(seconds: 3), () {
+                  Future.delayed(const Duration(seconds: 3), () {
                     Navigator.pop(context);
                   });
                   return AlertDialog(
@@ -132,16 +132,16 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   );
-                });
+                });*/
 
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => OTP(
-            //             namePage: "signUp",
-            //             phone: phoneController.text,
-            //           )),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => OTP(
+                        namePage: "signUp",
+                        phone: phoneController.text,
+                      )),
+            );
           }
         },
         builder: (context, state) {

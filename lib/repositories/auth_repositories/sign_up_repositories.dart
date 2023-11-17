@@ -76,9 +76,7 @@ class SignUpRepositories {
         url: AutomationApi.registerUrl,
         data: formData,
       );
-      print("H11111");
         var data = jsonDecode(response.data) as Map<String, dynamic>;
-        print(data.toString());
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
@@ -142,6 +140,27 @@ class SignUpRepositories {
       final Response response = await dioHelper.postData(
         needAuth: true,
         url: AutomationApi.checkOtpRegisterUrl,
+        data: {
+          "otp": otp,
+        },
+      );
+      // var data = jsonDecode(response.data) as Map<String, dynamic>;
+      // await hiveHelper.putData("token", token);
+      return response;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      throw error['message'];
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
+  Future<Response> verifyPhone({
+    required String otp,
+  }) async {
+    try {
+      final Response response = await dioHelper.postData(
+        needAuth: true,
+        url: AutomationApi.verifyPhone,
         data: {
           "otp": otp,
         },

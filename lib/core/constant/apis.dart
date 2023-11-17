@@ -6,6 +6,7 @@ class AutomationApi {
   static const registerUrl = "$baseUrl/auth/register-client"; //post
   static const checkOtpRegisterUrl = "$baseUrl/auth/reset/check_code"; //post
   static const changePhoneUrl = "$baseUrl/change_phone"; //post
+  static const verifyPhone = "$baseUrl/verify-phone"; //post
   static const countriesUrl = "$baseUrl/countries"; //get
   static const forgetUrl = "$baseUrl/auth/check-phone"; //post
   static const changePasswordUrl = "$baseUrl/auth/reset/reset_password"; //post

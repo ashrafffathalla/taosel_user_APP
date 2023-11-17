@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:taosel_user_app/view/pages/home/layout.dart';
 import 'dart:math' as math;
 import '../../../../core/localization/check_local.dart';
 import '../../../../core/localization/language_cubit.dart';
@@ -93,11 +94,11 @@ class _OTPState extends State<OTP> {
           }
           if (state is AuthLoaded) {
             if (widget.namePage == "signUp") {
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute<void>(
-              //         builder: (BuildContext context) => const ResetPassword()),
-              //     (route) => false);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const LayoutScreen()),
+                  (route) => false);
               showDialog(
                   context: context,
                   builder: (context) {
@@ -163,10 +164,10 @@ class _OTPState extends State<OTP> {
                     SizedBox(
                       height: size.height*0.08,
                     ),
-                    Text(local!.resetPassword.toString(),style: TextStyle(
+                    Text(widget.namePage == "signUp"?"التحقق من الهاتف":local!.resetPassword.toString(),style: TextStyle(
                       fontSize: 16.sp,
                     ),),
-                    SizedBox(height: 0.02.sh,),
+                    SizedBox(height: 0.09.sh,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -180,11 +181,11 @@ class _OTPState extends State<OTP> {
                           ),
                         ),
                         SizedBox(
-                          width: SizeConfig.defaultSize! * 1,
+                          width: SizeConfig.defaultSize! * 2,
                         ),
                         RichText(
                           text: TextSpan(
-                            text: local.otpCode,
+                            text: local!.otpCode,
                             style: CheckLocal.isDirectionRTL(context)
                                 ? Theme.of(context)
                                     .textTheme
@@ -265,30 +266,7 @@ class _OTPState extends State<OTP> {
                               setState(() {
                                 currentText = value;
                                 if (currentText.length == 4) {
-                                  // if (HiveHelper().getData("sendAgainToken") !=
-                                  //     null) {
-                                  //   BlocProvider.of<AuthCubit>(context)
-                                  //       .againCheckOtp(otpControler.text);
-                                  //   emailCreated = false;
-                                  //   setState(() {
-                                  //     print(emailCreated.toString());
-                                  //   });
-                                  // } else {
-                                  //   HiveHelper().getData("tokenRegister") !=
-                                  //           null
-                                  //       ? BlocProvider.of<AuthCubit>(context)
-                                  //           .checkOtp(otpControler.text)
-                                  //       : BlocProvider.of<AuthCubit>(context)
-                                  //           .checkOtpPass(otpControler.text);
-                                  //   emailCreated = false;
-                                  //   setState(() {
-                                  //     print(emailCreated.toString());
-                                  //   });
-                                  // }
-                                  //
-                                  // print(HiveHelper()
-                                  //     .getData('sendAgainToken')
-                                  //     .toString());
+
                                 }
                               });
                             },
@@ -299,7 +277,7 @@ class _OTPState extends State<OTP> {
                           ),
                         )),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     // Padding(
                     //   padding: EdgeInsets.symmetric(
@@ -363,18 +341,34 @@ class _OTPState extends State<OTP> {
                                     BlocProvider.of<AuthCubit>(context)
                                         .checkOtp(otpControler.text);
                                     }
-
+                                  // if (HiveHelper().getData("sendAgainToken") !=
+                                  //     null) {
+                                  //   BlocProvider.of<AuthCubit>(context)
+                                  //       .againCheckOtp(otpControler.text);
+                                  //   emailCreated = false;
+                                  //   setState(() {
+                                  //     print(emailCreated.toString());
+                                  //   });
+                                  // } else {
+                                  //   HiveHelper().getData("tokenRegister") !=
+                                  //           null
+                                  //       ? BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtp(otpControler.text)
+                                  //       : BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtpPass(otpControler.text);
+                                  //   emailCreated = false;
+                                  //   setState(() {
+                                  //     print(emailCreated.toString());
+                                  //   });
+                                  // }
+                                  //
+                                  // print(HiveHelper()
+                                  //     .getData('sendAgainToken')
+                                  //     .toString());
                                 },
                                 child: Text(local.confirm,style:const TextStyle(
                                   color: Colors.white
                                 ),))),
-                    // ElevatedButton.icon(
-                    //     onPressed: () {
-                    //       BlocProvider.of<LanguageCubit>(context)
-                    //           .selectEngLanguage();
-                    //     },
-                    //     icon: const Icon(Icons.language),
-                    //     label: const Text("Change Languagh"))
                   ],
                 ),
               ],

@@ -41,7 +41,6 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      print("HHHHH1");
       await signUpRepositories.signUp(
           email: email,
           name: name,
