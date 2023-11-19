@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
 import 'package:taosel_user_app/myobserver.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:taosel_user_app/view/pages/auth/login/login.dart';
 import 'package:taosel_user_app/view/pages/auth/sign_up/sign_up.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) => getIt<LanguageCubit>()),
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
+            BlocProvider<GetAllVendorsCategoriesCubit>(create: (context) => getIt<GetAllVendorsCategoriesCubit>()),
             BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()),
             // BlocProvider(
             //     create: (BuildContext context) => FacebookLoginCubit()),
