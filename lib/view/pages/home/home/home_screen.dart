@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 @override
   void initState() {
-  BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendorsCategoriesFun();
-  print('object5');
+  BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllCategoryVendorsFun();
+  BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
     super.initState();
   }
   @override
@@ -40,13 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: const Menu(),
       body: BlocConsumer<GetAllVendorsCategoriesCubit,HomeState>(
         listener: (context, state) {
-          if(state is GetAllVendorsCategoriesLoading){
-            const CircularProgressIndicator.adaptive();
-          }
-
+          // if(cubit.allCategoryVendors==null||cubit.allVendorsModel==null){
+          //   const CircularProgressIndicator.adaptive();
+          // }
         },
         builder: (context, state) {
-          return SingleChildScrollView(
+
+          return  cubit.allCategoryVendors==null||cubit.allVendorsModel==null?Center(child: CircularProgressIndicator()):SingleChildScrollView(
             child: SizedBox(
               height: size.height / 1,
               child: Column(
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: size.height * 0.06,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 8, // Replace with the actual number of items
+                            itemCount: cubit.allCategoryVendors!.data.length, // Replace with the actual number of items
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0.sp),
                                     child: Text(
-                                      ' مطعم $index',
+                                      cubit.allCategoryVendors!.data[index].name,
                                       style: TextStyle(
                                         fontSize: 14.0.sp,
                                         color: const Color(0xff0C1D2E),
@@ -258,13 +258,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ///---------Grid ITEMS------------
                         SizedBox(
                           height: size.height * 0.4,
-                          child: GridView.count(
+                          child:GridView.count(
                             crossAxisCount: 3, //
                             physics: const NeverScrollableScrollPhysics(),
-                            children: List.generate(6, (index) {
-                              return Container(
-                                margin: EdgeInsets.all(8.0.sp),
-                                child: Column(
+                            children:List.generate(cubit.allVendorsModel!.data!.length.toInt(), (index) {
+                              return Column(
                                   children: [
                                     Image.asset(
                                       'assets/images/ba.png',
@@ -274,17 +272,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     SizedBox(height: 5.h),
                                     Text(
-                                      'Item $index',
+                                    cubit.allVendorsModel!.data![index].name!,
                                       style: TextStyle(
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.w500,
                                           color: const Color(0xff0C1D2E)),
                                     ),
                                   ],
-                                ),
-                              );
+                                );
+
                             }),
-                          ),
+                          )
                         ),
                       ],
                     ),

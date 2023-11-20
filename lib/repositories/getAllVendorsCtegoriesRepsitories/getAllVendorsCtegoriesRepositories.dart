@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:taosel_user_app/core/constant/apis.dart';
 import 'package:dio/dio.dart';
@@ -7,6 +8,7 @@ import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/data/remote/dio_helper.dart';
 
 import '../../data/model/allVendorsCategories.dart';
+import '../../data/model/allVendors_model.dart';
 
 class GetAllVendorsCategoriesRepositories {
   final DioHelper dioHelper;
@@ -14,14 +16,13 @@ class GetAllVendorsCategoriesRepositories {
 
   GetAllVendorsCategoriesRepositories({required this.dioHelper,});
 
-  Future<VendorCategoryModel> getAllVendorsCategoriesRepositories()async{
+  Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories()async{
     try {
        Response response = await dioHelper.getData(
-          url: AutomationApi.getAllVendorCategories, needAuth: true
+          url: AutomationApi.getAlCategorylVendors, needAuth: true
       );
-
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      final VendorCategoryModel  vendorCategoryModel = VendorCategoryModel.fromJson(data);
+      final AllCategoryVendorsModel  vendorCategoryModel = AllCategoryVendorsModel.fromJson(data);
       return vendorCategoryModel;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
@@ -31,42 +32,21 @@ class GetAllVendorsCategoriesRepositories {
       throw '..Oops $error';
     }
   }
-}
-/*
-import 'dart:convert';
-
-import 'package:taosel_user_app/core/constant/apis.dart';
-import 'package:dio/dio.dart';
-
-import 'package:taosel_user_app/data/local/hiva_helper.dart';
-import 'package:taosel_user_app/data/model/allVendorsCategories.dart';
-import 'package:taosel_user_app/data/remote/dio_helper.dart';
-
-class GetAllVendorsCategoriesRepositories {
-  final DioHelper dioHelper;
-  final HiveHelper hiveHelper;
-
-  GetAllVendorsCategoriesRepositories({required this.dioHelper, required this.hiveHelper});
-
-  Future<VendorCategoryModel> getAllVendorsCategoriesRepositories()async{
+  ///------------------ALl Vendors
+  Future<AllVendorsModel> allVendorsRepositories()async{
     try {
-      print('object11');
-      final Response response = await dioHelper.getData(
-          url: AutomationApi.getAllVendorCategories, needAuth: true
+      Response response = await dioHelper.getData(
+          url: AutomationApi.getAlCategorylVendors, needAuth: true
       );
-      print('object12');
-      final data = jsonDecode(response.data) as Map<String, dynamic>;
-      final VendorCategoryModel vendorCategoryModel = VendorCategoryModel.fromJson(data);
-      return vendorCategoryModel;
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      final AllVendorsModel  allVendorsModel = AllVendorsModel.fromJson(data);
+      return allVendorsModel;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
-      print(error['message']);
       throw error['message'];
+
     } catch (error) {
       throw '..Oops $error';
     }
   }
 }
-
-*
-* */

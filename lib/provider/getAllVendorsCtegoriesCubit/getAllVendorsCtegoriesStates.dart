@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:taosel_user_app/data/model/allVendorsCategories.dart';
 
+import '../../data/model/allVendors_model.dart';
+
 abstract class HomeState extends Equatable {
   const HomeState();
   @override
@@ -8,17 +10,33 @@ abstract class HomeState extends Equatable {
 }
 class GetAllVendorsCategoriesInitial extends HomeState {}
 
-class GetAllVendorsCategoriesLoading extends HomeState {}
+class GetAllCategoryVendorsLoading extends HomeState {}
 
-class GetAllVendorsCategoriesLoaded extends HomeState {
-  final VendorCategoryModel allVendorsCategoriesModel;
-  const GetAllVendorsCategoriesLoaded({required this.allVendorsCategoriesModel});
-  @override
-  List<Object> get props => [allVendorsCategoriesModel];
+class GetAllCategoryVendorsLoaded extends HomeState {
+  // final AllCategoryVendorsModel allCategoryVendorsModel;
+  // const GetAllCategoryVendorsLoaded({required this.allCategoryVendorsModel});
+  // @override
+  // List<Object> get props => [allCategoryVendorsModel];
 }
-class GetAllVendorsCategoriesError extends HomeState {
+class GetAllCategoryVendorsError extends HomeState {
   final String error;
-  const GetAllVendorsCategoriesError({required this.error});
+  const GetAllCategoryVendorsError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+
+///AllVendors States
+class GetAllVendorsLoading extends HomeState {}
+
+class GetAllVendorsLoaded extends HomeState {
+  // final AllVendorsModel allVendorsModel;
+  // const GetAllVendorsLoaded({required this.allVendorsModel});
+  // @override
+  // List<Object> get props => [allVendorsModel];
+}
+class GetAllVendorsError extends HomeState {
+  final String error;
+  const GetAllVendorsError({required this.error});
   @override
   List<Object> get props => [error];
 }

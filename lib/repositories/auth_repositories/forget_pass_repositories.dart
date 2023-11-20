@@ -19,7 +19,7 @@ class ForgetPassRepositories {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
-        url: AutomationApi.forgetUrl,
+        url: AutomationApi.verifieyPhoneUrl,
         data: {
           "phone": phone,
         },
@@ -41,7 +41,7 @@ class ForgetPassRepositories {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
-        url: AutomationApi.forgetUrl,
+        url: AutomationApi.verifieyPhoneUrl,
         data: {
           "phone": phone,
         },

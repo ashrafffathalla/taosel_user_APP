@@ -27,7 +27,10 @@ class DioHelper {
       options: Options(
         responseType: ResponseType.plain,
         headers: {
-          "Config-lang": langCode,
+          "X-Locale": langCode,
+          "Accept":"application/json",
+          "Content-Type":"application/json",
+          "X-Time-Zone":"Africa/Cairo"
         },
       ),
     );

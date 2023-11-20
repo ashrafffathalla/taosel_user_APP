@@ -77,6 +77,8 @@ class SignUpRepositories {
         data: formData,
       );
         var data = jsonDecode(response.data) as Map<String, dynamic>;
+      token = data['data']["token"];
+      await HiveHelper().putData('token', token);
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;

@@ -1,36 +1,27 @@
-class VendorCategoryModel {
-  List<VendorCategory> data;
+class AllCategoryVendorsModel {
+  List<Data> data;
   Links links;
   Meta meta;
 
-  VendorCategoryModel({
-    required this.data,
-    required this.links,
-    required this.meta,
-  });
+  AllCategoryVendorsModel({required this.data, required this.links,required  this.meta});
 
-  factory VendorCategoryModel.fromJson(Map<String, dynamic> json) {
-    return VendorCategoryModel(
-      data: List<VendorCategory>.from(
-        json['data'].map((category) => VendorCategory.fromJson(category)),
-      ),
+  factory AllCategoryVendorsModel.fromJson(Map<String, dynamic> json) {
+    return AllCategoryVendorsModel(
+      data: List<Data>.from(json['data'].map((x) => Data.fromJson(x))),
       links: Links.fromJson(json['links']),
       meta: Meta.fromJson(json['meta']),
     );
   }
 }
 
-class VendorCategory {
+class Data {
   String name;
   String langId;
 
-  VendorCategory({
-    required this.name,
-    required this.langId,
-  });
+  Data({required this.name, required this.langId});
 
-  factory VendorCategory.fromJson(Map<String, dynamic> json) {
-    return VendorCategory(
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
       name: json['name'],
       langId: json['lang_id'],
     );
@@ -38,17 +29,12 @@ class VendorCategory {
 }
 
 class Links {
-  String? first;
-  String? last;
-  String? prev;
-  String? next;
+  String first;
+  String last;
+  dynamic prev;
+  dynamic next;
 
-  Links({
-    this.first,
-    this.last,
-    this.prev,
-    this.next,
-  });
+  Links({required this.first, required this.last, required this.prev,required  this.next});
 
   factory Links.fromJson(Map<String, dynamic> json) {
     return Links(
@@ -72,12 +58,12 @@ class Meta {
 
   Meta({
     required this.currentPage,
-    required this.from,
-    required this.lastPage,
-    required this.links,
-    required this.path,
-    required this.perPage,
-    required this.to,
+    required  this.from,
+    required  this.lastPage,
+    required  this.links,
+    required  this.path,
+    required    this.perPage,
+    required  this.to,
     required this.total,
   });
 
@@ -86,7 +72,7 @@ class Meta {
       currentPage: json['current_page'],
       from: json['from'],
       lastPage: json['last_page'],
-      links: List<Link>.from(json['links'].map((link) => Link.fromJson(link))),
+      links: List<Link>.from(json['links'].map((x) => Link.fromJson(x))),
       path: json['path'],
       perPage: json['per_page'],
       to: json['to'],
@@ -96,15 +82,11 @@ class Meta {
 }
 
 class Link {
-  String? url;
+  dynamic url;
   String label;
   bool active;
 
-  Link({
-    this.url,
-    required this.label,
-    required this.active,
-  });
+  Link({required this.url,required  this.label,required  this.active});
 
   factory Link.fromJson(Map<String, dynamic> json) {
     return Link(
@@ -114,3 +96,4 @@ class Link {
     );
   }
 }
+

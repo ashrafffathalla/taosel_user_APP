@@ -7,11 +7,11 @@ class AutomationApi {
   static const checkOtpRegisterUrl = "$baseUrl/auth/reset/check_code"; //post
   static const changePhoneUrl = "$baseUrl/change_phone"; //post
   static const verifyPhone = "$baseUrl/verify-phone"; //post
-  static const countriesUrl = "$baseUrl/countries"; //get
-  static const forgetUrl = "$baseUrl/auth/check-phone"; //post
+  static const verifieyPhoneUrl = "$baseUrl/auth/check-phone"; //post
   static const changePasswordUrl = "$baseUrl/auth/reset/reset_password"; //post
   static const updateAllProfileUrl = "$baseUrl/update_profile"; //post
-  static const getAllVendorCategories = "$baseUrl/vendor-categories"; //post
+  static const getAlCategorylVendors = "$baseUrl/vendor-categories"; //get
+  static const getAllVendors = "$baseUrl/vendors"; //get
 
 
   //**************** Profile *******************//
