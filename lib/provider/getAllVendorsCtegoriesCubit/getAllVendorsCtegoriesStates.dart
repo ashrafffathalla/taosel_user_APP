@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:taosel_user_app/data/model/allVendorsCategories.dart';
+import 'package:taosel_user_app/data/model/allCategoryCategories.dart';
 
 import '../../data/model/allVendors_model.dart';
 
@@ -24,7 +24,21 @@ class GetAllCategoryVendorsError extends HomeState {
   @override
   List<Object> get props => [error];
 }
+///AllVendors States
+class GetAllVendorCategoryLoading extends HomeState {}
 
+class GetAllVendorCategoryLoaded extends HomeState {
+  // final AllVendorsModel allVendorsModel;
+  // const GetAllVendorsLoaded({required this.allVendorsModel});
+  // @override
+  // List<Object> get props => [allVendorsModel];
+}
+class GetAllVendorCategoryError extends HomeState {
+  final String error;
+  const GetAllVendorCategoryError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
 ///AllVendors States
 class GetAllVendorsLoading extends HomeState {}
 

@@ -17,13 +17,15 @@ class AllCategoryVendorsModel {
 class Data {
   String name;
   String langId;
+  int id;
 
-  Data({required this.name, required this.langId});
+  Data({required this.name, required this.langId,required this.id});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       name: json['name'],
       langId: json['lang_id'],
+      id: json['id'],
     );
   }
 }

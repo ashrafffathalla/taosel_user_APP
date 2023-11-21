@@ -1,7 +1,8 @@
-import 'package:taosel_user_app/data/model/allVendorsCategories.dart';
+import 'package:taosel_user_app/data/model/allCategoryCategories.dart';
 import 'package:taosel_user_app/data/model/allVendors_model.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
 import 'package:bloc/bloc.dart';
+import '../../data/model/allVendorCategoryModel.dart';
 import '../../repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'getAllVendorsCtegoriesStates.dart';
 
@@ -19,10 +20,22 @@ class GetAllVendorsCategoriesCubit extends Cubit<HomeState> {
     try {
        allCategoryVendors = await repositories.getAllVendorsCategoriesRepositories();
       emit(GetAllCategoryVendorsLoaded(/*allCategoryVendorsModel: allCategoryVendors!*/));
-       print(allCategoryVendors!.data.length.toString()+"HHHHH");
     } catch (e) {
 
       emit(GetAllCategoryVendorsError(error: e.toString()));
+    }
+  }
+  ///------------Get All Cat Vendors
+  AllVendorCategoryModel? allVendorCategoryModel;
+  getAllVendorCategory(id) async {
+
+    emit(GetAllVendorCategoryLoading());
+    try {
+
+      allVendorCategoryModel = await repositories.allVendorCategoryRepositories(id);
+      emit(GetAllVendorCategoryLoaded(/*allVendorsModel: allVendorsModel*/));
+    } catch (e) {
+      emit(GetAllVendorCategoryError(error: e.toString()));
     }
   }
 ///------------Get All Vendors
@@ -32,9 +45,7 @@ class GetAllVendorsCategoriesCubit extends Cubit<HomeState> {
     try {
        allVendorsModel = await repositories.allVendorsRepositories();
       emit(GetAllVendorsLoaded(/*allVendorsModel: allVendorsModel*/));
-      print(allVendorsModel!.data.toString()+"ssssssss");
     } catch (e) {
-      print(e.toString());
       emit(GetAllVendorsError(error: e.toString()));
     }
   }
