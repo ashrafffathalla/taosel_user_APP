@@ -54,3 +54,18 @@ class GetAllVendorsError extends HomeState {
   @override
   List<Object> get props => [error];
 }
+///----------show Vendor
+class ShowVendorLoading extends HomeState {}
+
+class ShowVendorLoaded extends HomeState {
+  // final AllVendorsModel allVendorsModel;
+  // const GetAllVendorsLoaded({required this.allVendorsModel});
+  // @override
+  // List<Object> get props => [allVendorsModel];
+}
+class ShowVendorError extends HomeState {
+  final String error;
+  const ShowVendorError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
