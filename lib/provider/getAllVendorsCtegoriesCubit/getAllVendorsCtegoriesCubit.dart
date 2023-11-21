@@ -3,6 +3,7 @@ import 'package:taosel_user_app/data/model/allVendors_model.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
 import 'package:bloc/bloc.dart';
 import '../../data/model/allVendorCategoryModel.dart';
+import '../../data/model/showVendor_model.dart';
 import '../../repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'getAllVendorsCtegoriesStates.dart';
 
@@ -50,5 +51,15 @@ class GetAllVendorsCategoriesCubit extends Cubit<HomeState> {
     }
   }
 
-
+  ///------------ShowVendor----------------
+  ShowVendorModel? showVendorModel;
+  showVendor(id) async {
+    emit(ShowVendorLoading());
+    try {
+      showVendorModel = await repositories.showVendorRepositories(id);
+      emit(ShowVendorLoaded(/*allVendorsModel: allVendorsModel*/));
+    } catch (e) {
+      emit(ShowVendorError(error: e.toString()));
+    }
+  }
 }

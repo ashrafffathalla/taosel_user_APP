@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/data/model/allVendorCategoryModel.dart';
+import 'package:taosel_user_app/data/model/showVendor_model.dart';
 import 'package:taosel_user_app/data/remote/dio_helper.dart';
 
 import '../../data/model/allCategoryCategories.dart';
@@ -59,6 +60,23 @@ class GetAllVendorsCategoriesRepositories {
       var data = jsonDecode(response.data) as Map<String, dynamic>;
       final AllVendorsModel  allVendorsModel = AllVendorsModel.fromJson(data);
       return allVendorsModel;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
+  ///---------------------------
+ Future<ShowVendorModel> showVendorRepositories(id)async{
+    try {
+      Response response = await dioHelper.getData(
+          url: 'https://taosel.com/api/vendors/$id', needAuth: true
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      final ShowVendorModel  showVendorModel = ShowVendorModel.fromJson(data);
+      return showVendorModel;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
       throw error['message'];

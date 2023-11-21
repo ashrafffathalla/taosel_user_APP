@@ -9,6 +9,7 @@ import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
 import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
+import 'package:taosel_user_app/view/pages/home/home/showVendorScreen.dart';
 
 import '../../../../shared/shared_commponents/commponents.dart';
 import '../../menu/menu.dart';
@@ -229,8 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onTap: () {
                                         setState(() {
                                           selectedIndex = index;
+                                          // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel =null;
+                                          BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendorCategory(index+1);
                                         });
-                                        BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendorCategory(index);
 
                                       },
                                       child: Container(
@@ -308,28 +310,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                               cubit.allVendorCategoryModel!
                                                   .data!.vendors!.length
                                                   .toInt(), (index) {
-                                            return Column(
-                                              children: [
-                                                SizedBox(
-                                                  height: 0.065.sh,
-                                                  width: 0.06.sh,
-                                                    child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![0].media![0].path.toString())),
-                                                SizedBox(height: 5.h),
-                                                Text(
-                                                  cubit
-                                                      .allVendorCategoryModel!
-                                                      .data!
-                                                      .vendors![index]
-                                                      .name
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontSize: 13.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: const Color(
-                                                          0xff0C1D2E)),
-                                                ),
-                                              ],
+                                            return GestureDetector(
+                                              onTap: () {
+                                                 navigateTo(context, ShowVendorScreen(
+                                                   vendorId: index+1,
+                                                 ));
+
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 0.065.sh,
+                                                    width: 0.06.sh,
+                                                      child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![0].media![0].path.toString())),
+                                                  SizedBox(height: 5.h),
+                                                  Text(
+                                                    cubit
+                                                        .allVendorCategoryModel!
+                                                        .data!
+                                                        .vendors![index]
+                                                        .name
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: const Color(
+                                                            0xff0C1D2E)),
+                                                  ),
+                                                ],
+                                              ),
                                             );
                                           }),
                                         )),
