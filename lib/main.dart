@@ -33,10 +33,7 @@ void main() async{
   ///------------injection Container & HIVHELPER----------
   await init();
   await HiveHelper.init();
-  // BlocOverrides.runZoned(
-  //       () => runApp(const MyApp()),
-  //   blocObserver: MyObserver(),
-  // );
+  Bloc.observer = MyObserver();
   runApp(const MyApp());
 }
 

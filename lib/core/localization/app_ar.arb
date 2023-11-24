@@ -12,7 +12,7 @@
   "choosefromthelistofadditionalservices": "اختر من قائمة الخدمات الإضافية",
   "receive": "الاستلام",
   "fuel": "فرق البزين",
-  "deliver": "التسليم",
+  "deliver": "رسوم التوصيل ",
   "carPrice": "سعر السيارة",
   "payDetails": "تفاصيل الدفع",
   "invoice": "الفاتوره",
@@ -250,7 +250,8 @@
     "day" : "يوم",
     "minutes" : "دقيقة",
     "book" : "حجز",
-    "sar" : "SR",
+    "eg" : "ج",
+    "rate" : "تقييمات",
     "notCompleted" : "غير مكتمل",
 
     "plateNumber" : "رقم اللوحة: ",

@@ -24,13 +24,14 @@ class Data {
   String? mobile;
   String? deliveryCharge;
   String? deliveryTime;
+  bool? isDelivery;
   int? rating;
   String? description;
   String? address;
   String? createdAt;
   String? updatedAt;
   List<Media>? media;
-  // List<Null>? products;
+  List<Categories>? categories;
 
   Data(
       {this.id,
@@ -40,14 +41,14 @@ class Data {
         this.mobile,
         this.deliveryCharge,
         this.deliveryTime,
+        this.isDelivery,
         this.rating,
         this.description,
         this.address,
         this.createdAt,
         this.updatedAt,
         this.media,
-        // this.products
-      });
+        this.categories});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -57,6 +58,7 @@ class Data {
     mobile = json['mobile'];
     deliveryCharge = json['delivery_charge'];
     deliveryTime = json['delivery_time'];
+    isDelivery = json['is_delivery'];
     rating = json['rating'];
     description = json['description'];
     address = json['address'];
@@ -68,12 +70,12 @@ class Data {
         media!.add(new Media.fromJson(v));
       });
     }
-    // if (json['products'] != null) {
-    //   products = <Null>[];
-    //   json['products'].forEach((v) {
-    //     products!.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['categories'] != null) {
+      categories = <Categories>[];
+      json['categories'].forEach((v) {
+        categories!.add(new Categories.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -85,6 +87,7 @@ class Data {
     data['mobile'] = this.mobile;
     data['delivery_charge'] = this.deliveryCharge;
     data['delivery_time'] = this.deliveryTime;
+    data['is_delivery'] = this.isDelivery;
     data['rating'] = this.rating;
     data['description'] = this.description;
     data['address'] = this.address;
@@ -93,9 +96,9 @@ class Data {
     if (this.media != null) {
       data['media'] = this.media!.map((v) => v.toJson()).toList();
     }
-    // if (this.products != null) {
-    //   data['products'] = this.products!.map((v) => v.toJson()).toList();
-    // }
+    if (this.categories != null) {
+      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -149,6 +152,95 @@ class Media {
     data['size'] = this.size;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Categories {
+  String? name;
+  String? langId;
+  List<Products>? products;
+
+  Categories({this.name, this.langId, this.products});
+
+  Categories.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    langId = json['lang_id'];
+    if (json['products'] != null) {
+      products = <Products>[];
+      json['products'].forEach((v) {
+        products!.add(new Products.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['lang_id'] = this.langId;
+    if (this.products != null) {
+      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Products {
+  int? id;
+  String? name;
+  String? description;
+  String? lang;
+  int? price;
+  int? discountPrice;
+  bool? featured;
+  String? yourChoice;
+  String? currency;
+  List<Media>? media;
+
+  Products(
+      {this.id,
+        this.name,
+        this.description,
+        this.lang,
+        this.price,
+        this.discountPrice,
+        this.featured,
+        this.yourChoice,
+        this.currency,
+        this.media});
+
+  Products.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    description = json['description'];
+    lang = json['lang'];
+    price = json['price'];
+    discountPrice = json['discount_price'];
+    featured = json['featured'];
+    yourChoice = json['your_choice'];
+    currency = json['currency'];
+    if (json['media'] != null) {
+      media = <Media>[];
+      json['media'].forEach((v) {
+        media!.add(new Media.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['lang'] = this.lang;
+    data['price'] = this.price;
+    data['discount_price'] = this.discountPrice;
+    data['featured'] = this.featured;
+    data['your_choice'] = this.yourChoice;
+    data['currency'] = this.currency;
+    if (this.media != null) {
+      data['media'] = this.media!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

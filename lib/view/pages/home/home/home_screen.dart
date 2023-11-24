@@ -34,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
         .getAllCategoryVendorsFun();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
 
-    BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendorCategory(1);
+    BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+        .getAllVendorCategory(1);
     super.initState();
   }
 
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (state.error.contains('Unauthenticated')) {
               navigateAndFinish(
                 context,
-                AuthView(),
+                const AuthView(),
               );
             }
           }
@@ -213,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
 
-                              /// -------------Horizantal List
+                              /// -------------Horizontal List------------
                               SizedBox(
                                 height: size.height * 0.03,
                               ),
@@ -231,9 +232,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         setState(() {
                                           selectedIndex = index;
                                           // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel =null;
-                                          BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendorCategory(index+1);
+                                          BlocProvider.of<
+                                                      GetAllVendorsCategoriesCubit>(
+                                                  context)
+                                              .getAllVendorCategory(index + 1);
                                         });
-
                                       },
                                       child: Container(
                                         margin: const EdgeInsets.symmetric(
@@ -302,47 +305,59 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ? const Center(
                                           child: CircularProgressIndicator
                                               .adaptive())
-                                      : GridView.count(
-                                          crossAxisCount: 3, //
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          children: List.generate(
-                                              cubit.allVendorCategoryModel!
-                                                  .data!.vendors!.length
-                                                  .toInt(), (index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                 navigateTo(context, ShowVendorScreen(
-                                                   vendorId: index+1,
-                                                 ));
+                                      : cubit.allVendorCategoryModel!.data!
+                                                  .vendors ==
+                                              null
+                                          ? const Text( 'لايوجد متاجر متاحه حاليا')
+                                          : GridView.count(
+                                              crossAxisCount: 3, //
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              children: List.generate(
+                                                  cubit.allVendorCategoryModel!
+                                                      .data!.vendors!.length
+                                                      .toInt(), (index) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+                                                        .showVendor (index + 1);
+                                                    navigateTo(
+                                                        context,
+                                                        const ShowVendorScreen());
 
-                                              },
-                                              child: Column(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 0.065.sh,
-                                                    width: 0.06.sh,
-                                                      child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![0].media![0].path.toString())),
-                                                  SizedBox(height: 5.h),
-                                                  Text(
-                                                    cubit
-                                                        .allVendorCategoryModel!
-                                                        .data!
-                                                        .vendors![index]
-                                                        .name
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 13.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: const Color(
-                                                            0xff0C1D2E)),
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                          height: 0.065.sh,
+                                                          width: 0.06.sh,
+                                                          child: Image.network(cubit
+                                                              .allVendorCategoryModel!
+                                                              .data!
+                                                              .vendors![0]
+                                                              .media![0]
+                                                              .path
+                                                              .toString())),
+                                                      SizedBox(height: 5.h),
+                                                      Text(
+                                                        cubit
+                                                            .allVendorCategoryModel!
+                                                            .data!
+                                                            .vendors![index]
+                                                            .name
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: const Color(
+                                                                0xff0C1D2E)),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                            );
-                                          }),
-                                        )),
+                                                );
+                                              }),
+                                            )),
                             ],
                           ),
                         ),
