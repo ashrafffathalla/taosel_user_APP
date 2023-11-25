@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
 import 'package:taosel_user_app/view/widgets/statusBar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,7 +20,6 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
   int selectedIndex = 0;
   @override
   void initState() {
-    // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel!.data ==null;
     super.initState();
   }
   @override
@@ -36,7 +36,8 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          body: state is ShowVendorLoading?const Center(child:  CircularProgressIndicator.adaptive()):SingleChildScrollView(
+          body: state is ShowVendorLoading?const Center(child:  CircularProgressIndicator.adaptive()):
+          SingleChildScrollView(
             child: SizedBox(
               height: size.height / 1,
               child: cubit.showVendorModel==null? const Center(child: Text('لا توجد منتجات متاحه حاليا')):Padding(
@@ -93,7 +94,6 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            cubit.showVendorModel!.data!.categories==null?print(cubit.showVendorModel!.data!.categories.toString()):false;
                           },
                           child: Text(
                             "${local.deliver.toString()}${cubit.showVendorModel!.data!.deliveryCharge}${local.eg}",
@@ -127,7 +127,8 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-
+                                BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+                                    .showVendor (index);
                               });
                             },
                             child: Container(
@@ -158,8 +159,43 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                         },
                       ),
                     ),
+                    ///--------------------Products List---------------
+                   Expanded(
+                     flex: 3,
+                     child: ListView.separated(
+                       scrollDirection: Axis.vertical,
+                         shrinkWrap: true,
+                         padding: const EdgeInsets.all(0),
+                         itemBuilder: (context, index) {
+                           return  Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text('كريب فراخ',
+                                     style: TextStyle(
+                                       fontSize: 16.sp,
+                                       fontWeight: FontWeight.w600,
+                                     ),),
+                                   Text('كريب فراخ مع الخضار ',
+                                     style: TextStyle(
+                                       fontSize: 14.sp,
+                                       fontWeight: FontWeight.w400,
+                                     ),
+                                   ),
+                                 ],),
+                               Image.asset('assets/images/krep.png'),
+                             ],
+                           );
+                         },
+                         separatorBuilder:(context, index) {
+                           return const Divider();
+                         },
+                         itemCount: 10,),
+                   ),
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: size.height * 0.03,
                     ),
                   ],
                 ),
