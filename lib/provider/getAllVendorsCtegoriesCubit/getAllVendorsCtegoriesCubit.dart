@@ -7,8 +7,8 @@ import '../../data/model/showVendor_model.dart';
 import '../../repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'getAllVendorsCtegoriesStates.dart';
 
-class GetAllVendorsCategoriesCubit extends Cubit<HomeState> {
-  GetAllVendorsCategoriesCubit(
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit(
       {required this.repositories})
       : super(GetAllVendorsCategoriesInitial());
   final GetAllVendorsCategoriesRepositories repositories;

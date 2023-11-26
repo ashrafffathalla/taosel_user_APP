@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/localization/check_local.dart';
-class AccountInfoContainer extends StatelessWidget {
+class AccountInfoContainer extends StatefulWidget {
   bool isPasswordScreen=false;
   final IconData? containerIcon;
   final Widget widget;
-  final Function? containerEdit;
+  final VoidCallbackAction? containerEdit;
   final bool isEdit;
    AccountInfoContainer({
   this.containerIcon,
@@ -16,6 +16,11 @@ class AccountInfoContainer extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<AccountInfoContainer> createState() => _AccountInfoContainerState();
+}
+
+class _AccountInfoContainerState extends State<AccountInfoContainer> {
   @override
   Widget build(BuildContext context) {
 
@@ -48,19 +53,19 @@ class AccountInfoContainer extends StatelessWidget {
       padding:  EdgeInsets.symmetric(horizontal: 7.sp, vertical: 7.sp),
       child: Row(
           children: [
-        Expanded(flex: 1, child: Icon(containerIcon)),
+        Expanded(flex: 1, child: Icon(widget.containerIcon)),
         Expanded(
-            flex: isPasswordScreen?6:30,
-            child: widget),
+            flex: widget.isPasswordScreen?6:30,
+            child: widget.widget),
 
         Expanded(
             flex: 1,
             child: GestureDetector(
               onTap: () {
-                containerEdit!();
+                widget.containerEdit!;
               },
-              child: isEdit
-                  ? const Icon(Icons.edit)
+              child: widget.isEdit
+                  ?Container()
                   : Icon(
                       Icons.visibility,
                       color: Theme.of(context).colorScheme.primary,

@@ -56,12 +56,14 @@ class Vendors {
   String? mobile;
   String? deliveryCharge;
   String? deliveryTime;
+  bool? isDelivery;
   int? rating;
   String? description;
   String? address;
   String? createdAt;
   String? updatedAt;
   List<Media>? media;
+  // List<Null>? categories;
 
   Vendors(
       {this.id,
@@ -71,12 +73,15 @@ class Vendors {
         this.mobile,
         this.deliveryCharge,
         this.deliveryTime,
+        this.isDelivery,
         this.rating,
         this.description,
         this.address,
         this.createdAt,
         this.updatedAt,
-        this.media});
+        this.media,
+        // this.categories
+      });
 
   Vendors.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -86,6 +91,7 @@ class Vendors {
     mobile = json['mobile'];
     deliveryCharge = json['delivery_charge'];
     deliveryTime = json['delivery_time'];
+    isDelivery = json['is_delivery'];
     rating = json['rating'];
     description = json['description'];
     address = json['address'];
@@ -97,6 +103,12 @@ class Vendors {
         media!.add(new Media.fromJson(v));
       });
     }
+    // if (json['categories'] != null) {
+    //   categories = <Null>[];
+    //   json['categories'].forEach((v) {
+    //     categories!.add(new Null.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
@@ -108,6 +120,7 @@ class Vendors {
     data['mobile'] = this.mobile;
     data['delivery_charge'] = this.deliveryCharge;
     data['delivery_time'] = this.deliveryTime;
+    data['is_delivery'] = this.isDelivery;
     data['rating'] = this.rating;
     data['description'] = this.description;
     data['address'] = this.address;
@@ -116,6 +129,9 @@ class Vendors {
     if (this.media != null) {
       data['media'] = this.media!.map((v) => v.toJson()).toList();
     }
+    // if (this.categories != null) {
+    //   data['categories'] = this.categories!.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }

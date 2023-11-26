@@ -89,10 +89,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  updateProfilePassword(String password) async {
+  updateProfilePassword(String password,String new_password_confirmation,) async {
     emit(UpdateProfileLoading());
     try {
-      await updatePassword.updatePassword(password: password);
+      await updatePassword.updatePassword(password: password,new_password_confirmation:new_password_confirmation );
       emit(UpdatePasswordProfileLoaded());
     } catch (e) {
       emit(UpdateProfileError(error: e.toString()));
@@ -107,6 +107,7 @@ updateAllFieldsAccInfo({
   required dynamic name,
   required dynamic email,
   required dynamic phone,
+  required dynamic image,
 
 
 })async{
@@ -115,6 +116,7 @@ updateAllFieldsAccInfo({
         name: name,
         email: email,
         phone: phone,
+      image: image,
     );
     emit(UpdateAllProfileLoaded());
 

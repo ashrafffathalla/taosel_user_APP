@@ -38,22 +38,24 @@ class UpdateAllFields {
     required dynamic name,
     required dynamic email,
     required dynamic phone,
+    required dynamic image,
 
   }) async {
     try {
-      print('object');
+      print('ssss');
       final Response response = await dioHelper.postData(
           url: AutomationApi.updateAllProfileUrl,
           data: {
-            "full_name": name,
+            "name": name,
             "email": email,
             "phone": phone,
+            "image": image,
           },
           needAuth: true);
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
-      throw textSelect(error['data'].toString());
+      throw error.toString();
     } catch (error) {
       throw '..Oops $error';
     }

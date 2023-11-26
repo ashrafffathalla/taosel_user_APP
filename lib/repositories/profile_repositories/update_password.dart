@@ -10,12 +10,14 @@ class UpdatePassword {
 
   Future<Response> updatePassword({
     required String password,
+    required String new_password_confirmation,
   }) async {
     try {
       final Response response = await dioHelper.postData(
           url: AutomationApi.changePasswordUrl,
           data: {
-            "password": password,
+            "new_password": password,
+            "new_password_confirmation": new_password_confirmation,
           },
           needAuth: true);
       return response;

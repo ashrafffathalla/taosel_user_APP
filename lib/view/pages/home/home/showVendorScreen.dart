@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
+import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
+import 'package:taosel_user_app/view/pages/home/home/additions_screen.dart';
 import 'package:taosel_user_app/view/widgets/statusBar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 
 class ShowVendorScreen extends StatefulWidget {
@@ -27,8 +28,8 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
     final Size size = MediaQuery.of(context).size;
-    var cubit = BlocProvider.of<GetAllVendorsCategoriesCubit>(context);
-    return BlocConsumer<GetAllVendorsCategoriesCubit, HomeState>(
+    var cubit = BlocProvider.of<HomeCubit>(context);
+    return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
         if(state is ShowVendorLoading){
 
@@ -127,7 +128,7 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+                                BlocProvider.of<HomeCubit>(context)
                                     .showVendor (index);
                               });
                             },
@@ -160,39 +161,57 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                       ),
                     ),
                     ///--------------------Products List---------------
-                   Expanded(
+                    cubit.showVendorModel!.data!.categories!.isEmpty?Column(
+                      children: [
+                        SizedBox(height: size.height*0.07,),
+                        Icon(Icons.hourglass_empty),
+                        Text('لا توجد منتجات حاليا',
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600,
+                        ),),
+                      ],
+                    ):Expanded(
                      flex: 3,
                      child: ListView.separated(
                        scrollDirection: Axis.vertical,
                          shrinkWrap: true,
-                         padding: const EdgeInsets.all(0),
+                         padding: const EdgeInsets.all(5),
                          itemBuilder: (context, index) {
-                           return  Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text('كريب فراخ',
-                                     style: TextStyle(
-                                       fontSize: 16.sp,
-                                       fontWeight: FontWeight.w600,
-                                     ),),
-                                   Text('كريب فراخ مع الخضار ',
-                                     style: TextStyle(
-                                       fontSize: 14.sp,
-                                       fontWeight: FontWeight.w400,
+                           return  GestureDetector(
+                             onTap: () {
+                               // navigateTo(context,  AdditionsScreen(
+                               //   index: index,
+                               // ));
+                               // print(index.toInt());
+                             },
+                             child: Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text(cubit.showVendorModel!.data!.categories![0].products![index].name.toString(),
+                                       style: TextStyle(
+                                         fontSize: 16.sp,
+                                         fontWeight: FontWeight.w600,
+                                       ),),
+                                     Text(cubit.showVendorModel!.data!.categories![0].products![index].description.toString(),
+                                       style: TextStyle(
+                                         fontSize: 14.sp,
+                                         fontWeight: FontWeight.w400,
+                                       ),
                                      ),
-                                   ),
-                                 ],),
-                               Image.asset('assets/images/krep.png'),
-                             ],
+                                   ],),
+                                 Image.asset('assets/images/krep.png'),
+                               ],
+                             ),
                            );
                          },
                          separatorBuilder:(context, index) {
                            return const Divider();
                          },
-                         itemCount: 10,),
+                         itemCount: cubit.showVendorModel!.data!.categories![0].products!.length.toInt()),
                    ),
                     SizedBox(
                       height: size.height * 0.03,

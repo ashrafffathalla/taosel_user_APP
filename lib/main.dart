@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) => getIt<LanguageCubit>()),
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
-            BlocProvider<GetAllVendorsCategoriesCubit>(create: (context) => getIt<GetAllVendorsCategoriesCubit>()),
+            BlocProvider<HomeCubit>(create: (context) => getIt<HomeCubit>()),
             BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()),
             // BlocProvider(
             //     create: (BuildContext context) => FacebookLoginCubit()),

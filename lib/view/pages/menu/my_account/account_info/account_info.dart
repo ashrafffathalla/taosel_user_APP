@@ -91,6 +91,7 @@ class _AccountInfoState extends State<AccountInfo> {
                         name: userNameController.text,
                         email: emailController.text,
                         phone: phoneController.text,
+                        image: 'assets/images/person.png'.toString(),
                       );
                     },
                     child: Center(
@@ -159,7 +160,7 @@ class _AccountInfoState extends State<AccountInfo> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   GestureDetector(
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.close,
                                       color: Colors.black87,
                                     ),
@@ -169,8 +170,8 @@ class _AccountInfoState extends State<AccountInfo> {
                                   ),
                                 ],
                               ),
-                              Center(
-                                  child: Icon(
+                              const Center(
+                                  child:  Icon(
                                     Icons.check_circle,
                                     color: Colors.green,
                                     size: 30,
@@ -187,17 +188,17 @@ class _AccountInfoState extends State<AccountInfo> {
                       context: context,
                       builder: (_) {
                         return AlertDialog(
-                          title: Column(
+                          title: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Center(
-                                  child: SvgPicture.asset(
-                                      'assets/images/infoIcon.svg')),
+                                  child: Icon(Icons.info)
+                              ),
                             ],
                           ),
                           content: Text(
-                            state.error.replaceAll('[', "").replaceAll(']', ""),
+                            state.error.toString(),
                             textAlign: TextAlign.center,
                           ),
                         );

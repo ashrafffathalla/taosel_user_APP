@@ -8,8 +8,8 @@ class AutomationApi {
   static const changePhoneUrl = "$baseUrl/change_phone"; //post
   static const verifyPhone = "$baseUrl/verify-phone"; //post
   static const verifieyPhoneUrl = "$baseUrl/auth/check-phone"; //post
-  static const changePasswordUrl = "$baseUrl/auth/reset/reset_password"; //post
-  static const updateAllProfileUrl = "$baseUrl/update_profile"; //post
+  static const changePasswordUrl = "$baseUrl/change-password"; //post
+  static const updateAllProfileUrl = "$baseUrl/profile"; //post
   static const getAlCategorylVendors = "$baseUrl/vendor-categories"; //get
   static const getAllVendors = "$baseUrl/vendors"; //get
   static const getAllVendorCategory = "$baseUrl/vendor-categories/"; //get

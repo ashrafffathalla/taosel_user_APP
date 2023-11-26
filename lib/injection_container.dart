@@ -26,7 +26,7 @@ Future<void> init() async {
       signUpRepositories: getIt(),
       forgetPassRepositories: getIt())
   );
-  getIt.registerFactory(() => GetAllVendorsCategoriesCubit(repositories: getIt())
+  getIt.registerFactory(() => HomeCubit(repositories: getIt())
   );
   getIt.registerFactory(() => ProfileCubit(
       getProfileRepository: getIt(),

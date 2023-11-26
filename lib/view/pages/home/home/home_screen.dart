@@ -30,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+    BlocProvider.of<HomeCubit>(context)
         .getAllCategoryVendorsFun();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
 
-    BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+    BlocProvider.of<HomeCubit>(context)
         .getAllVendorCategory(1);
     super.initState();
   }
@@ -43,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
     final Size size = MediaQuery.of(context).size;
-    var cubit = BlocProvider.of<GetAllVendorsCategoriesCubit>(context);
+    var cubit = BlocProvider.of<HomeCubit>(context);
     return Scaffold(
       drawer: const Menu(),
-      body: BlocConsumer<GetAllVendorsCategoriesCubit, HomeState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
           if (state is GetAllCategoryVendorsError) {
             if (state.error.contains('Unauthenticated')) {
@@ -233,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           selectedIndex = index;
                                           // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel =null;
                                           BlocProvider.of<
-                                                      GetAllVendorsCategoriesCubit>(
+                                                      HomeCubit>(
                                                   context)
                                               .getAllVendorCategory(index + 1);
                                         });
@@ -305,21 +305,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ? const Center(
                                           child: CircularProgressIndicator
                                               .adaptive())
-                                      : cubit.allVendorCategoryModel!.data!
-                                                  .vendors ==
-                                              null
-                                          ? const Text( 'لايوجد متاجر متاحه حاليا')
+                                      : cubit.allVendorCategoryModel!.data!.vendors!.isEmpty
+                                          ? Column(
+                                            children: [
+                                              SizedBox(height: size.height*0.09,),
+                                               const Icon(Icons.hourglass_empty),
+                                               Text( 'لايوجد متاجر متاحه حاليا',
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                      FontWeight.w600,
+                                                      color: const Color(
+                                                          0xff0C1D2E)),
+                                              ),
+                                            ],
+                                          )
                                           : GridView.count(
                                               crossAxisCount: 3, //
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
+                                              physics: const NeverScrollableScrollPhysics(),
                                               children: List.generate(
                                                   cubit.allVendorCategoryModel!
                                                       .data!.vendors!.length
                                                       .toInt(), (index) {
                                                 return GestureDetector(
                                                   onTap: () {
-                                                    BlocProvider.of<GetAllVendorsCategoriesCubit>(context)
+                                                    BlocProvider.of<HomeCubit>(context)
                                                         .showVendor (index + 1);
                                                     navigateTo(
                                                         context,

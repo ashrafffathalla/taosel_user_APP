@@ -330,7 +330,7 @@ class _PasswordEditState extends State<PasswordEdit> {
                                 GestureDetector(
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
-                                      BlocProvider.of<ProfileCubit>(context).updateProfilePassword(newPasswordController.text);
+                                      BlocProvider.of<ProfileCubit>(context).updateProfilePassword(newPasswordController.text,newPasswordController.text);
                                     }
                                   },
                                   child: Container(
@@ -344,10 +344,8 @@ class _PasswordEditState extends State<PasswordEdit> {
                                     child: Center(
                                       child: Text(
                                         local.change,
-                                        style: TextStyle(
-                                          // color:Theme.of(context)
-                                          //     .colorScheme
-                                          //     .primary,
+                                        style: const TextStyle(
+                                         color: Colors.white
                                         ),
                                       ),
                                     ),
