@@ -180,10 +180,9 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                          itemBuilder: (context, index) {
                            return  GestureDetector(
                              onTap: () {
-                               // navigateTo(context,  AdditionsScreen(
-                               //   index: index,
-                               // ));
-                               // print(index.toInt());
+                               navigateTo(context,  AdditionsScreen(
+                                 index: index,
+                               ));
                              },
                              child: Row(
                                mainAxisAlignment: MainAxisAlignment.spaceBetween,

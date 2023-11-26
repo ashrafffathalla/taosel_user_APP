@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/view/widgets/statusBar.dart';
 
 import '../../../../data/model/showVendor_model.dart';
@@ -34,11 +35,23 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
               SizedBox(
                   width: size.width,
                   height: size.height*0.35,
-                  child: Image.network(cubit.showVendorModel!.data!.categories![0].products![widget.index+1].media![0].path.toString())),
+                  child: cubit.showVendorModel!.data!.categories![0].products![widget.index].media!.isEmpty?Container(
+                    child: Icon(Icons.image_not_supported_rounded,size: 60.sp,),
+                  ):Image.network(cubit.showVendorModel!.data!.categories![0].products![widget.index].media![0].path.toString())),
               SizedBox(height: size.height*0.03,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
+                  Text(cubit.showVendorModel!.data!.categories![0].products![widget.index].name.toString(),style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600
+                  ),),
+                  Text(cubit.showVendorModel!.data!.categories![0].products![widget.index].description.toString(),
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500
+                    ),
+                  ),
                 ],
               ),
             ],
