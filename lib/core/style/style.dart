@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightTheme() {
@@ -7,7 +8,7 @@ ThemeData lightTheme() {
     scaffoldBackgroundColor: const Color(0xFFF0EFEF),
     colorScheme: const ColorScheme(
       primary: Color(0xff152F4B),
-      primaryContainer: Colors.white,
+      primaryContainer: Color(0xFF161EEE),
       secondary: Color(0xff152F4B),
       secondaryContainer: Color(0xff152F4B),
       surface: Color(0xffFFFFFF),
@@ -106,6 +107,11 @@ ThemeData lightTheme() {
         textStyle: GoogleFonts.cairo(
             fontWeight: FontWeight.bold),
         padding: const EdgeInsets.all(0.0),
+      ),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.sp),
       ),
     ),
   );

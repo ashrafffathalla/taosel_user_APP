@@ -62,4 +62,19 @@ class HomeCubit extends Cubit<HomeState> {
       emit(ShowVendorError(error: e.toString()));
     }
   }
+
+
+  ///----------Addition Screen Counter
+  int counter = 1;
+  incrementCounter() {
+    emit(CounterLoading());
+     counter++;
+    emit(CounterLoaded());
+  }
+
+  decrementCounter() {
+    emit(CounterLoading());
+    counter--;
+    emit(CounterLoaded());
+  }
 }

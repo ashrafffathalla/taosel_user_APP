@@ -69,3 +69,8 @@ class ShowVendorError extends HomeState {
   @override
   List<Object> get props => [error];
 }
+
+///----------Addition Counter
+class CounterLoading extends HomeState {}
+
+class CounterLoaded extends HomeState {}

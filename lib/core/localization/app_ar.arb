@@ -12,6 +12,7 @@
   "choosefromthelistofadditionalservices": "اختر من قائمة الخدمات الإضافية",
   "receive": "الاستلام",
   "fuel": "فرق البزين",
+  "addToCard": "اضافة الى السلة ",
   "deliver": "رسوم التوصيل ",
   "carPrice": "سعر السيارة",
   "payDetails": "تفاصيل الدفع",
@@ -267,8 +268,7 @@
     "pickUpDetails" : "تفاصيل الاستلام",
     "dropOffDetails" : "تفاصيل التسليم",
 
-
-    "additionalServices" : "خدمات إضافية",
+    "additionalServices" : "اضافات",
     "fullInsurance" : "تكلفه التأمين الشامل",
     "shield" : "درع", 
     "extraDriver" : "سائق إضافي",

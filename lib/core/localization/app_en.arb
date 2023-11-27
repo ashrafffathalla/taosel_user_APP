@@ -12,6 +12,7 @@
   "selectCountry": "Nationality",
   "enterMobileNumber": "Enter Mobile Number",
   "bookingDays": "Booking Days : ",
+  "addToCard": "add ToCard",
   "choosefromthelistofadditionalservices": "Choose from the list of additional services",
   "receive": "Receive",
   "deliver": "Delivery Charge",
@@ -259,7 +260,7 @@
     "pickUpDetails" : "Pick Up Details",
     "dropOffDetails" : "Drop Off Details",
 
-    "additionalServices" : "Additional Services",
+    "additionalServices" : "Additions",
     "fullInsurance" : "Full Insurance",
     "shield" : "Shield", 
     "extraDriver" : "Extra Driver",

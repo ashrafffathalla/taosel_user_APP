@@ -215,6 +215,7 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                     SizedBox(
                       height: size.height * 0.03,
                     ),
+
                   ],
                 ),
               ),
