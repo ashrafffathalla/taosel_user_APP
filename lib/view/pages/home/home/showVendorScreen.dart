@@ -52,7 +52,7 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                     SizedBox(
                       width: size.width,
                       height: size.height*0.35,
-                        child: Image.network(cubit.showVendorModel!.data!.media![0].path.toString())),
+                        child: cubit.showVendorModel!.data!.media!.isEmpty?Container():Image.network(cubit.showVendorModel!.data!.media![0].path.toString())),
                     SizedBox(height: size.height*0.02,),
                     ///----------Row Before Divider
                     Row(

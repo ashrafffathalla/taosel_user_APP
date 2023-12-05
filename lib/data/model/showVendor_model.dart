@@ -196,6 +196,8 @@ class Products {
   String? yourChoice;
   String? currency;
   List<Media>? media;
+  List<Addition>? addition;
+
 
   Products(
       {this.id,
@@ -207,7 +209,8 @@ class Products {
         this.featured,
         this.yourChoice,
         this.currency,
-        this.media});
+        this.media,
+        this.addition});
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -222,25 +225,56 @@ class Products {
     if (json['media'] != null) {
       media = <Media>[];
       json['media'].forEach((v) {
-        media!.add(new Media.fromJson(v));
+        media!.add( Media.fromJson(v));
+      });
+    } if (json['addition'] != null) {
+      addition = <Addition>[];
+      json['addition'].forEach((v) {
+        addition!.add(new Addition.fromJson(v));
       });
     }
+
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['lang'] = lang;
+    data['price'] = price;
+    data['discount_price'] = discountPrice;
+    data['featured'] = featured;
+    data['your_choice'] = yourChoice;
+    data['currency'] = currency;
+    if (this.media != null) {
+      data['media'] = this.media!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class Addition {
+  int? id;
+  String? name;
+  int? price;
+  bool? isActive;
+
+  Addition({this.id, this.name, this.price, this.isActive});
+
+  Addition.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    price = json['price'];
+    isActive = json['is_active'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['description'] = this.description;
-    data['lang'] = this.lang;
     data['price'] = this.price;
-    data['discount_price'] = this.discountPrice;
-    data['featured'] = this.featured;
-    data['your_choice'] = this.yourChoice;
-    data['currency'] = this.currency;
-    if (this.media != null) {
-      data['media'] = this.media!.map((v) => v.toJson()).toList();
-    }
+    data['is_active'] = this.isActive;
     return data;
   }
 }

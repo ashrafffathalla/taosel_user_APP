@@ -12,6 +12,7 @@ class AutomationApi {
   static const updateAllProfileUrl = "$baseUrl/profile"; //post
   static const getAlCategorylVendors = "$baseUrl/vendor-categories"; //get
   static const getAllVendors = "$baseUrl/vendors"; //get
+  static const addAddition = "$baseUrl/cart/store"; //get
   static const getAllVendorCategory = "$baseUrl/vendor-categories/"; //get
 
 

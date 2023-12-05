@@ -74,3 +74,5 @@ class ShowVendorError extends HomeState {
 class CounterLoading extends HomeState {}
 
 class CounterLoaded extends HomeState {}
+
+class CheckAdditionSelectedLoading extends HomeState {}

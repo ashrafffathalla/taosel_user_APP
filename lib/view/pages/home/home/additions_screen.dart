@@ -19,6 +19,7 @@ List checked = [];
 bool isChecked = false;
 
 class _AdditionsScreenState extends State<AdditionsScreen> {
+  List checked = [false, false, false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
@@ -41,7 +42,7 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                     const StatusBar(),
                     SizedBox(
                         width: size.width,
-                        height: size.height * 0.35,
+                        height: size.height * 0.3,
                         child: cubit.showVendorModel!.data!.categories![0]
                                 .products![widget.index].media!.isEmpty
                             ? Icon(
@@ -69,7 +70,7 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                               .products![widget.index].description
                               .toString(),
                           style:
-                              TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -123,33 +124,20 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                       ],
                     ),
                     ///----------List --------
-                    SizedBox(
-                      width: size.width,
-                      height: 100,
+                    Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
-                        itemCount: /*widget.checkOrderStepModel!.order!.features!.length*/
-                            1,
+                        itemCount: cubit.showVendorModel!.data!.categories![0].products![0].addition!.length,
                         itemBuilder: (BuildContext context, int index) {
-                          // List checked = widget.checkOrderStepModel!.order!.features!.toList();
-                          //  additionCubit.initialCheckedList();
-                          // additionCubit.checkId(1);
-                          // additionCubit.checkId(2);
-                          ///---------------------
-                          // final List<String?>? title =
-                          // widget.checkOrderStepModel!.order!.features?.map((e) => e.title).cast<
-                          //     String?>().toList();
-                          // final List<String?>? price = widget.checkOrderStepModel!.order!
-                          //     .features!
-                          //     .map((e) =>
-                          // "${e.price}")
-                          //     .toList();
-                          // final List<String?>? daily = widget.checkOrderStepModel!.order!
-                          //     .features!.map((e) =>
-                          // "${e.daily == false ? "${local.sar.toString()}" : "${locale.sar
-                          //     .toString()}/${local.day.toString()}"}")
-                          //     .toList();
+                          // List checked = cubit.showVendorModel!.data!.categories![index].products![index].addition!.toList();
+                          final List<String?>? title =
+                          cubit.showVendorModel!.data!.categories![0].products![0].addition?.map((e) => e.name).cast<
+                              String?>().toList();
+                          final List<String?> price = cubit.showVendorModel!.data!.categories![0].products![0].addition!
+                              .map((e) =>
+                          "${e.price} EG")
+                              .toList();
                           return Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: CheckboxListTile(
@@ -161,43 +149,37 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10.0)),
                                   // Circle Checkbox
-                                  value: isChecked,
+                                  value: checked[index],
                                   onChanged: (value) {
-                                    // // if(value != null) {
-                                    // // additionCubit.checkAddition(index,value);
-                                    // checked[index] = value;
-                                    // if (checked[index]) {
-                                    //   // BlocProvider.of<AdditionsCubit>(context).addAdditionNotCompleted(context, widget.checkOrderStepModel!.order!.features![index]);
-                                    //   // checked[index]= false;
-                                    // } else {
-                                    //   // BlocProvider.of<AdditionsCubit>(context).removeAdditionNotCompleted(
-                                    //   //     context, widget.checkOrderStepModel!.order!.features![index]);
-                                    //   // additionCubit.checked[index]=false;
-                                    //
-                                    //   // }
-                                    // }
-                                    //------------
+                                    print(title.toString());
                                     setState(() {
-                                      isChecked = value!;
+                                      checked[index] = value;
                                     });
+                                    checked[index];
+                                    // checked[index]
+                                    //     ? cubit
+                                    //     .addAddition(context, widget.features![index])
+                                    //     : cubit
+                                    //     .removeAddition(context, widget.features![index]);
                                   },
                                   title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Row(
                                         children: [
-                                          Text("555",
+                                          Text(price[index].toString(),
                                               style: TextStyle(
                                                 fontSize: 16.sp,
                                               )),
-                                          Text("ssssssssss",
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                              )),
+                                          // Text("ssssssssss",
+                                          //     style: TextStyle(
+                                          //       fontSize: 16.sp,
+                                          //     )),
                                         ],
                                       ),
+                                      const Spacer(),
                                       Text(
-                                        "ccccc",
+                                        title![index].toString(),
                                         style: TextStyle(
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w400,
@@ -235,7 +217,7 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                             ),
                             onPressed: () {
                             },
-                            child: Text(local!.addToCard,style: TextStyle(
+                            child: Text(local.addToCard,style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.sp
                             ),))),

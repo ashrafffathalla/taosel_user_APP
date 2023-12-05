@@ -343,16 +343,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Column(
                                     children: [
-                                      SizedBox(
+                                      cubit.allVendorCategoryModel!.data!.vendors![0].media!.isEmpty?Container():SizedBox(
                                           height: 0.065.sh,
                                           width: 0.06.sh,
-                                          child: Image.network(cubit
-                                              .allVendorCategoryModel!
-                                              .data!
-                                              .vendors![0]
-                                              .media![0]
-                                              .path
-                                              .toString())),
+                                          child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![0].media![0].path.toString())),
                                       SizedBox(height: 5.h),
                                       Text(
                                         cubit

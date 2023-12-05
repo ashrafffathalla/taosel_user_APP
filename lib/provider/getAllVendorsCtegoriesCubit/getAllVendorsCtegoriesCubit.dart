@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:taosel_user_app/data/model/allCategoryCategories.dart';
 import 'package:taosel_user_app/data/model/allVendors_model.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
@@ -65,6 +66,24 @@ class HomeCubit extends Cubit<HomeState> {
 
 
   ///----------Addition Screen Counter
+  ///
+  List<int> additions = [];
+  // add addition to the list of additions
+  addAddition(BuildContext context, Addition? addition) {
+    additions.add(int.parse(addition!.id.toString()));
+    emit(AdditionsLoading());
+    emit(AdditionsSuccess(features));
+  }
+  // // remove addition from the list of additions
+  // removeAddition(BuildContext context, Feature? feature) {
+  //   additions.remove(int.parse(feature!.id.toString()));
+  //   final daysPrice = double.parse(feature.daily!
+  //       ? BlocProvider.of<BookingCubit>(context).days!.toString()
+  //       : "1");
+  //   total = total - (double.parse(feature.price.toString()) * daysPrice);
+  //   emit(AdditionsLoading());
+  //   emit(AdditionsSuccess(features));
+  // }
   int counter = 1;
   incrementCounter() {
     emit(CounterLoading());

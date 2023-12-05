@@ -85,4 +85,30 @@ class GetAllVendorsCategoriesRepositories {
       throw '..Oops $error';
     }
   }
+  Future<Response> addAddition(
+      {required String product_id, required String quantity,required List additions,}) async {
+    try {
+      final Response response = await dioHelper.postData(
+        needAuth: false,
+        url: AutomationApi.loginUrl,
+        data: {
+          "product_id": product_id,
+          "quantity": quantity,
+          "password": additions,
+        },
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      String message = data['data']["message"];
+      // await hiveHelper.putData("token", token);
+       print(message.toString()+"HHHHH");
+      return response;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      print(error['message']);
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
 }
