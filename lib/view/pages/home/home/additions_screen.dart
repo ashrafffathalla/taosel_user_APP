@@ -151,16 +151,16 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                                   // Circle Checkbox
                                   value: checked[index],
                                   onChanged: (value) {
-                                    print(title.toString());
                                     setState(() {
                                       checked[index] = value;
                                     });
+                                    print(cubit.additions);
                                     checked[index];
-                                    // checked[index]
-                                    //     ? cubit
-                                    //     .addAddition(context, widget.features![index])
-                                    //     : cubit
-                                    //     .removeAddition(context, widget.features![index]);
+                                    checked[index] ? cubit.addAddition(context,
+                                      cubit.showVendorModel!.data!.categories![0].products![0].addition![index], cubit.counter.toString()
+                                    ):false;
+                                        // : cubit
+                                        // .removeAddition(context, widget.features![index]);
                                   },
                                   title: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,

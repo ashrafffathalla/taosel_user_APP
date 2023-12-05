@@ -90,7 +90,7 @@ class GetAllVendorsCategoriesRepositories {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
-        url: AutomationApi.loginUrl,
+        url: AutomationApi.addAddition,
         data: {
           "product_id": product_id,
           "quantity": quantity,

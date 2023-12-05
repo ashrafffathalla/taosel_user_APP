@@ -65,14 +65,17 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
 
-  ///----------Addition Screen Counter
+  ///----------Addition Fun
   ///
   List<int> additions = [];
+  List<Addition?>? features;
+
   // add addition to the list of additions
-  addAddition(BuildContext context, Addition? addition) {
-    additions.add(int.parse(addition!.id.toString()));
+  addAddition(BuildContext context, Addition? addition,String quantity)async{
     emit(AdditionsLoading());
-    emit(AdditionsSuccess(features));
+    additions.add(int.parse(addition!.id.toString()));
+    // await repositories.addAddition(product_id: addition.id.toString(), quantity: quantity, additions: additions);
+    // emit(AdditionsSuccess(features));
   }
   // // remove addition from the list of additions
   // removeAddition(BuildContext context, Feature? feature) {

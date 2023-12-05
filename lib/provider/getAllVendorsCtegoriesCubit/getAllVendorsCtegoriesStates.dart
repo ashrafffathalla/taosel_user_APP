@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:taosel_user_app/data/model/allCategoryCategories.dart';
+import 'package:taosel_user_app/data/model/showVendor_model.dart';
 
 import '../../data/model/allVendors_model.dart';
 
@@ -76,3 +77,12 @@ class CounterLoading extends HomeState {}
 class CounterLoaded extends HomeState {}
 
 class CheckAdditionSelectedLoading extends HomeState {}
+class AdditionsLoading extends HomeState {}
+class AdditionsSuccess extends HomeState {
+  final List<Addition?>? additions;
+
+  const AdditionsSuccess(this.additions);
+
+  @override
+  List<Object> get props => [additions ?? []];
+}
