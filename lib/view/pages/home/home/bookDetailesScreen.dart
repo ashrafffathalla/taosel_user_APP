@@ -14,6 +14,7 @@ class BookDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(height: size.height*0.05,),
           Container(
             width: size.width,
             decoration: BoxDecoration(
@@ -24,14 +25,19 @@ class BookDetailsScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text('تفاصيل الطلب',style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16.sp,
 
-                ),),
                 Row(
                   children: [
-                    Text(cubit.showVendorModel!.data!.name.toString()),
+                    Text('تفاصيل الطلب',style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+
+                    ),),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(''),
                     // Text(cubit.showVendorModel!.data!.),
                   ],
                 ),

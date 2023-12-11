@@ -74,6 +74,7 @@ class HomeCubit extends Cubit<HomeState> {
   addAdditionToCart(BuildContext context, String productId,String quantity)async{
     emit(AdditionsLoading());
     await repositories.addAddition(product_id: productId, quantity: quantity, additions: additions);
+    print(additions.toString()+"DDDD");
     emit(AdditionsSuccess(features));
   }
   addAddition(BuildContext context, Addition? addition,String quantity)async{
