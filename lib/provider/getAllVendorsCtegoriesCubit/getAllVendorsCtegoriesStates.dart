@@ -86,3 +86,5 @@ class AdditionsSuccess extends HomeState {
   @override
   List<Object> get props => [additions ?? []];
 }
+class ShowCartLoading extends HomeState {}
+class ShowCartSuccess extends HomeState {}

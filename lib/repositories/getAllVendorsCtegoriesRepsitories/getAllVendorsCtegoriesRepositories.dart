@@ -86,7 +86,7 @@ class GetAllVendorsCategoriesRepositories {
     }
   }
   Future<Response> addAddition(
-      {required String product_id, required String quantity,required List additions,}) async {
+      {required String product_id, required String quantity, List? additions,}) async {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
@@ -94,13 +94,39 @@ class GetAllVendorsCategoriesRepositories {
         data: {
           "product_id": product_id,
           "quantity": quantity,
-          "password": additions,
+          "additions": additions,
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      String message = data['data']["message"];
       // await hiveHelper.putData("token", token);
-       print(message.toString()+"HHHHH");
+      return response;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      print(error['message']);
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
+  ///----------Show Order Store
+///
+  Future<Response> showOrderCart(
+      {required String paymentMethod, required String addressId, required String notes,required dynamic total,required String discount,}) async {
+    try {
+      final Response response = await dioHelper.postData(
+        needAuth: false,
+        url: AutomationApi.showOrderCart,
+        data: {
+          "payment_method": paymentMethod,
+          "address_id": addressId,
+          "notes": notes,
+          "total": total,
+          "discount": discount,
+        },
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      // await hiveHelper.putData("token", token);
       return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;

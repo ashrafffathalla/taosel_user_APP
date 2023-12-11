@@ -71,6 +71,11 @@ class HomeCubit extends Cubit<HomeState> {
   List<Addition?>? features;
 
   // add addition to the list of additions
+  addAdditionToCart(BuildContext context, String productId,String quantity)async{
+    emit(AdditionsLoading());
+    await repositories.addAddition(product_id: productId, quantity: quantity, additions: additions);
+    emit(AdditionsSuccess(features));
+  }
   addAddition(BuildContext context, Addition? addition,String quantity)async{
     emit(AdditionsLoading());
     additions.add(int.parse(addition!.id.toString()));
@@ -87,6 +92,18 @@ class HomeCubit extends Cubit<HomeState> {
   //   emit(AdditionsLoading());
   //   emit(AdditionsSuccess(features));
   // }
+
+
+  showOrderCart(String addressId,String discount,String notes,String paymentMethod,dynamic total)async {
+    emit(ShowCartLoading());
+    await repositories.showOrderCart(addressId: addressId,
+        discount: discount,
+        notes: notes,
+        paymentMethod: paymentMethod,
+        total: total);
+    emit(ShowCartSuccess());
+
+  }
   int counter = 1;
   incrementCounter() {
     emit(CounterLoading());
