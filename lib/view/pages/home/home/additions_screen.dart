@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/data/model/showVendor_model.dart';
+import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
+import 'package:taosel_user_app/view/pages/home/home/bookDetailesScreen.dart';
 import 'package:taosel_user_app/view/widgets/statusBar.dart';
 import '../../../../provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import '../../../../provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
@@ -29,7 +31,11 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
     int price =int.parse( cubit.showVendorModel!.data!.categories![0].products![widget.index].price.toString());
     return Scaffold(
       body: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ShowCartSuccess){
+            navigateTo(context,const BookDetailsScreen());
+          }
+        },
         builder: (context, state) {
           return SingleChildScrollView(
             child: SizedBox(
@@ -220,9 +226,10 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                             onPressed: () {
                               cubit.addAdditionToCart(context, cubit.showVendorModel!.data!.categories![0].products![0].id.toString(), cubit.counter.toString(),);
                               cubit.showOrderCart('1', '0', 'notes', 'cod',price*cubit.counter);
-                              print("${price*(cubit.counter)}KKKK");
                               },
-                            child: Text(local.addToCard,style: TextStyle(
+                            child:state is ShowCartLoading?const Center(child:  CircularProgressIndicator.adaptive(
+                              backgroundColor: Colors.white,
+                            )): Text(local.addToCard,style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.sp
                             ),))),
