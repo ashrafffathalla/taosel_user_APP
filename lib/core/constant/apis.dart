@@ -1,6 +1,5 @@
 class AutomationApi {
   static const baseUrl = "https://taosel.com/api";
-
   //**************** Authentication *******************//
   static const loginUrl = "$baseUrl/auth/login"; //post
   static const registerUrl = "$baseUrl/auth/register-client"; //post
@@ -15,8 +14,6 @@ class AutomationApi {
   static const addAddition = "$baseUrl/cart/store"; //get
   static const getAllVendorCategory = "$baseUrl/vendor-categories/"; //get
   static const showOrderCart = "$baseUrl/order/store"; //post
-
-
   //**************** Profile *******************//
   static const profileUrl = "$baseUrl/profile"; //get
   static const updateNameUrl = "$baseUrl/update_name"; //post
