@@ -33,7 +33,16 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
       body: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
           if(state is AdditionsSuccess){
-            navigateTo(context,const BookDetailsScreen());
+            navigateTo(context, BookDetailsScreen(
+              itemName: cubit.showVendorModel!.data!.categories![0]
+                  .products![widget.index].name
+                  .toString(),
+              price: cubit.showVendorModel!.data!.categories![0]
+                  .products![widget.index].price
+                  .toString(),
+              quantity: cubit.counter.toString(),
+
+            ));
           }
         },
         builder: (context, state) {
@@ -162,7 +171,6 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                                     setState(() {
                                       checked[index] = value;
                                     });
-                                    print(cubit.additions.toString()+"KKKKKKKK");
                                     checked[index];
                                     checked[index] ? cubit.addAddition(context,
                                       cubit.showVendorModel!.data!.categories![0].products![0].addition![index], cubit.counter.toString()
@@ -227,7 +235,7 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
                               cubit.addAdditionToCart(context, cubit.showVendorModel!.data!.categories![0].products![0].id.toString(), cubit.counter.toString(),);
                               // cubit.showOrderCart('1', '0', 'notes', 'cod',price*cubit.counter);
                               },
-                            child:state is ShowCartLoading?const Center(child:  CircularProgressIndicator.adaptive(
+                            child:state is AdditionsLoading?const Center(child:  CircularProgressIndicator.adaptive(
                               backgroundColor: Colors.white,
                             )): Text(local.addToCard,style: TextStyle(
                                 color: Colors.white,

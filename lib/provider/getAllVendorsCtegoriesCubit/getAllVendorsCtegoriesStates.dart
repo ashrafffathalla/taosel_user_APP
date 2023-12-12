@@ -71,20 +71,19 @@ class ShowVendorError extends HomeState {
   List<Object> get props => [error];
 }
 
-///----------Addition Counter
+///----------Addition Counter------------
 class CounterLoading extends HomeState {}
-
 class CounterLoaded extends HomeState {}
-
+///--------
 class CheckAdditionSelectedLoading extends HomeState {}
+class AdditionsIsLoading extends HomeState {}
 class AdditionsLoading extends HomeState {}
 class AdditionsSuccess extends HomeState {
   final List<Addition?>? additions;
-
   const AdditionsSuccess(this.additions);
-
   @override
   List<Object> get props => [additions ?? []];
 }
 class ShowCartLoading extends HomeState {}
+
 class ShowCartSuccess extends HomeState {}

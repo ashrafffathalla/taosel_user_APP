@@ -58,20 +58,29 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        backgroundColor: const Color(0xff00B0B9),
-        body: Center(
-          child: Padding(
-            padding:  EdgeInsets.all(MediaQuery.of(context).size.width*0.08),
-            child: AnimatedBuilder(
-              animation: _opacityAnimation,
-              builder: (context, child) {
-                return Opacity(opacity: _opacityAnimation.value,
-                child: Image.asset(
-                  "assets/images/splash.png",
-                  gaplessPlayback: true,
-                ),
-                );
-              },
+        // backgroundColor: const Color(0xff00B0B9),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient:  LinearGradient(
+              colors: [Color(0xff8b10b787), Color(0XFF76AAF800)], // Define your gradient colors
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.width*0.08),
+              child: AnimatedBuilder(
+                animation: _opacityAnimation,
+                builder: (context, child) {
+                  return Opacity(opacity: _opacityAnimation.value,
+                  child: Image.asset(
+                    "assets/images/splash.png",
+                    gaplessPlayback: true,
+                  ),
+                  );
+                },
+              ),
             ),
           ),
         ));
