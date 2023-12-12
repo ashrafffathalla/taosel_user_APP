@@ -5,14 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 class BookDetailsScreen extends StatelessWidget {
   const BookDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
     final Size size = MediaQuery.of(context).size;
     var cubit = BlocProvider.of<HomeCubit>(context);
     return Scaffold(
-      body: Column(children: [
-        Container(
+      body: Column(
+        children: [
+          Container(
             width: size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.sp),
@@ -35,7 +37,9 @@ class BookDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),],),
+          ),
+        ],
+      ),
     );
   }
 }
