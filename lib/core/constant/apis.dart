@@ -14,6 +14,8 @@ class AutomationApi {
   static const addAddition = "$baseUrl/cart/store"; //get
   static const getAllVendorCategory = "$baseUrl/vendor-categories/"; //get
   static const showOrderCart = "$baseUrl/order/store"; //post
+  static const getAllOrder = "$baseUrl/order"; //get
+  static const cancelOrder = "$baseUrl/order/cancel"; //get
   //**************** Profile *******************//
   static const profileUrl = "$baseUrl/profile"; //get
   static const updateNameUrl = "$baseUrl/update_name"; //post

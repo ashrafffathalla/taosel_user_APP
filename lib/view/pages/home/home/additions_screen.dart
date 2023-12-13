@@ -5,6 +5,7 @@ import 'package:taosel_user_app/data/model/showVendor_model.dart';
 import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
 import 'package:taosel_user_app/view/pages/home/home/bookDetailesScreen.dart';
 import 'package:taosel_user_app/view/widgets/statusBar.dart';
+import '../../../../core/helpers/helper_fun.dart';
 import '../../../../provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import '../../../../provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,6 +44,17 @@ class _AdditionsScreenState extends State<AdditionsScreen> {
               quantity: cubit.counter.toString(),
 
             ));
+          }
+          if(state is AdditionError){
+            HelperFunctions.showFlashBar(
+                context: context,
+                title: 'خطأ',
+                message: state.error,
+                color: Color(0xffF6A9A9),
+                titlcolor: Color(0xffD62E2E),
+                icon: Icons.warning_amber,
+                iconColor: Color(0xffD62E2E)
+            );
           }
         },
         builder: (context, state) {

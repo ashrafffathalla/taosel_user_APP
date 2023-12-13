@@ -11,11 +11,10 @@ import 'package:taosel_user_app/data/remote/dio_helper.dart';
 
 import '../../data/model/allCategoryCategories.dart';
 import '../../data/model/allVendors_model.dart';
+import '../../data/model/cart_order_store_model.dart';
 
 class GetAllVendorsCategoriesRepositories {
   final DioHelper dioHelper;
-
-
   GetAllVendorsCategoriesRepositories({required this.dioHelper,});
 
   Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories()async{
@@ -111,7 +110,7 @@ class GetAllVendorsCategoriesRepositories {
   }
   ///----------Show Order Store
 ///
-  Future<Response> showOrderCart(
+  Future<CartOrderStoreModel> showOrderCart(
       {required String paymentMethod, required String addressId, required String notes,required dynamic total,required String discount,}) async {
     try {
       final Response response = await dioHelper.postData(
@@ -126,11 +125,34 @@ class GetAllVendorsCategoriesRepositories {
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
+      final CartOrderStoreModel  cartOrderStoreModel = CartOrderStoreModel.fromJson(data);
+      return cartOrderStoreModel;
       // await hiveHelper.putData("token", token);
-      return response;
     } on DioError catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
       print(error['message']);
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
+
+  Future<Response> cancelBooking({required  orderId, }) async {
+    try {
+      final Response response = await dioHelper.postData(
+        needAuth: true,
+        url: AutomationApi.cancelOrder,
+        data: {
+          "order_id": orderId,
+        },
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      // await hiveHelper.putData("token", token);
+      print(data['message']+"5555");
+      return response;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
       throw error['message'];
 
     } catch (error) {

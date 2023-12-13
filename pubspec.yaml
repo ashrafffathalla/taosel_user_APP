@@ -61,7 +61,7 @@ dependencies:
   #date_time_picker: ^2.1.0
   syncfusion_flutter_datepicker: ^20.2.43
   #⚡️A highly customizable, powerful and easy-to-use alerting library for Flutter.
-  flash: ^2.0.3+1
+
   lottie: ^1.2.1
   #This package contains pre-canned animations for commonly-desired effects.
   # The animations can be customized with your content and dropped into your application to delight your users.
@@ -120,6 +120,7 @@ dependencies:
 #  flutter_local_notifications: ^15.1.1
 #  cloud_firestore: ^4.9.2
   pay: ^1.1.2
+  flash: ^3.0.5+2
 
 dev_dependencies:
   flutter_test:

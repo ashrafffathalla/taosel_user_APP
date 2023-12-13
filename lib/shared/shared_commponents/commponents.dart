@@ -97,3 +97,24 @@ PreferredSizeWidget customAppBar(context)=>AppBar(
 //         )),
 //   );
 // }
+
+///--------
+// HelperFunctions.showFlashBar(
+// color:Color(0xffDCEFE3) ,
+// context: context,
+// title: '',
+// message: locale.isDirectionRTL(context)?'تم الغاء الطلب بنجاح':'Order has been cancelled Successfully',
+// titlcolor: Color(0xff327B5B),
+// icon: Icons.check,
+// iconColor: Color(0xff327B5B)
+// );
+///-----
+// HelperFunctions.showFlashBar(
+// context: context,
+// title: 'خطأ',
+// message: state.error,
+// color: Color(0xffF6A9A9),
+// titlcolor: Color(0xffD62E2E),
+// icon: Icons.warning_amber,
+// iconColor: Color(0xffD62E2E)
+// );

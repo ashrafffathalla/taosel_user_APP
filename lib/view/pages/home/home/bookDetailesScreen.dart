@@ -7,6 +7,7 @@ import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendo
 import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
 import 'package:taosel_user_app/view/widgets/success_makeOrder.dart';
 
+import '../../../../core/helpers/helper_fun.dart';
 import '../../../widgets/statusBar.dart';
 class BookDetailsScreen extends StatefulWidget {
   String ? itemName;
@@ -28,7 +29,18 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
         if(state is ShowCartSuccess){
-          navigateTo(context, const SuccessMakeOrder());
+          navigateAndFinish(context, const SuccessMakeOrder());
+        }
+        if(state is ShowCartError){
+          HelperFunctions.showFlashBar(
+              context: context,
+              title: 'خطأ',
+              message: state.error,
+              color: Color(0xffF6A9A9),
+              titlcolor: Color(0xffD62E2E),
+              icon: Icons.warning_amber,
+              iconColor: Color(0xffD62E2E)
+          );
         }
       },
       builder: (context, state) {
@@ -295,7 +307,9 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                           onPressed: () {
                             cubit.showOrderCart('1', '0', 'notes', 'cod',widget.price!*cubit.counter);
                           },
-                          child: state is ShowCartLoading?const Center(child: CircularProgressIndicator.adaptive()):Text('تنفيذ الطلب',style: TextStyle(
+                          child: state is ShowCartLoading?const Center(child: CircularProgressIndicator.adaptive(
+                            backgroundColor: Colors.white,
+                          )):Text('تنفيذ الطلب',style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.sp
                           ),))),

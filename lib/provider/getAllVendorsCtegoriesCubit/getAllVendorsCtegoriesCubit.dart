@@ -4,6 +4,7 @@ import 'package:taosel_user_app/data/model/allVendors_model.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
 import 'package:bloc/bloc.dart';
 import '../../data/model/allVendorCategoryModel.dart';
+import '../../data/model/cart_order_store_model.dart';
 import '../../data/model/showVendor_model.dart';
 import '../../repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'getAllVendorsCtegoriesStates.dart';
@@ -73,8 +74,12 @@ class HomeCubit extends Cubit<HomeState> {
   // add addition to the list of additions
   addAdditionToCart(BuildContext context, String productId,String quantity)async{
     emit(AdditionsLoading());
-    await repositories.addAddition(product_id: productId, quantity: quantity, additions: additions);
-    emit(AdditionsSuccess(features));
+    try{
+      await repositories.addAddition(product_id: productId, quantity: quantity, additions: additions);
+      emit(AdditionsSuccess(features));
+    }catch(e){
+      emit(AdditionError(error: e.toString()));
+    }
   }
   addAddition(BuildContext context, Addition? addition,String quantity)async{
     emit(AdditionsIsLoading());
@@ -93,17 +98,41 @@ class HomeCubit extends Cubit<HomeState> {
   //   emit(AdditionsSuccess(features));
   // }
 
-
+  CartOrderStoreModel? cartOrderStoreModel;
   showOrderCart(String addressId,String discount,String notes,String paymentMethod,dynamic total)async {
     emit(ShowCartLoading());
-    await repositories.showOrderCart(addressId: addressId,
+  try{
+    cartOrderStoreModel = await repositories.showOrderCart(addressId: addressId,
         discount: discount,
         notes: notes,
         paymentMethod: paymentMethod,
         total: total);
     emit(ShowCartSuccess());
+  }catch(e){
+    emit(ShowCartError(error: e.toString()));
+  }
 
   }
+  ///--------------cancel
+  Future<void> cancelBooking({required int orderId}) async {
+    emit(CancelLoading());
+    try {
+      await repositories.cancelBooking(orderId: orderId);
+      emit(CancelSuccess());
+    } catch (e) {
+      emit(CancelError(error: e.toString()));
+    }
+  }
+  ///delete
+  // Future<void> deleteBooking({required int orderId}) async {
+  //   emit(DeleteOrderLoading());
+  //   try {
+  //     await cancelBookingDataSources.deleteBooking();
+  //     emit(DeleteOrderSuccess());
+  //   } catch (e) {
+  //     emit(DeleteOrderError(error: e.toString()));
+  //   }
+  // }
   int counter = 1;
   incrementCounter() {
     emit(CounterLoading());

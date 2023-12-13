@@ -84,6 +84,40 @@ class AdditionsSuccess extends HomeState {
   @override
   List<Object> get props => [additions ?? []];
 }
+class AdditionError extends HomeState {
+  final String error;
+  const AdditionError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+///---------
 class ShowCartLoading extends HomeState {}
 
 class ShowCartSuccess extends HomeState {}
+class ShowCartError extends HomeState {
+  final String error;
+  const ShowCartError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+///-----
+class CancelLoading extends HomeState {}
+
+class CancelSuccess extends HomeState {}
+
+class CancelError extends HomeState {
+  final String error;
+  CancelError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+class DeleteOrderLoading extends HomeState {}
+
+class DeleteOrderSuccess extends HomeState {}
+
+class DeleteOrderError extends HomeState {
+  final String error;
+  DeleteOrderError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
