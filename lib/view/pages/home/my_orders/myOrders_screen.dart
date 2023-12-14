@@ -20,7 +20,9 @@ class MyOrdersScreen extends StatelessWidget {
       )),
       body: BlocConsumer<AllOrdersCubit,AllOrdersState>(
         listener: (context, state) {
-
+          if(state is GetAllOrdersLoading ){
+            const CircularProgressIndicator.adaptive();
+          }
         },
         builder: (context, state) {
           return Column(
