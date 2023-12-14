@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
 import 'package:taosel_user_app/myobserver.dart';
@@ -8,20 +11,46 @@ import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
 import 'package:taosel_user_app/provider/getAllOrders/getAllOrdersCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
-import 'package:taosel_user_app/view/pages/auth/login/login.dart';
-import 'package:taosel_user_app/view/pages/auth/sign_up/sign_up.dart';
-import 'package:taosel_user_app/view/pages/home/home/home_screen.dart';
-import 'package:taosel_user_app/view/pages/home/layout.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:taosel_user_app/view/pages/splash_screen/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/constant/lang_code.dart';
 import 'core/style/style.dart';
 import 'data/local/hiva_helper.dart';
 import 'injection_container.dart';
 import 'view/pages/auth/autth_view.dart';
-
-void main() async{
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+if (Platform.isIOS) {
+await Firebase.initializeApp(
+name: 'abudiyab',
+options: const FirebaseOptions(
+apiKey: "AIzaSyAFKqP6AeGcJKP55yEYtSWCo1m4PWE83Zk",
+appId: "1:1092780024078:ios:6274a163218d2a9ba4375f",
+messagingSenderId: "1092780024078",
+projectId: "abudiyab-ab965",
+),
+);
+firebaseMessaging.requestPermission(
+alert: true,
+announcement: false,
+badge: true,
+carPlay: false,
+criticalAlert: false,
+provisional: false,
+sound: true,
+);
+}else{
+await Firebase.initializeApp();
+}
+  await FirebaseMessaging.instance.getToken().then((value) {deviceToken = value;});
+  FirebaseMessaging.onMessage.listen((event) {});
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {}
+  );
+  ///------------- END Firebase Code -------------------
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
