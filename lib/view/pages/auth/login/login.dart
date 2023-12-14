@@ -1,4 +1,6 @@
+
 import 'package:flutter/services.dart';
+import 'package:taosel_user_app/core/constant/lang_code.dart';
 import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/core/size_config/size_config.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
@@ -112,7 +114,7 @@ class _LoginState extends State<Login> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                               const  Row(
+                                const  Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     // GestureDetector(
@@ -126,7 +128,7 @@ class _LoginState extends State<Login> {
                                     // ),
                                   ],
                                 ),
-                                 Center(
+                                Center(
                                     child: Icon(Icons.close,color: Colors.red,size: 35.sp,)),
                               ],
                             ),
@@ -140,11 +142,11 @@ class _LoginState extends State<Login> {
                   if (state is AuthLoaded) {
                     if (_formKey.currentState!.validate()) {
                       Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      const LayoutScreen()
-                              ),
+                          context,
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                              const LayoutScreen()
+                          ),
                               (route) => false);
                     }
                   }
@@ -169,21 +171,23 @@ class _LoginState extends State<Login> {
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        )
+                              borderRadius: BorderRadius.circular(8.0),
+                            )
                             ),   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<AuthCubit>(context).login(
                                 phone: phoneController.text,
-                                password: passwordController.text);
+                                password: passwordController.text,
+                                device_token: deviceToken.toString()
+                            );
 
                           }
                         },
                         child: Text(
                           local.signIn,
                           style:
-                              TextStyle(fontSize: 18.sp, color: Colors.white),
+                          TextStyle(fontSize: 18.sp, color: Colors.white),
                         )),
                   );
                 },

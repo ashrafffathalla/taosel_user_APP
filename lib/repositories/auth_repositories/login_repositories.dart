@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:taosel_user_app/core/constant/apis.dart';
@@ -13,7 +14,7 @@ class LoginRepositories {
   LoginRepositories({required this.dioHelper, required this.hiveHelper});
 
   Future<Response> login(
-      {required String phone, required String password}) async {
+      {required String phone, required String password,required dynamic device_token}) async {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
@@ -21,6 +22,7 @@ class LoginRepositories {
         data: {
           "phone": "+2$phone",
           "password": password,
+          "device_token": device_token,
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;

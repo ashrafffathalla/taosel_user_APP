@@ -25,7 +25,7 @@ class MyOrdersScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Column(
+          return state is GetAllOrdersLoading?const Center(child: CircularProgressIndicator.adaptive()):Column(
             children: [
              Expanded(
                child: ListView.separated(
@@ -122,7 +122,7 @@ class MyOrdersScreen extends StatelessWidget {
                    itemCount: cubit.getAllOrdersModel!.data!.orders!.length
                ),
              ),
-              SizedBox(height: size.height*0.15,)
+              SizedBox(height: size.height*0.08,)
             ],
           );
         },

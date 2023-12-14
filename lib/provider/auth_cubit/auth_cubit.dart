@@ -11,8 +11,8 @@ import '../../repositories/auth_repositories/forget_pass_repositories.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(
       {required this.loginRepositories,
-      required this.signUpRepositories,
-      required this.forgetPassRepositories})
+        required this.signUpRepositories,
+        required this.forgetPassRepositories})
       : super(AuthInitial());
   final LoginRepositories loginRepositories;
   final SignUpRepositories signUpRepositories;
@@ -20,10 +20,11 @@ class AuthCubit extends Cubit<AuthState> {
 
 
 //user login
-  login({required String phone, required String password}) async {
+  login({required String phone, required String password,required String device_token,}) async {
     emit(AuthLoading());
     try {
-      await loginRepositories.login(phone: phone, password: password,);
+      await loginRepositories.login(phone: phone, password: password,device_token: device_token);
+      print(device_token.toString()+"GGG");
       emit(AuthLoaded());
     } catch (e) {
 
@@ -42,11 +43,11 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await signUpRepositories.signUp(
-          email: email,
-          name: name,
-          phone: phone,
-          password: password,
-          password_confirmation: password_confirmation,);
+        email: email,
+        name: name,
+        phone: phone,
+        password: password,
+        password_confirmation: password_confirmation,);
       emit(AuthLoaded());
     } catch (e) {
       emit(RegisterStateError(error: e.toString()));
@@ -63,7 +64,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(error: e.toString()));
     }
   }
-///Check Again OTP
+  ///Check Again OTP
   againCheckOtp(String otp) async {
     emit(AuthLoading());
     try {
@@ -135,9 +136,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await forgetPassRepositories.changePass(
-        pass: pass,
+          pass: pass,
           password_confirmation:password_confirmation
       );
+
       emit(AuthLoaded());
     } catch (e) {
       print("changepass $e");
