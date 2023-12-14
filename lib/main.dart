@@ -36,8 +36,6 @@ Future<void> main() async {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-
-  ///------------injection Container & HIVHELPER----------
   await init();
   await HiveHelper.init();
   Bloc.observer = MyObserver();
@@ -62,6 +60,7 @@ Future<void> main() async {
       sound: true,
     );
   } else {
+
     await Firebase.initializeApp();
   }
   await FirebaseMessaging.instance.getToken().then((value) {
