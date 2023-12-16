@@ -3,12 +3,14 @@ import 'package:get_it/get_it.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
 import 'package:taosel_user_app/provider/getAllOrders/getAllOrdersCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
+import 'package:taosel_user_app/provider/notification_Cubit/notification_cubit.dart';
 import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/forget_pass_repositories.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/login_repositories.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/sign_up_repositories.dart';
 import 'package:taosel_user_app/repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'package:taosel_user_app/repositories/my_orders_repositories/get_allOrder_repositories.dart';
+import 'package:taosel_user_app/repositories/notification_repositories/notification_repositories.dart';
 import 'package:taosel_user_app/repositories/profile_repositories/get_profile_repository.dart';
 import 'package:taosel_user_app/repositories/profile_repositories/update_all_fields.dart';
 import 'package:taosel_user_app/repositories/profile_repositories/update_email.dart';
@@ -42,9 +44,12 @@ Future<void> init() async {
   getIt.registerFactory(() => AllOrdersCubit(
      repositories: getIt()
   ));
+  getIt.registerFactory(() => NotificationCubit(
+     repositories: getIt()
+  ));
 
   getIt.registerLazySingleton(
-      () => GetAllVendorsCategoriesRepositories(dioHelper: getIt(),));
+      () => HomeRepositories(dioHelper: getIt(),));
   getIt.registerLazySingleton(
       () => LoginRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
@@ -53,6 +58,8 @@ Future<void> init() async {
       () => ForgetPassRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
       () => GetAllOrdersRepositories(dioHelper: getIt(),));
+  getIt.registerLazySingleton(
+      () => GelAllNotificationRepository(dioHelper: getIt(),));
    getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
    getIt.registerLazySingleton(() => UpdateName(dioHelper: getIt()));
   getIt.registerLazySingleton(() => UpdateEmail(dioHelper: getIt()));

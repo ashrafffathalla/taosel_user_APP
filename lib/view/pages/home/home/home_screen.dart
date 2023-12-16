@@ -8,11 +8,15 @@ import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
+import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
 import 'package:taosel_user_app/view/pages/home/home/showVendorScreen.dart';
+import 'package:taosel_user_app/view/pages/home/my_orders/myOrders_screen.dart';
+import 'package:taosel_user_app/view/pages/menu/my_account/account_info/account_info.dart';
 
 import '../../../../shared/shared_commponents/commponents.dart';
 import '../../menu/menu.dart';
+import '../../menu/my_account/account_info/account_Informations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -30,8 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<HomeCubit>(context)
-        .getAllCategoryVendorsFun();
+    BlocProvider.of<ProfileCubit>(context).getProfileData();
+    BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
 
     BlocProvider.of<HomeCubit>(context)
@@ -85,8 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Row(
                               children: [
-                                SvgPicture.asset(
-                                    'assets/images/shop.svg'),
+                                GestureDetector(
+                                  onTap: () {
+                                    navigateTo(context, MyOrdersScreen());
+                                  },
+                                  child: SvgPicture.asset(
+                                      'assets/images/shop.svg'),
+                                ),
                                 SizedBox(
                                   width: size.width * 0.01,
                                 ),
@@ -120,10 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    HiveHelper().removeData('token').then(
-                                      navigateAndFinish(
-                                          context, AuthView()),
-                                    );
+                                   navigateTo(context, const AccountInformation());
                                   },
                                   child: CircleAvatar(
                                     radius: 18.sp, // Image radius

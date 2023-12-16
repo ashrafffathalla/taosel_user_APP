@@ -69,6 +69,21 @@ class Validate {
 
     return null;
   }
+  static String? validateMap(BuildContext context, String? value) {
+    final locale = AppLocalizations.of(context);
+
+    if (value == null) {
+      return null;
+    }
+    if (value.isEmpty) {
+      return 'من فضلك اكتب العنوان بالتفصيل';
+    }
+
+    if (value.length < 8) {
+      return 'من فضلك اكتب العنوان بالتفصيل';
+    }
+    return null;
+  }
 
   static String? validateLicenceNumber(BuildContext context, String? value) {
     final locale = AppLocalizations.of(context);

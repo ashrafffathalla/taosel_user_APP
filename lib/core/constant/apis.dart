@@ -16,12 +16,13 @@ class AutomationApi {
   static const showOrderCart = "$baseUrl/order/store"; //post
   static const getAllOrder = "$baseUrl/order"; //get
   static const cancelOrder = "$baseUrl/order/cancel"; //get
+  static const getNotification = "$baseUrl/notification"; //get
+  static const sendLocation = "$baseUrl/address"; //get
   //**************** Profile *******************//
   static const profileUrl = "$baseUrl/profile"; //get
   static const updateNameUrl = "$baseUrl/update_name"; //post
   static const updateEmailUrl = "$baseUrl/update_email"; //post
   static const updatePhoneUrl = "$baseUrl/update_phone"; //post
   static const updateLicenseImageUrl = "$baseUrl/update_license_image"; //post
-
 
 }

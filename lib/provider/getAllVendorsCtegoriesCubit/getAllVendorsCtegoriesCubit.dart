@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(
       {required this.repositories})
       : super(GetAllVendorsCategoriesInitial());
-  final GetAllVendorsCategoriesRepositories repositories;
+  final HomeRepositories repositories;
 
 
 //allVendorsCategories
@@ -121,6 +121,15 @@ class HomeCubit extends Cubit<HomeState> {
       emit(CancelSuccess());
     } catch (e) {
       emit(CancelError(error: e.toString()));
+    }
+  }
+  Future<void> addNewAddress({required String address,required double lat,required double lon,}) async {
+    emit(AddAddressLoading());
+    try {
+      await repositories.addNewAddress(address: address, lat: lat, lon: lon);
+      emit(AddAddressSuccess());
+    } catch (e) {
+      emit(AddAddressError(error: e.toString()));
     }
   }
   ///delete

@@ -111,6 +111,16 @@ class CancelError extends HomeState {
   @override
   List<Object> get props => [error];
 }
+class AddAddressLoading extends HomeState {}
+
+class AddAddressSuccess extends HomeState {}
+
+class AddAddressError extends HomeState {
+  final String error;
+  AddAddressError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
 class DeleteOrderLoading extends HomeState {}
 
 class DeleteOrderSuccess extends HomeState {}

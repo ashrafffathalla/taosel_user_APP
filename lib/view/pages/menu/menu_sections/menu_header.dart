@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 
 import '../../../../../core/size_config/size_config.dart';
+import '../../../../provider/profile_cubit/profile_cubit.dart';
 
 class MenuHeader extends StatelessWidget {
   const MenuHeader({
@@ -31,21 +33,21 @@ class MenuHeader extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 35.sp, // Image radius
-                  backgroundImage: const NetworkImage(
-                    'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+                  backgroundImage:  NetworkImage(
+                    BlocProvider.of<ProfileCubit>(context).profileListProfileData!.data!.media==null? 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg':  BlocProvider.of<ProfileCubit>(context).profileListProfileData!.data!.media.toString(),
                   ),
                 ),
                 SizedBox(width: size.width*0.02,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Ashraf Fathalla',
+                    Text(BlocProvider.of<ProfileCubit>(context).profileListProfileData!.data!.name.toString(),
                       style: TextStyle(
                       color: Colors.white,
                       fontSize: 14.sp,
                         fontWeight: FontWeight.w600
                     ),),
-                    Text('ashraf@gmail.com',
+                    Text(BlocProvider.of<ProfileCubit>(context).profileListProfileData!.data!.email.toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,

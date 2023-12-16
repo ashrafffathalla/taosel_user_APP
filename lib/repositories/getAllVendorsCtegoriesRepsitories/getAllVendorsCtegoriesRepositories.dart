@@ -13,9 +13,9 @@ import '../../data/model/allCategoryCategories.dart';
 import '../../data/model/allVendors_model.dart';
 import '../../data/model/cart_order_store_model.dart';
 
-class GetAllVendorsCategoriesRepositories {
+class HomeRepositories {
   final DioHelper dioHelper;
-  GetAllVendorsCategoriesRepositories({required this.dioHelper,});
+  HomeRepositories({required this.dioHelper,});
 
   Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories()async{
     try {
@@ -159,4 +159,33 @@ class GetAllVendorsCategoriesRepositories {
       throw '..Oops $error';
     }
   }
+
+  Future<Response> addNewAddress(
+      {required String address, required double lat,required double lon,}) async {
+    try {
+      final Response response = await dioHelper.postData(
+        needAuth: false,
+        url: AutomationApi.sendLocation,
+        data: {
+          "address": address,
+          "lat": lat,
+          "lon": lon,
+        },
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      return response;
+      // await hiveHelper.putData("token", token);
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      print(error['message']);
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
+
+
+
+
 }

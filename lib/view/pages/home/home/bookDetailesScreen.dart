@@ -202,11 +202,16 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                             ),
                             Row(
                               children: [
-                                Text('اضافة عنوان جديد',style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w400
-                                ),),
+                                GestureDetector(
+                                  // onTap: () {
+                                  //   navigateTo(context, widget)
+                                  // },
+                                  child: Text('اضافة عنوان جديد',style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w400
+                                  ),),
+                                ),
                                 // Text(cubit.showVendorModel!.data!.),
                               ],
                             ),

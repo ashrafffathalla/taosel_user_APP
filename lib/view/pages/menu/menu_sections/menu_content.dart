@@ -192,10 +192,10 @@ class _BuildMenuItemState extends State<BuildMenuItem> {
                               TextStyle(color: Colors.white, fontSize: 15.sp),
                         ),
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ContactUs()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const ContactUs()));
                         },
                       ),
                       ListTile(

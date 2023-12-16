@@ -27,7 +27,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     HomeScreen(),
     FavoriteScreen(),
     MyOrdersScreen(),
-    SearchScreen(),
+    // SearchScreen(),
     NotificationScreen(),
   ];
   late PersistentTabController _controller;
@@ -114,7 +114,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
         inactiveColorPrimary: Colors.grey,
       ),
 
-      PersistentBottomNavBarItem(
+     /* PersistentBottomNavBarItem(
         icon: FittedBox(
           fit: BoxFit.none,
           child: Padding(
@@ -140,7 +140,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
             .copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
         activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
         inactiveColorPrimary: Colors.grey,
-      ),
+      ),*/
       PersistentBottomNavBarItem(
         icon: FittedBox(
             fit: BoxFit.none, child: GestureDetector(

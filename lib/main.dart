@@ -10,6 +10,7 @@ import 'package:taosel_user_app/myobserver.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
 import 'package:taosel_user_app/provider/getAllOrders/getAllOrdersCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
+import 'package:taosel_user_app/provider/notification_Cubit/notification_cubit.dart';
 import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -39,7 +40,7 @@ Future<void> main() async {
   await init();
   await HiveHelper.init();
   Bloc.observer = MyObserver();
-  runApp(const MyApp());
+
   if (Platform.isIOS) {
     // await Firebase.initializeApp(
     //   name: 'abudiyab',
@@ -60,8 +61,17 @@ Future<void> main() async {
       sound: true,
     );
   } else {
-
     await Firebase.initializeApp();
+    firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    // await Firebase.initializeApp();
   }
   await FirebaseMessaging.instance.getToken().then((value) {
     deviceToken = value;
@@ -70,7 +80,7 @@ Future<void> main() async {
   FirebaseMessaging.onMessageOpenedApp.listen((event) {});
 
   ///------------- END Firebase Code -------------------
-
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -94,6 +104,8 @@ class MyApp extends StatelessWidget {
                 create: (context) => getIt<ProfileCubit>()),
             BlocProvider(
                 create: (context) => getIt<AllOrdersCubit>()..getAllOrders()),
+            BlocProvider(
+                create: (context) => getIt<NotificationCubit>()..getAllNotification()),
             // BlocProvider(
             //     create: (BuildContext context) => FacebookLoginCubit()),
           ],
