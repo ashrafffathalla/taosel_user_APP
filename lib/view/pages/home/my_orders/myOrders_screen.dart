@@ -27,7 +27,23 @@ class MyOrdersScreen extends StatelessWidget {
         builder: (context, state) {
           return state is GetAllOrdersLoading?const Center(child: CircularProgressIndicator.adaptive()):Column(
             children: [
-             Expanded(
+              cubit.getAllOrdersModel!.data==null?Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/3,
+                    ),
+                    Icon(Icons.shopping_cart_sharp,size: 50.sp,),
+                    Text(
+                      'لا توجد طلبات حاليا',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ): Expanded(
                child: ListView.separated(
                    itemBuilder: (context, index) {
                      return Container(

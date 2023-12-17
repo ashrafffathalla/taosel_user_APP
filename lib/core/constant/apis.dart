@@ -18,6 +18,7 @@ class AutomationApi {
   static const cancelOrder = "$baseUrl/order/cancel"; //get
   static const getNotification = "$baseUrl/notification"; //get
   static const sendLocation = "$baseUrl/address"; //get
+  static const getFavourite = "$baseUrl/favourite"; //get
   //**************** Profile *******************//
   static const profileUrl = "$baseUrl/profile"; //get
   static const updateNameUrl = "$baseUrl/update_name"; //post

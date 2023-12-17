@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/provider/favourite_cubit/favourite_cubit.dart';
 import 'package:taosel_user_app/provider/getAllOrders/getAllOrdersCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/notification_Cubit/notification_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/forget_pass_repositories.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/login_repositories.dart';
 import 'package:taosel_user_app/repositories/auth_repositories/sign_up_repositories.dart';
+import 'package:taosel_user_app/repositories/favourit_repositories/fav_repositories.dart';
 import 'package:taosel_user_app/repositories/getAllVendorsCtegoriesRepsitories/getAllVendorsCtegoriesRepositories.dart';
 import 'package:taosel_user_app/repositories/my_orders_repositories/get_allOrder_repositories.dart';
 import 'package:taosel_user_app/repositories/notification_repositories/notification_repositories.dart';
@@ -46,6 +48,8 @@ Future<void> init() async {
   ));
   getIt.registerFactory(() => NotificationCubit(
      repositories: getIt()
+  ));  getIt.registerFactory(() => FavouriteCubit(
+     repositories: getIt()
   ));
 
   getIt.registerLazySingleton(
@@ -60,6 +64,8 @@ Future<void> init() async {
       () => GetAllOrdersRepositories(dioHelper: getIt(),));
   getIt.registerLazySingleton(
       () => GelAllNotificationRepository(dioHelper: getIt(),));
+  getIt.registerLazySingleton(
+      () => FavouriteRepository(dioHelper: getIt(),));
    getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
    getIt.registerLazySingleton(() => UpdateName(dioHelper: getIt()));
   getIt.registerLazySingleton(() => UpdateEmail(dioHelper: getIt()));

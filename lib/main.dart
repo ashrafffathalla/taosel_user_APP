@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/core/localization/language_cubit.dart';
 import 'package:taosel_user_app/myobserver.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_cubit.dart';
+import 'package:taosel_user_app/provider/favourite_cubit/favourite_cubit.dart';
 import 'package:taosel_user_app/provider/getAllOrders/getAllOrdersCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/notification_Cubit/notification_cubit.dart';
@@ -40,7 +41,7 @@ Future<void> main() async {
   await init();
   await HiveHelper.init();
   Bloc.observer = MyObserver();
-
+  runApp(const MyApp());
   if (Platform.isIOS) {
     // await Firebase.initializeApp(
     //   name: 'abudiyab',
@@ -80,7 +81,7 @@ Future<void> main() async {
   FirebaseMessaging.onMessageOpenedApp.listen((event) {});
 
   ///------------- END Firebase Code -------------------
-  runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -104,8 +105,8 @@ class MyApp extends StatelessWidget {
                 create: (context) => getIt<ProfileCubit>()),
             BlocProvider(
                 create: (context) => getIt<AllOrdersCubit>()..getAllOrders()),
-            BlocProvider(
-                create: (context) => getIt<NotificationCubit>()..getAllNotification()),
+            BlocProvider(create: (context) => getIt<NotificationCubit>()..getAllNotification()),
+            BlocProvider(create: (context) => getIt<FavouriteCubit>()..getAllFavourite()),
             // BlocProvider(
             //     create: (BuildContext context) => FacebookLoginCubit()),
           ],
