@@ -34,7 +34,6 @@ class HomeCubit extends Cubit<HomeState> {
 
     emit(GetAllVendorCategoryLoading());
     try {
-
       allVendorCategoryModel = await repositories.allVendorCategoryRepositories(id);
       emit(GetAllVendorCategoryLoaded(/*allVendorsModel: allVendorsModel*/));
     } catch (e) {

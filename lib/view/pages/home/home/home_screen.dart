@@ -33,13 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
   @override
-  void initState() {
+  void initState(){
     BlocProvider.of<ProfileCubit>(context).getProfileData();
     BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
-
-    BlocProvider.of<HomeCubit>(context)
-        .getAllVendorCategory(1);
+    // if(BlocProvider.of<HomeCubit>(context).allCategoryVendors !=null){
+    //   print("HIIII");
+    //   BlocProvider.of<HomeCubit>(context).getAllVendorCategory(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data[0].id);
+    // }
     super.initState();
   }
 
@@ -61,6 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 const AuthView(),
               );
             }
+          }
+          if(state is GetAllCategoryVendorsLoaded){
+              BlocProvider.of<HomeCubit>(context).getAllVendorCategory(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data[0].id);
           }
           // if(cubit.allCategoryVendors==null||cubit.allVendorsModel==null){
           //   const CircularProgressIndicator.adaptive();
