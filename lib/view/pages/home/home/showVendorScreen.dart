@@ -55,39 +55,41 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                         child: cubit.showVendorModel!.data!.media!.isEmpty?Container():Image.network(cubit.showVendorModel!.data!.media![0].path.toString())),
                     SizedBox(height: size.height*0.02,),
                     ///----------Row Before Divider
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      Text(
-                        cubit.showVendorModel!.data!.name.toString(),
-                        style: TextStyle(
-                          color:const Color(0xff0C1D2E),
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Row(
+                    FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(Icons.star,color: Colors.yellow,),
-                          Text(
-                            "${cubit.showVendorModel!.data!.rating}${local!.rate}",
-                            style: TextStyle(
-                              color:const Color(0xff0C1D2E),
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        Text(
+                          cubit.showVendorModel!.data!.name.toString(),
+                          style: TextStyle(
+                            color:const Color(0xff0C1D2E),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
-                      Text(
-                        cubit.showVendorModel!.data!.address.toString(),
-                        style: TextStyle(
-                          color:const Color(0xff0C1D2E),
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
                         ),
-                      ),
-                    ],),
+                        Row(
+                          children: [
+                            const Icon(Icons.star,color: Colors.yellow,),
+                            Text(
+                              "${cubit.showVendorModel!.data!.rating}${local!.rate}",
+                              style: TextStyle(
+                                color:const Color(0xff0C1D2E),
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          cubit.showVendorModel!.data!.address.toString(),
+                          style: TextStyle(
+                            color:const Color(0xff0C1D2E),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],),
+                    ),
                     const Divider(color: Colors.grey,),
                     ///-------------Row After Divider
                     Row(
