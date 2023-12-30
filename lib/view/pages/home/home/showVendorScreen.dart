@@ -130,8 +130,9 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
+                                print(index.toString()+"HHHH");
                                 BlocProvider.of<HomeCubit>(context)
-                                    .showVendor (index);
+                                    .showVendor(index);
                               });
                             },
                             child: Container(

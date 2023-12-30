@@ -247,10 +247,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   setState(() {
                                     selectedIndex = index;
                                     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel =null;
-                                    BlocProvider.of<
-                                        HomeCubit>(
-                                        context)
-                                        .getAllVendorCategory(index + 1);
+                                    print(index.toString()+"HHHH");
+                                    BlocProvider.of<HomeCubit>(context).getAllVendorCategory(index + 1);
                                   });
                                 },
                                 child: Container(
@@ -345,8 +343,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .toInt(), (index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    BlocProvider.of<HomeCubit>(context)
-                                        .showVendor(index + 1);
+                                    print("${cubit.allVendorCategoryModel!.data!.vendors![index].id}HHHH2");
+                                    BlocProvider.of<HomeCubit>(context).showVendor(cubit.allVendorCategoryModel!
+                                        .data!.vendors![index].id.toString());
                                     navigateTo(
                                         context,
                                         const ShowVendorScreen());
