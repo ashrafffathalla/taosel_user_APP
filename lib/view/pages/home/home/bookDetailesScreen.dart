@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesCubit.dart';
 import 'package:taosel_user_app/provider/getAllVendorsCtegoriesCubit/getAllVendorsCtegoriesStates.dart';
 import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
+import 'package:taosel_user_app/view/pages/home/home/payment.dart';
 import 'package:taosel_user_app/view/widgets/success_makeOrder.dart';
 
 import '../../../../core/helpers/helper_fun.dart';
@@ -19,8 +20,10 @@ class BookDetailsScreen extends StatefulWidget {
   State<BookDetailsScreen> createState() => _BookDetailsScreenState();
 }
 List<String> options = ['68 شارع فيصل - المريوطية','68 شارع فيصل - الأسكندريه','المريوطية'];
+List<String> paymentOptions = ['cod','visa'];
 class _BookDetailsScreenState extends State<BookDetailsScreen> {
   String currentOption = options[0];
+  String paymentOption = paymentOptions[0];
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
@@ -28,8 +31,10 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     var cubit = BlocProvider.of<HomeCubit>(context);
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        if(state is ShowCartSuccess){
+        if(state is ShowCartSuccess&&paymentOptions=='cod'){
           navigateAndFinish(context, const SuccessMakeOrder());
+        }else{
+          navigateTo(context, WebPayment(url: cubit.cartOrderStoreModel!.data!.redirect_url.toString()));
         }
         if(state is ShowCartError){
           HelperFunctions.showFlashBar(
@@ -250,12 +255,13 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                   child: SizedBox(
                                     width:size.width/1,
                                     child: RadioListTile(
-                                      title: const  Text('بطاقات الخصم / الائتمان'),
-                                      value: options[0],
-                                      groupValue: currentOption,
+                                      title: const  Text('بطاقات الخصم / الان'),
+                                      value: paymentOptions[1],
+                                      groupValue: paymentOption,
                                       onChanged: (value) {
                                         setState(() {
-                                          currentOption = value.toString();
+                                          paymentOption = value.toString();
+                                          print(paymentOption.toString());
                                         });
                                       },),
                                   ),
@@ -270,11 +276,12 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                     width:size.width/1,
                                     child: RadioListTile(
                                       title: const  Text('الدفع كاش'),
-                                      value: options[1],
-                                      groupValue: currentOption,
+                                      value: paymentOptions[0],
+                                      groupValue: paymentOption,
                                       onChanged: (value) {
                                         setState(() {
-                                          currentOption = value.toString();
+                                          paymentOption = value.toString();
+                                          print(paymentOption.toString());
                                         });
                                       },),
                                   ),
@@ -310,7 +317,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
                           ),
                           onPressed: () {
-                            cubit.showOrderCart('1', '0', 'notes', 'cod',widget.price!*cubit.counter);
+                            print(paymentOption.toString());
+                            cubit.showOrderCart('1', '0', 'notes', paymentOption,widget.price!*cubit.counter);
                           },
                           child: state is ShowCartLoading?const Center(child: CircularProgressIndicator.adaptive(
                             backgroundColor: Colors.white,

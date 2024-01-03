@@ -12,12 +12,14 @@ class CartOrderStoreModel {
 }
 
 class Data {
+  String? redirect_url;
   Order? order;
 
   Data({order});
 
   Data.fromJson(Map<String, dynamic> json) {
     order = json['order'] != null ?  Order.fromJson(json['order']) : null;
+    redirect_url =  json['redirect_url'];
   }
 
 }

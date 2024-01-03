@@ -47,33 +47,33 @@ class _AuthViewState extends State<AuthView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: size.height*0.02,),
+              SizedBox(height: size.height*0.05,),
               Text(local.signIn.toString(),style: TextStyle(
                 fontSize: 16.sp,
               ),),
-              SizedBox(height: 0.03.sh,),
+              SizedBox(height: 0.05.sh,),
               Text(CheckLocal.isDirectionRTL(context)?"مرحبا بعودتك مرة اخري ":"Welcome Back Again",style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700
               ),),
-              SizedBox(height: 0.03.sh,),
+              SizedBox(height: 0.05.sh,),
               const Login(),
-              SizedBox(height: 0.03.sh,),
-              CustomMainBtn(ontap: (){},
-              iconButton: Padding(
-                padding:  EdgeInsets.only(right:size.width*0.03 ),
-                child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
-              ),
-                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
-              ),
-              SizedBox(height: 0.02.sh,),
-              CustomMainBtn(ontap: (){},
-                iconButton: Padding(
-                  padding:  EdgeInsets.only(right:size.width*0.03 ),
-                  child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
-                ),
-                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
-              ),
+              SizedBox(height: 0.04.sh,),
+              // CustomMainBtn(ontap: (){},
+              // iconButton: Padding(
+              //   padding:  EdgeInsets.only(right:size.width*0.03 ),
+              //   child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
+              // ),
+              //   textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
+              // ),
+              // SizedBox(height: 0.02.sh,),
+              // CustomMainBtn(ontap: (){},
+              //   iconButton: Padding(
+              //     padding:  EdgeInsets.only(right:size.width*0.03 ),
+              //     child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
+              //   ),
+              //   textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
+              // ),
               SizedBox(height: 0.025.sh,),
               InkWell(
                 onTap: (){
