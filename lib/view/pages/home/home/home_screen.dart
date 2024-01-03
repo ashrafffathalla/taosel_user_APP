@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                   ),
                             ),
-                            Expanded(
+                            /*Expanded(
                               child: SizedBox(
                                 width: size.width / 1.2,
                                 height: 50.h,
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
 

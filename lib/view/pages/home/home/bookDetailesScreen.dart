@@ -34,7 +34,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
         if(state is ShowCartSuccess&&paymentOptions=='cod'){
           navigateAndFinish(context, const SuccessMakeOrder());
         }else{
-          navigateTo(context, WebPayment(url: cubit.cartOrderStoreModel!.data!.redirect_url.toString()));
+          cubit.cartOrderStoreModel!.data!.redirect_url !=null?
+          navigateTo(context, WebPayment(url: cubit.cartOrderStoreModel!.data!.redirect_url.toString())):const CircularProgressIndicator();
         }
         if(state is ShowCartError){
           HelperFunctions.showFlashBar(
