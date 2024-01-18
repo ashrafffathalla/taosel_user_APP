@@ -43,15 +43,15 @@ Future<void> main() async {
   Bloc.observer = MyObserver();
   runApp(const MyApp());
   if (Platform.isIOS) {
-    // await Firebase.initializeApp(
-    //   name: 'abudiyab',
-    //   options: const FirebaseOptions(
-    //     apiKey: "AIzaSyAFKqP6AeGcJKP55yEYtSWCo1m4PWE83Zk",
-    //     appId: "1:1092780024078:ios:6274a163218d2a9ba4375f",
-    //     messagingSenderId: "1092780024078",
-    //     projectId: "abudiyab-ab965",
-    //   ),
-    // );
+    await Firebase.initializeApp(
+      name: 'taosel',
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyDROVjOQ0SRn6CStNy3Evr-bukvkH0kEYc",
+        appId: "1:196266779739:ios:ce748c394f344c5fec4b7e",
+        messagingSenderId: "196266779739",
+        projectId: "taosel",
+      ),
+    );
     firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
@@ -76,9 +76,10 @@ Future<void> main() async {
   }
   await FirebaseMessaging.instance.getToken().then((value) {
     deviceToken = value;
+    print(deviceToken.toString());
   });
-  FirebaseMessaging.onMessage.listen((event) {});
-  FirebaseMessaging.onMessageOpenedApp.listen((event) {});
+  await FirebaseMessaging.onMessage.listen((event) {});
+  await FirebaseMessaging.onMessageOpenedApp.listen((event) {});
 
   ///------------- END Firebase Code -------------------
 
