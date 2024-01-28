@@ -1,101 +1,132 @@
 class AllCategoryVendorsModel {
-  List<Data> data;
-  Links links;
-  Meta meta;
+  List<Data>? data;
+  Links? links;
+  Meta? meta;
 
-  AllCategoryVendorsModel({required this.data, required this.links,required  this.meta});
+  AllCategoryVendorsModel({this.data, this.links, this.meta});
 
-  factory AllCategoryVendorsModel.fromJson(Map<String, dynamic> json) {
-    return AllCategoryVendorsModel(
-      data: List<Data>.from(json['data'].map((x) => Data.fromJson(x))),
-      links: Links.fromJson(json['links']),
-      meta: Meta.fromJson(json['meta']),
-    );
+  AllCategoryVendorsModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+    links = json['links'] != null ? new Links.fromJson(json['links']) : null;
+    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    if (this.links != null) {
+      data['links'] = this.links!.toJson();
+    }
+    if (this.meta != null) {
+      data['meta'] = this.meta!.toJson();
+    }
+    return data;
   }
 }
 
 class Data {
-  String name;
-  String langId;
-  int id;
+  int? id;
+  String? name;
+  String? langId;
 
-  Data({required this.name, required this.langId,required this.id});
+  Data({this.id, this.name, this.langId});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-      name: json['name'],
-      langId: json['lang_id'],
-      id: json['id'],
-    );
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    langId = json['lang_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['lang_id'] = this.langId;
+    return data;
   }
 }
 
 class Links {
-  String first;
-  String last;
-  dynamic prev;
-  dynamic next;
+  String? first;
+  String? last;
+  Null? prev;
+  Null? next;
 
-  Links({required this.first, required this.last, required this.prev,required  this.next});
+  Links({this.first, this.last, this.prev, this.next});
 
-  factory Links.fromJson(Map<String, dynamic> json) {
-    return Links(
-      first: json['first'],
-      last: json['last'],
-      prev: json['prev'],
-      next: json['next'],
-    );
+  Links.fromJson(Map<String, dynamic> json) {
+    first = json['first'];
+    last = json['last'];
+    prev = json['prev'];
+    next = json['next'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['first'] = this.first;
+    data['last'] = this.last;
+    data['prev'] = this.prev;
+    data['next'] = this.next;
+    return data;
   }
 }
 
 class Meta {
-  int currentPage;
-  int from;
-  int lastPage;
-  List<Link> links;
-  String path;
-  int perPage;
-  int to;
-  int total;
+  int? currentPage;
+  int? from;
+  int? lastPage;
+  List<Links>? links;
+  String? path;
+  int? perPage;
+  int? to;
+  int? total;
 
-  Meta({
-    required this.currentPage,
-    required  this.from,
-    required  this.lastPage,
-    required  this.links,
-    required  this.path,
-    required    this.perPage,
-    required  this.to,
-    required this.total,
-  });
+  Meta(
+      {this.currentPage,
+        this.from,
+        this.lastPage,
+        this.links,
+        this.path,
+        this.perPage,
+        this.to,
+        this.total});
 
-  factory Meta.fromJson(Map<String, dynamic> json) {
-    return Meta(
-      currentPage: json['current_page'],
-      from: json['from'],
-      lastPage: json['last_page'],
-      links: List<Link>.from(json['links'].map((x) => Link.fromJson(x))),
-      path: json['path'],
-      perPage: json['per_page'],
-      to: json['to'],
-      total: json['total'],
-    );
+  Meta.fromJson(Map<String, dynamic> json) {
+    currentPage = json['current_page'];
+    from = json['from'];
+    lastPage = json['last_page'];
+    if (json['links'] != null) {
+      links = <Links>[];
+      json['links'].forEach((v) {
+        links!.add(new Links.fromJson(v));
+      });
+    }
+    path = json['path'];
+    perPage = json['per_page'];
+    to = json['to'];
+    total = json['total'];
   }
-}
 
-class Link {
-  dynamic url;
-  String label;
-  bool active;
-
-  Link({required this.url,required  this.label,required  this.active});
-
-  factory Link.fromJson(Map<String, dynamic> json) {
-    return Link(
-      url: json['url'],
-      label: json['label'],
-      active: json['active'],
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['current_page'] = this.currentPage;
+    data['from'] = this.from;
+    data['last_page'] = this.lastPage;
+    if (this.links != null) {
+      data['links'] = this.links!.map((v) => v.toJson()).toList();
+    }
+    data['path'] = this.path;
+    data['per_page'] = this.perPage;
+    data['to'] = this.to;
+    data['total'] = this.total;
+    return data;
   }
 }
 

@@ -34,8 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState(){
-    BlocProvider.of<ProfileCubit>(context).getProfileData();
+
     BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun();
+    BlocProvider.of<ProfileCubit>(context).getProfileData();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
     // if(BlocProvider.of<HomeCubit>(context).allCategoryVendors !=null){
     //   print("HIIII");
@@ -64,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           }
           if(state is GetAllCategoryVendorsLoaded){
-              BlocProvider.of<HomeCubit>(context).getAllVendorCategory(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data[0].id);
+            print(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data![0].id.toString()+"GGGG");
+              BlocProvider.of<HomeCubit>(context).getAllVendorCategory(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data![0].id);
+
           }
           // if(cubit.allCategoryVendors==null||cubit.allVendorsModel==null){
           //   const CircularProgressIndicator.adaptive();
@@ -238,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount:
-                            cubit.allCategoryVendors!.data.length,
+                            cubit.allCategoryVendors!.data!.length,
                             // Replace with the actual number of items
                             itemBuilder:
                                 (BuildContext context, int index) {
@@ -268,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: EdgeInsets.all(8.0.sp),
                                     child: Text(
                                       cubit.allCategoryVendors!
-                                          .data[index].name,
+                                          .data![index].name.toString(),
                                       style: TextStyle(
                                         fontSize: 14.0.sp,
                                         color: const Color(0xff0C1D2E),
