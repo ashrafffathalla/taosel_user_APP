@@ -69,7 +69,8 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('C:/Users/ashraf fathalla/Desktop/key.jks')
+            storeFile file('C:/Users/hp/Louttes/key.jks')
+//            storeFile file('C:/Users/ashraf fathalla/Desktop/key.jks')
             storePassword '111111'
             keyAlias = 'key'
             keyPassword '111111'
