@@ -127,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )),
                               ],
                             ),
-                            Text(
-                              CheckLocal.isDirectionRTL(context)
-                                  ? "عنوان التوصيل ^"
-                                  : "Delivery address ^",
-                            ),
+                            // Text(
+                            //   CheckLocal.isDirectionRTL(context)
+                            //       ? "عنوان التوصيل ^"
+                            //       : "Delivery address ^",
+                            // ),
                             Row(
                               children: [
                                 GestureDetector(

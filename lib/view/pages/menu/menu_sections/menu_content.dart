@@ -1,6 +1,8 @@
 import 'package:taosel_user_app/core/localization/check_local.dart';
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
+import 'package:taosel_user_app/shared/shared_commponents/commponents.dart';
 import 'package:taosel_user_app/view/pages/auth/autth_view.dart';
+import 'package:taosel_user_app/view/pages/home/my_orders/myOrders_screen.dart';
 import 'package:taosel_user_app/view/pages/menu/about_us/how_app_works/how_app_works.dart';
 import 'package:taosel_user_app/view/pages/menu/about_us/our_services/our_services.dart';
 import 'package:taosel_user_app/view/pages/menu/about_us/privacy_policy/privacy_policy.dart';
@@ -108,7 +110,9 @@ class _BuildMenuItemState extends State<BuildMenuItem> {
                   local.myBooking,
                   style: TextStyle(color: Colors.white, fontSize: 15.sp),
                 ),
-                onTap: null,
+                onTap: () {
+                  navigateTo(context, MyOrdersScreen());
+                },
               ),
               children: [
                 Padding(
