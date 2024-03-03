@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) => getIt<LanguageCubit>()),
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
-            BlocProvider<HomeCubit>(create: (context) => getIt<HomeCubit>()),
+            BlocProvider<HomeCubit>(create: (context) => getIt<HomeCubit>()..getSlider()),
             BlocProvider<ProfileCubit>(
                 create: (context) => getIt<ProfileCubit>()),
             BlocProvider(

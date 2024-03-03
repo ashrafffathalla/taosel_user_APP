@@ -3,6 +3,7 @@ import 'package:taosel_user_app/data/model/allCategoryCategories.dart';
 import 'package:taosel_user_app/data/model/allVendors_model.dart';
 import 'package:taosel_user_app/provider/auth_cubit/auth_state.dart';
 import 'package:bloc/bloc.dart';
+import '../../data/model/SliderModel.dart';
 import '../../data/model/allVendorCategoryModel.dart';
 import '../../data/model/cart_order_store_model.dart';
 import '../../data/model/showVendor_model.dart';
@@ -15,7 +16,18 @@ class HomeCubit extends Cubit<HomeState> {
       : super(GetAllVendorsCategoriesInitial());
   final HomeRepositories repositories;
 
+///----------------get Slider------------
+  SliderModel? sliderModel;
+  getSlider() async {
+    emit(GetAllSlidersLoading());
+    try {
+      sliderModel = await repositories.getSlider();
+      emit(GetAllSlidersLoaded());
+    } catch (e) {
 
+      emit(GetAllSlidersError(error: e.toString()));
+    }
+  }
 //allVendorsCategories
   AllCategoryVendorsModel? allCategoryVendors;
   getAllCategoryVendorsFun() async {

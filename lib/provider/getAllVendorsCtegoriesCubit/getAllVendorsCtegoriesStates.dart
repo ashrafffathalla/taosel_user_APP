@@ -10,15 +10,20 @@ abstract class HomeState extends Equatable {
   List<Object> get props => [];
 }
 class GetAllVendorsCategoriesInitial extends HomeState {}
+///---------Slider------------------
+class GetAllSlidersLoading extends HomeState {}
 
+class GetAllSlidersLoaded extends HomeState {}
+class GetAllSlidersError extends HomeState {
+  final String error;
+  const GetAllSlidersError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+///----------------
 class GetAllCategoryVendorsLoading extends HomeState {}
 
-class GetAllCategoryVendorsLoaded extends HomeState {
-  // final AllCategoryVendorsModel allCategoryVendorsModel;
-  // const GetAllCategoryVendorsLoaded({required this.allCategoryVendorsModel});
-  // @override
-  // List<Object> get props => [allCategoryVendorsModel];
-}
+class GetAllCategoryVendorsLoaded extends HomeState {}
 class GetAllCategoryVendorsError extends HomeState {
   final String error;
   const GetAllCategoryVendorsError({required this.error});

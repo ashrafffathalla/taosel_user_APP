@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           }
           if(state is GetAllCategoryVendorsLoaded){
-            print(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data![0].id.toString()+"GGGG");
+           
               BlocProvider.of<HomeCubit>(context).getAllVendorCategory(BlocProvider.of<HomeCubit>(context).allCategoryVendors!.data![0].id);
 
           }
@@ -249,8 +249,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTap: () {
                                   setState(() {
                                     selectedIndex = index;
-                                    // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).showVendorModel =null;
-                                    print(index.toString()+"HHHH");
                                     BlocProvider.of<HomeCubit>(context).getAllVendorCategory(index + 1);
                                   });
                                 },
@@ -286,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: size.height * 0.02,
                         ),
-                        Image.asset('assets/images/lay.png'),
+                        Container(height:210.h,width: size.width,child: Image.network(cubit.sliderModel!.data![0].media![0].path.toString(),)),
                         SizedBox(
                           height: size.height * 0.02,
                         ),
@@ -302,15 +300,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: const Color(0xff0C1D2E),
                                   fontSize: 16.sp),
                             ),
-                            Text(
-                              CheckLocal.isDirectionRTL(context)
-                                  ? "عرض الكل "
-                                  : "Show All",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: const Color(0xff0C1D2E),
-                                  fontSize: 16.sp),
-                            ),
+                            // Text(
+                            //   CheckLocal.isDirectionRTL(context)
+                            //       ? "عرض الكل "
+                            //       : "Show All",
+                            //   style: TextStyle(
+                            //       decoration: TextDecoration.underline,
+                            //       color: const Color(0xff0C1D2E),
+                            //       fontSize: 16.sp),
+                            // ),
                           ],
                         ),
 

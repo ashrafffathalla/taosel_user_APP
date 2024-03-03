@@ -71,7 +71,7 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                           children: [
                             const Icon(Icons.star,color: Colors.yellow,),
                             Text(
-                              "${cubit.showVendorModel!.data!.rating}${local!.rate}",
+                              "${cubit.showVendorModel!.data!.rating??'0.4'}${local!.rate}",
                               style: TextStyle(
                                 color:const Color(0xff0C1D2E),
                                 fontSize: 16.sp,
@@ -130,9 +130,7 @@ class _ShowVendorScreenState extends State<ShowVendorScreen> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                print(index.toString()+"HHHH");
-                                BlocProvider.of<HomeCubit>(context)
-                                    .showVendor(index);
+                                BlocProvider.of<HomeCubit>(context).showVendor(index);
                               });
                             },
                             child: Container(

@@ -5,6 +5,7 @@ import 'package:taosel_user_app/core/constant/apis.dart';
 import 'package:dio/dio.dart';
 
 import 'package:taosel_user_app/data/local/hiva_helper.dart';
+import 'package:taosel_user_app/data/model/SliderModel.dart';
 import 'package:taosel_user_app/data/model/allVendorCategoryModel.dart';
 import 'package:taosel_user_app/data/model/showVendor_model.dart';
 import 'package:taosel_user_app/data/remote/dio_helper.dart';
@@ -17,6 +18,24 @@ class HomeRepositories {
   final DioHelper dioHelper;
   HomeRepositories({required this.dioHelper,});
 
+
+  ///--------------Slider Model------------------
+  Future<SliderModel> getSlider()async{
+    try {
+      Response response = await dioHelper.getData(
+          url: AutomationApi.sliders, needAuth: true
+      );
+      var data = jsonDecode(response.data) as Map<String, dynamic>;
+      final SliderModel  sliderModel = SliderModel.fromJson(data);
+      return sliderModel;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      throw error['message'];
+
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
   Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories()async{
     try {
        Response response = await dioHelper.getData(
