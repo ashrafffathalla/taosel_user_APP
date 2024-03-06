@@ -1,4 +1,4 @@
-package com.example.taosel_user_app
+package com.taoseel.taosel_user_app
 
 import io.flutter.embedding.android.FlutterActivity
 
