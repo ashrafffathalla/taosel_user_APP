@@ -284,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: size.height * 0.02,
                         ),
-                        Container(height:210.h,width: size.width,child: Image.network(cubit.sliderModel!.data![0].media![0].path.toString(),)),
+                        Container(height:180.h,width: size.width,child: Image.network(cubit.sliderModel!.data![0].media![0].path.toString(),)),
                         SizedBox(
                           height: size.height * 0.02,
                         ),

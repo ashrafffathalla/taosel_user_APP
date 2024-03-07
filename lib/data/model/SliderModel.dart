@@ -24,15 +24,23 @@ class SliderModel {
 class Data {
   int? id;
   String? title;
+  String? lang;
   String? description;
   int? status;
   List<Media>? media;
 
-  Data({this.id, this.title, this.description, this.status, this.media});
+  Data(
+      {this.id,
+        this.title,
+        this.lang,
+        this.description,
+        this.status,
+        this.media});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
+    lang = json['lang'];
     description = json['description'];
     status = json['status'];
     if (json['media'] != null) {
@@ -47,6 +55,7 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
+    data['lang'] = this.lang;
     data['description'] = this.description;
     data['status'] = this.status;
     if (this.media != null) {
