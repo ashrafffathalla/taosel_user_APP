@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
             child: SizedBox(
-              height: size.height / 1,
+              height: size.height / 0.9,
               child: Column(
                 children: [
                   SizedBox(
@@ -344,7 +344,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .toInt(), (index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    print("${cubit.allVendorCategoryModel!.data!.vendors![index].id}HHHH2");
                                     BlocProvider.of<HomeCubit>(context).showVendor(cubit.allVendorCategoryModel!
                                         .data!.vendors![index].id.toString());
                                     navigateTo(
@@ -353,17 +352,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Column(
                                     children: [
-                                      cubit.allVendorCategoryModel!.data!.vendors![0].media!.isEmpty?Container():SizedBox(
+                                      cubit.allVendorCategoryModel!.data!.vendors![index].media!.isEmpty?Container(
+                                        height: 0.065.sh,
+                                        width: 0.06.sh,
+                                        child:Icon(Icons.add_photo_alternate_outlined,size: 40,),
+                                      ):SizedBox(
                                           height: 0.065.sh,
                                           width: 0.06.sh,
-                                          child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![0].media![0].path.toString())),
+                                          child: Image.network(cubit.allVendorCategoryModel!.data!.vendors![index].media![0].path.toString())),
                                       SizedBox(height: 5.h),
                                       Text(
-                                        cubit
-                                            .allVendorCategoryModel!
-                                            .data!
-                                            .vendors![index]
-                                            .name
+                                        cubit.allVendorCategoryModel!.data!.vendors![index].name
                                             .toString(),
                                         style: TextStyle(
                                             fontSize: 13.sp,
