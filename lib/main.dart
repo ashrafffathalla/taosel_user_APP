@@ -14,6 +14,7 @@ import 'package:taosel_user_app/provider/notification_Cubit/notification_cubit.d
 import 'package:taosel_user_app/provider/profile_cubit/profile_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:taosel_user_app/testSearch.dart';
 import 'package:taosel_user_app/view/pages/splash_screen/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/constant/lang_code.dart';
@@ -122,7 +123,7 @@ class MyApp extends StatelessWidget {
                 return supportedLocale.first;
               },
               locale: locale,
-              home: const SplashScreen(),
+              home:  Jobs(),
             );
           }),
         );
