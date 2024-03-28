@@ -34,21 +34,21 @@ class AllCategoryVendorsModel {
 class Data {
   int? id;
   String? name;
-  String? langId;
+  String? lang;
 
-  Data({this.id, this.name, this.langId});
+  Data({this.id, this.name, this.lang});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    langId = json['lang_id'];
+    lang = json['lang'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['lang_id'] = this.langId;
+    data['lang'] = this.lang;
     return data;
   }
 }
@@ -57,7 +57,7 @@ class Links {
   String? first;
   String? last;
   Null? prev;
-  Null? next;
+  String? next;
 
   Links({this.first, this.last, this.prev, this.next});
 

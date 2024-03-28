@@ -36,10 +36,10 @@ class HomeRepositories {
       throw '..Oops $error';
     }
   }
-  Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories()async{
+  Future<AllCategoryVendorsModel> getAllVendorsCategoriesRepositories(int pageNumber)async{
     try {
        Response response = await dioHelper.getData(
-          url: AutomationApi.getAlCategorylVendors, needAuth: true
+          url: AutomationApi.getAlCategorylVendors+"?page=$pageNumber", needAuth: true
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
       final AllCategoryVendorsModel  vendorCategoryModel = AllCategoryVendorsModel.fromJson(data);

@@ -30,13 +30,13 @@ class HomeCubit extends Cubit<HomeState> {
   }
 //allVendorsCategories
   AllCategoryVendorsModel? allCategoryVendors;
-  getAllCategoryVendorsFun() async {
+  getAllCategoryVendorsFun(int pageNumber,) async {
     emit(GetAllCategoryVendorsLoading());
     try {
-       allCategoryVendors = await repositories.getAllVendorsCategoriesRepositories();
+       allCategoryVendors = await repositories.getAllVendorsCategoriesRepositories(pageNumber);
       emit(GetAllCategoryVendorsLoaded(/*allCategoryVendorsModel: allCategoryVendors!*/));
     } catch (e) {
-
+      print(e.toString()+"GGG");
       emit(GetAllCategoryVendorsError(error: e.toString()));
     }
   }

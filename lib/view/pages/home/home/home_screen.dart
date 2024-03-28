@@ -27,15 +27,24 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin  {
   IconData? deIcon;
   bool isHide = false;
   int selectedIndex = 0;
+  late int pageNumber;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState(){
-
-    BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun();
+    pageNumber=1;
+    ///Start pagination
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        pageNumber += 1;
+        getMoreVendorsCat(pageNumber);
+      }
+    });
+    // BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun(pageNumber);
     BlocProvider.of<ProfileCubit>(context).getProfileData();
     // BlocProvider.of<GetAllVendorsCategoriesCubit>(context).getAllVendors();
     // if(BlocProvider.of<HomeCubit>(context).allCategoryVendors !=null){
@@ -44,7 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
     // }
     super.initState();
   }
-
+  @override
+  void didChangeDependencies() {
+    pageNumber = 1;
+      ///trace the code here *-----*
+    BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun(pageNumber);
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
@@ -386,5 +401,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+  getMoreVendorsCat(int page_num){
+    BlocProvider.of<HomeCubit>(context).getAllCategoryVendorsFun(pageNumber);
   }
 }
